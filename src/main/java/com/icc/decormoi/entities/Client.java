@@ -9,12 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Client")
 public class Client extends Personne{
-	
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long idClient;
 	
 	private Date dinscription;
 	
@@ -27,10 +26,15 @@ public class Client extends Personne{
 	public Client() {
 		super();
 	}
-	
-	public Client(String nom, String prénom, String adresse, int tel, String email, int numCompte) {
-		super(nom, prénom, adresse, tel, email, numCompte);
+
+	public Client(Date dinscription, Collection<Evenement> events, Collection<Devis> devis) {
+		super();
+		this.dinscription = dinscription;
+		this.events = events;
+		this.devis = devis;
 	}
+
+
 
 	public Client(Date dinscription) {
 		super();
@@ -53,18 +57,13 @@ public class Client extends Personne{
 		this.events = events;
 	}
 
-	public Long getIdClient() {
-		return idClient;
-	}
-
-	public void setIdClient(Long idClient) {
-		this.idClient = idClient;
-	}
-
 	@Override
 	public String toString() {
-		return "Client [dinscription=" + dinscription + ", nom=" + nom + ", prénom=" + prenom + ", tel=" + tel
-				+ ", email=" + email + "]";
+		return "Client [dinscription=" + dinscription + ", events=" + events + ", devis=" + devis + ", id=" + id
+				+ ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", tel=" + tel + ", email=" + email
+				+ ", NumCompte=" + NumCompte + "]";
 	}
+
+	
 	
 }

@@ -64,4 +64,12 @@ public class LigneDevis {
 		this.prix = prix;
 	}
 
+	@Override
+	public String toString() {
+		return "LigneDevis [idLigne=" + idLigne + ", article=" + article + ", quantite=" + quantite + ", prix=" + prix
+				+ "]";
+	}
+	
+	
+
 }

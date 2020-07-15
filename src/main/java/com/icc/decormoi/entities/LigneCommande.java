@@ -66,6 +66,12 @@ public class LigneCommande implements Serializable {
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
+
+	@Override
+	public String toString() {
+		return "LigneCommande [idLigne=" + idLigne + ", article=" + article + ", quantite=" + quantite + ", prix="
+				+ prix + "]";
+	}
 	
 
 }

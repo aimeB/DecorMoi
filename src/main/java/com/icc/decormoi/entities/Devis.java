@@ -71,6 +71,13 @@ public class Devis implements Serializable {
 	public void setLigneCommandes(Collection<LigneCommande> ligneCommandes) {
 		this.ligneCommandes = ligneCommandes;
 	}
+
+	@Override
+	public String toString() {
+		return "Devis [numDevis=" + numDevis + ", dateDevis=" + dateDevis + ", client=" + client + ", ligneCommandes="
+				+ ligneCommandes + "]";
+	}
+	
 	
 	
 }

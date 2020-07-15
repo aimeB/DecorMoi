@@ -12,13 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Agent")
 public class Agent extends Personne implements Serializable{
 	
 	
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long idAgent;
 	private Date entreService;
 	private boolean dispo;
 	
@@ -29,13 +29,13 @@ public class Agent extends Personne implements Serializable{
 		super();
 		
 	}
-	
-	
-	public Agent(String nom, String prénom, String adresse, int tel, String email, int numCompte) {
-		super(nom, prénom, adresse, tel, email, numCompte);
-	
-	}
 
+	public Agent(Date entreService, boolean dispo, Collection<Evenement> events) {
+		super();
+		this.entreService = entreService;
+		this.dispo = dispo;
+		this.events = events;
+	}
 
 	public Agent(Date entreService, boolean dispo) {
 		super();
@@ -65,16 +65,14 @@ public class Agent extends Personne implements Serializable{
 		this.events = events;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Agent [entreService=" + entreService + ", dispo=" + dispo + ", events=" + events + ", nom=" + nom
-				+ ", prénom=" + prenom + ", tel=" + tel + ", email=" + email + "]";
+		return "Agent [idAgent=" + ", entreService=" + entreService + ", dispo=" + dispo + ", events="
+				+ events + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", tel=" + tel + ", email="
+				+ email + ", NumCompte=" + NumCompte + "]";
 	}
-	public Long getIdAgent() {
-		return idAgent;
-	}
-	public void setIdAgent(Long idAgent) {
-		this.idAgent = idAgent;
-	}
+	
+	
 
 }

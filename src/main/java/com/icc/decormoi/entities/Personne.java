@@ -1,15 +1,18 @@
 package com.icc.decormoi.entities;
 
-
-import java.util.Collection;
-
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
-
+@Entity
+@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
 public abstract class Personne {
 	
+	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
+	protected Long id;
 	protected String nom ;
 	protected String prenom ;
 	protected String adresse;
@@ -21,8 +24,9 @@ public abstract class Personne {
 		super();
 	}
 
-	public Personne(String nom, String prenom, String adresse, int tel, String email, int numCompte) {
+	public Personne(Long id, String nom, String prenom, String adresse, int tel, String email, int numCompte) {
 		super();
+		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
@@ -30,8 +34,7 @@ public abstract class Personne {
 		this.email = email;
 		NumCompte = numCompte;
 	}
-	
-	
+
 	public String getNom() {
 		return nom;
 	}
@@ -88,5 +91,14 @@ public abstract class Personne {
 	public void setNumCompte(int numCompte) {
 		NumCompte = numCompte;
 	}
+
+	@Override
+	public String toString() {
+		return "Personne [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", tel=" + tel
+				+ ", email=" + email + ", NumCompte=" + NumCompte + "]";
+	}
 	
+	
+
+
 }

@@ -50,6 +50,12 @@ public class Facture {
 	public void setFacture_id(Long facture_id) {
 		this.facture_id = facture_id;
 	}
+
+	@Override
+	public String toString() {
+		return "Facture [facture_id=" + facture_id + ", facture_date=" + facture_date + ", event=" + event + "]";
+	}
+	
 	
 
 }

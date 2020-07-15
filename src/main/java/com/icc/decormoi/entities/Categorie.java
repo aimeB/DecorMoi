@@ -2,6 +2,7 @@ package com.icc.decormoi.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -78,6 +79,13 @@ public class Categorie implements Serializable {
 
 	public void setIdCategorie(Long idCategorie) {
 		this.idCategorie = idCategorie;
+	}
+
+	@Override
+	public String toString() {
+		return "Categorie [idCategorie=" + idCategorie + ", nomCategorie=" + nomCategorie + ", description="
+				+ description + ", nomPhoto=" + nomPhoto + ", image=" + Arrays.toString(image) + ", articles="
+				+ articles + "]";
 	}
 	
 	

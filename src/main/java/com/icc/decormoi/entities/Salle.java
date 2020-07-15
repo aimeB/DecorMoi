@@ -57,4 +57,10 @@ public class Salle {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Salle [idSalle=" + idSalle + ", désignation=" + désignation + ", dispo=" + dispo + "]";
+	}
+
+
 }

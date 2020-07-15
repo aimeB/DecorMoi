@@ -2,31 +2,21 @@ package com.icc.decormoi.entities;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "Admin")
 public class Admin extends Personne implements Serializable {
-	
-	@Id @GeneratedValue
-	private Long idAdmin;
-	
+
 	public Admin() {
 		super();
 
 	}
-
-	public Admin(String nom, String prenom, String adresse, int tel, String email, int numCompte) {
-		super(nom, prenom, adresse, tel, email, numCompte);
-		// TODO Auto-generated constructor stub
-	}
-
-
 
 	public void gererDevis() {
 		
@@ -60,17 +50,13 @@ public class Admin extends Personne implements Serializable {
 		
 	}
 
+
 	@Override
 	public String toString() {
-		return "Admin [id=" + idAdmin + ", nom=" + nom + ", prénom=" + prenom + ", tel=" + tel + ", email=" + email + "]";
+		return "Admin [idAdmin=" + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", tel="
+				+ tel + ", email=" + email + ", NumCompte=" + NumCompte + "]";
 	}
-
-	public Long getIdAdmin() {
-		return idAdmin;
-	}
-
-	public void setIdAdmin(Long idAdmin) {
-		this.idAdmin = idAdmin;
-	}
+	
+	
 
 }

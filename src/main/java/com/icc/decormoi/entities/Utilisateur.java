@@ -94,4 +94,12 @@ public class Utilisateur {
 		this.permission = permission;
 	}
 
+	@Override
+	public String toString() {
+		return "Utilisateur [id=" + id + ", user_name=" + user_name + ", user_password=" + user_password + ", actif="
+				+ actif + ", rôles=" + rôles + ", permission=" + permission + "]";
+	}
+	
+	
+
 }

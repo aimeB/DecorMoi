@@ -98,6 +98,11 @@ import javax.persistence.PrimaryKeyJoinColumn;
 		public void setClient(Client client) {
 			this.client = client;
 		}
+		@Override
+		public String toString() {
+			return "Evenement [idEvenement=" + idEvenement + ", dateEvent=" + dateEvent + ", client=" + client
+					+ ", salle=" + salle + ", ligneCommandes=" + ligneCommandes + ", agents=" + agents + "]";
+		}
 		
 		
 
