@@ -20,18 +20,15 @@ public class Client extends Personne{
 	@OneToMany(mappedBy="client")
 	private Collection<Evenement> events;
 	
-	@OneToMany(mappedBy="client")
-	private Collection<Devis> devis;
-	
 	public Client() {
 		super();
 	}
 
-	public Client(Date dinscription, Collection<Evenement> events, Collection<Devis> devis) {
+	public Client(Date dinscription, Collection<Evenement> events) {
 		super();
 		this.dinscription = dinscription;
 		this.events = events;
-		this.devis = devis;
+		
 	}
 
 
@@ -59,11 +56,9 @@ public class Client extends Personne{
 
 	@Override
 	public String toString() {
-		return "Client [dinscription=" + dinscription + ", events=" + events + ", devis=" + devis + ", id=" + id
+		return "Client [dinscription=" + dinscription + ", events=" + events + ", devis=" + ", id=" + id
 				+ ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", tel=" + tel + ", email=" + email
-				+ ", NumCompte=" + NumCompte + "]";
+				+ ", NumCompte=" + "]";
 	}
 
-	
-	
 }

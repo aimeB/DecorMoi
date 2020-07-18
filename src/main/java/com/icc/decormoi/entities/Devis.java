@@ -20,24 +20,31 @@ public class Devis implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "numDevis")
 	private Long numDevis;
-	private Date dateDevis;
-	
-	@ManyToOne
-	@JoinColumn(name="idClient")
-	private Client client;
-	
-	@OneToMany
-	@JoinColumn(name="numDevis")
-	private Collection<LigneCommande> ligneCommandes;
+	protected String nom ;
+	protected String prenom ;
+	protected int tel;
+	protected String email;
+	protected String Lieu;
+	private Date dateEvent;
+	private int nbPersonnes;
+	private String Remarques;
 	
 	public Devis() {
 		super();
 	}
 
-	public Devis(Date dateDevis) {
+	public Devis(Long numDevis, String nom, String prenom, int tel, String email, String lieu, Date dateEvent,
+			int nbPersonnes, String remarques) {
 		super();
-		this.dateDevis = dateDevis;
-		
+		this.numDevis = numDevis;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.tel = tel;
+		this.email = email;
+		Lieu = lieu;
+		this.dateEvent = dateEvent;
+		this.nbPersonnes = nbPersonnes;
+		Remarques = remarques;
 	}
 
 	public Long getNumDevis() {
@@ -48,35 +55,77 @@ public class Devis implements Serializable {
 		this.numDevis = numDevis;
 	}
 
-	public Date getDateDevis() {
-		return dateDevis;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setDateDevis(Date dateDevis) {
-		this.dateDevis = dateDevis;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
-	public Client getClient() {
-		return client;
+	public String getPrenom() {
+		return prenom;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
 
-	public Collection<LigneCommande> getLigneCommandes() {
-		return ligneCommandes;
+	public int getTel() {
+		return tel;
 	}
 
-	public void setLigneCommandes(Collection<LigneCommande> ligneCommandes) {
-		this.ligneCommandes = ligneCommandes;
+	public void setTel(int tel) {
+		this.tel = tel;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getLieu() {
+		return Lieu;
+	}
+
+	public void setLieu(String lieu) {
+		Lieu = lieu;
+	}
+
+	public Date getDateEvent() {
+		return dateEvent;
+	}
+
+	public void setDateEvent(Date dateEvent) {
+		this.dateEvent = dateEvent;
+	}
+
+	public int getNbPersonnes() {
+		return nbPersonnes;
+	}
+
+	public void setNbPersonnes(int nbPersonnes) {
+		this.nbPersonnes = nbPersonnes;
+	}
+
+	public String getRemarques() {
+		return Remarques;
+	}
+
+	public void setRemarques(String remarques) {
+		Remarques = remarques;
 	}
 
 	@Override
 	public String toString() {
-		return "Devis [numDevis=" + numDevis + ", dateDevis=" + dateDevis + ", client=" + client + ", ligneCommandes="
-				+ ligneCommandes + "]";
+		return "Devis [numDevis=" + numDevis + ", nom=" + nom + ", prenom=" + prenom + ", tel=" + tel + ", email="
+				+ email + ", Lieu=" + Lieu + ", dateEvent=" + dateEvent + ", nbPersonnes=" + nbPersonnes
+				+ ", Remarques=" + Remarques + "]";
 	}
+
 	
 	
 	

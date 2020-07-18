@@ -70,7 +70,7 @@ public class Agent extends Personne implements Serializable{
 	public String toString() {
 		return "Agent [idAgent=" + ", entreService=" + entreService + ", dispo=" + dispo + ", events="
 				+ events + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", tel=" + tel + ", email="
-				+ email + ", NumCompte=" + NumCompte + "]";
+				+ email + ", NumCompte=" + "]";
 	}
 	
 	

@@ -18,13 +18,13 @@ public abstract class Personne {
 	protected String adresse;
 	protected int tel;
 	protected String email;
-	protected int NumCompte;
+	
 	
 	public Personne() {
 		super();
 	}
 
-	public Personne(Long id, String nom, String prenom, String adresse, int tel, String email, int numCompte) {
+	public Personne(Long id, String nom, String prenom, String adresse, int tel, String email) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -32,7 +32,7 @@ public abstract class Personne {
 		this.adresse = adresse;
 		this.tel = tel;
 		this.email = email;
-		NumCompte = numCompte;
+		
 	}
 
 	public String getNom() {
@@ -84,18 +84,11 @@ public abstract class Personne {
 		this.adresse = adresse;
 	}
 
-	public int getNumCompte() {
-		return NumCompte;
-	}
-
-	public void setNumCompte(int numCompte) {
-		NumCompte = numCompte;
-	}
 
 	@Override
 	public String toString() {
 		return "Personne [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", tel=" + tel
-				+ ", email=" + email + ", NumCompte=" + NumCompte + "]";
+				+ ", email=" + email + ", NumCompte=" + "]";
 	}
 	
 	

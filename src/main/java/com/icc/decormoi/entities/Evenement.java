@@ -22,6 +22,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 		@Id @GeneratedValue
 		private Long idEvenement;
 		private Date dateEvent;
+		private enum typeEvent{PRIVE,PROFESSIONEL};
 		
 		@ManyToOne
 		@JoinColumn(name="idClient")
@@ -43,14 +44,20 @@ import javax.persistence.PrimaryKeyJoinColumn;
 			super();
 			
 		}
-		public Evenement(Date dateEvent, Client client, Salle salle, Collection<Agent> agents) {
+		
+		public Evenement(Long idEvenement, Date dateEvent, Client client, Salle salle,
+				Collection<LigneCommande> ligneCommandes, Collection<Agent> agents) {
 			super();
+			this.idEvenement = idEvenement;
 			this.dateEvent = dateEvent;
 			this.client = client;
 			this.salle = salle;
+			this.ligneCommandes = ligneCommandes;
 			this.agents = agents;
 		}
-		
+
+
+
 		public Date getDateEvent() {
 			return dateEvent;
 		}
@@ -98,6 +105,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 		public void setClient(Client client) {
 			this.client = client;
 		}
+		
+		
 		@Override
 		public String toString() {
 			return "Evenement [idEvenement=" + idEvenement + ", dateEvent=" + dateEvent + ", client=" + client
