@@ -6,11 +6,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,12 +23,20 @@ import javax.persistence.Table;
 public class Agent extends Personne implements Serializable{
 	
 	
+	
+	//ATTRIBUTS
 	private Date entreService;
+	
 	private boolean dispo;
 	
-	@OneToMany(mappedBy="client", fetch = FetchType.LAZY)
+	@ManyToMany(cascade = { CascadeType.ALL })
 	private Collection<Evenement> events;
+	
+	
+	
 
+	
+	//CONSTRUCTEUR
 	public Agent() {
 		super();
 		
@@ -42,6 +54,10 @@ public class Agent extends Personne implements Serializable{
 		this.entreService = entreService;
 		this.dispo = dispo;
 	}
+	
+	
+	
+	//GETTER ET SETTER
 	public Date getEntreService() {
 		return entreService;
 	}
@@ -66,6 +82,11 @@ public class Agent extends Personne implements Serializable{
 	}
 
 
+	
+	
+	
+	
+	//TOSTRING
 	@Override
 	public String toString() {
 		return "Agent [idAgent=" + ", entreService=" + entreService + ", dispo=" + dispo + ", events="

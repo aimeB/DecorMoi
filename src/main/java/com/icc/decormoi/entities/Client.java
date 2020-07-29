@@ -1,5 +1,6 @@
 package com.icc.decormoi.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -11,54 +12,31 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "Client")
-public class Client extends Personne{
+public class Client extends Personne implements Serializable{
 	
-	private Date dinscription;
 	
-	@OneToMany(mappedBy="client")
-	private Collection<Evenement> events;
-	
+	//Constructeur
 	public Client() {
 		super();
 	}
+	
 
-	public Client(Date dinscription, Collection<Evenement> events) {
-		super();
-		this.dinscription = dinscription;
-		this.events = events;
-		
+	public Client( String nom, String prenom, String adresse, int tel, String email, Date dinscription) {
+		super( nom, prenom, adresse, tel, email, dinscription);
+		// TODO Auto-generated constructor stub
 	}
+	
 
-
-
-	public Client(Date dinscription) {
-		super();
-		this.dinscription = dinscription;
-	}
-
-	public Date getDinscription() {
-		return dinscription;
-	}
-
-	public void setDinscription(Date dinscription) {
-		this.dinscription = dinscription;
-	}
-
-	public Collection<Evenement> getEvents() {
-		return events;
-	}
-
-	public void setEvents(ArrayList<Evenement> events) {
-		this.events = events;
-	}
-
+	//TOSTRING
 	@Override
 	public String toString() {
-		return "Client [dinscription=" + dinscription + ", events=" + events + ", devis=" + ", id=" + id
-				+ ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", tel=" + tel + ", email=" + email
-				+ ", NumCompte=" + "]";
+		return "Client [nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", tel=" + tel + ", email="
+				+ email + "]";
 	}
 
+
+	
 }

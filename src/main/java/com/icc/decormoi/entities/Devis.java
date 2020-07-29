@@ -15,118 +15,105 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Devis implements Serializable {
+public class Devis extends Evenement implements Serializable {
 	
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "numDevis")
-	private Long numDevis;
+	
+	
+	//ATTRIBUTS
+
 	protected String nom ;
 	protected String prenom ;
 	protected int tel;
 	protected String email;
-	protected String Lieu;
-	private Date dateEvent;
-	private int nbPersonnes;
-	private String Remarques;
+	public enum typeEvent{MARIAGE,FIANCAILLE,DOTE, PRECIOUSTIMES, GARDENPARTY};
+	protected String lieu;
+	
+	
+	
+	//CONSTRUCTEURS
 	
 	public Devis() {
 		super();
+		
+	}
+	
+	
+	public Devis(String nomEvent, Date dateEvent, int nbPersonnes, String remarques, Client client, Salle salle,
+			Collection<Agent> agents, Facture fact) {
+		super(nomEvent, dateEvent, nbPersonnes, remarques, client, salle, agents, fact);
+		// TODO Auto-generated constructor stub
 	}
 
-	public Devis(Long numDevis, String nom, String prenom, int tel, String email, String lieu, Date dateEvent,
-			int nbPersonnes, String remarques) {
+
+
+	public Devis(String nom, String prenom, int tel, String email, String lieu) {
 		super();
-		this.numDevis = numDevis;
+		
+		for(typeEvent te : typeEvent.values()){
+		      if(typeEvent.MARIAGE.equals(te))
+		        new Mariage();
+		      else if(typeEvent.FIANCAILLE.equals(te))
+		    	  new Fiancaille();
+		      else if(typeEvent.DOTE.equals(te))
+		    	  new Dote();
+		      else if(typeEvent.PRECIOUSTIMES.equals(te))
+		    	  new PreciousTimes();
+		      else if(typeEvent.GARDENPARTY.equals(te))
+		    	  new GardenParty();
+		}
+		
 		this.nom = nom;
 		this.prenom = prenom;
 		this.tel = tel;
 		this.email = email;
-		Lieu = lieu;
-		this.dateEvent = dateEvent;
-		this.nbPersonnes = nbPersonnes;
-		Remarques = remarques;
+		this.lieu = lieu;
 	}
-
-	public Long getNumDevis() {
-		return numDevis;
-	}
-
-	public void setNumDevis(Long numDevis) {
-		this.numDevis = numDevis;
-	}
-
+	
+	
+	//GETTER ET SETTER
 	public String getNom() {
 		return nom;
 	}
-
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
 	public String getPrenom() {
 		return prenom;
 	}
-
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-
 	public int getTel() {
 		return tel;
 	}
-
 	public void setTel(int tel) {
 		this.tel = tel;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getLieu() {
-		return Lieu;
+		return lieu;
 	}
-
 	public void setLieu(String lieu) {
-		Lieu = lieu;
+		this.lieu = lieu;
 	}
 
-	public Date getDateEvent() {
-		return dateEvent;
-	}
-
-	public void setDateEvent(Date dateEvent) {
-		this.dateEvent = dateEvent;
-	}
-
-	public int getNbPersonnes() {
-		return nbPersonnes;
-	}
-
-	public void setNbPersonnes(int nbPersonnes) {
-		this.nbPersonnes = nbPersonnes;
-	}
-
-	public String getRemarques() {
-		return Remarques;
-	}
-
-	public void setRemarques(String remarques) {
-		Remarques = remarques;
-	}
 
 	@Override
 	public String toString() {
-		return "Devis [numDevis=" + numDevis + ", nom=" + nom + ", prenom=" + prenom + ", tel=" + tel + ", email="
-				+ email + ", Lieu=" + Lieu + ", dateEvent=" + dateEvent + ", nbPersonnes=" + nbPersonnes
-				+ ", Remarques=" + Remarques + "]";
+		return "Devis [nom=" + nom + ", prenom=" + prenom + ", tel=" + tel + ", email=" + email + ", lieu=" + lieu
+				+ ", idEvenement=" + idEvenement + ", NomEvent=" + NomEvent + ", dateEvent=" + dateEvent
+				+ ", nbPersonnes=" + nbPersonnes + ", Remarques=" + Remarques + ", prix=" + prix + ", client=" + client
+				+ ", salle=" + salle + ", agents=" + agents + "]";
 	}
+	
 
 	
+	//TOSTRING
 	
 	
 }

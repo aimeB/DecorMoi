@@ -2,6 +2,7 @@ package com.icc.decormoi.entities;
 
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,13 +14,35 @@ public class PanierC implements Serializable{
 		if(lc==null) {
 			LigneCommande art = new LigneCommande();
 			art.setArticle(ar);
-			art.setQuantite(quantite);
-			art.setPrix(ar.getPrix());
+			art.setQte(quantite);
+			art.setTtc(ar.getPrix());
 			items.put(ar.getIdArticle(), art);
 		}
 		else {
-			lc.setQuantite(lc.getQuantite()+ quantite);
+			lc.setQte(lc.getQte()+ quantite);
 		}
 	}
-
+	
+	public Collection <LigneCommande> getItems(){
+		
+		return items.values();
+	}
+	
+	public double getTotal() {
+		double total =0;
+		for(LigneCommande lc:items.values()) {
+			total+=lc.getTtc()*lc.getQte();
+		}
+		return total;
+	}
+	
+	public int getSize() {
+		return items.size();
+	}
+	
+	public void deleteItem(Long idProduit) {
+		items.remove(idProduit);
+	}
 }
+
+

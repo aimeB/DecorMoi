@@ -20,9 +20,8 @@ public class Categorie implements Serializable {
 	
 	private String nomCategorie;
 	private String description;
-	
-	@Lob
 	private String nomPhoto;
+	@Lob
 	private byte[] image;
 	
 	@OneToMany(mappedBy="categorie")

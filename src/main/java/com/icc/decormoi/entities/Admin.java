@@ -13,16 +13,22 @@ import javax.persistence.Table;
 @Table(name = "Admin")
 public class Admin extends Personne implements Serializable {
 
+	
+	
+	//CONSTRUCTEUR
 	public Admin() {
 		super();
 
 	}
 
+	
+	
+	//METHODES
 	public void gererDevis() {
 		
 	}
 	
-	public void accepterCommande() {
+	public void accepterEvenement() {
 		
 	}
 	
@@ -50,12 +56,17 @@ public class Admin extends Personne implements Serializable {
 		
 	}
 
-
+	
+	
+	
+	
 	@Override
 	public String toString() {
-		return "Admin [idAdmin=" + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", tel="
-				+ tel + ", email=" + email + ", NumCompte=" + "]";
+		return "Admin [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", tel=" + tel
+				+ ", email=" + email + "]";
 	}
+
+
 	
 	
 

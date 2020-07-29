@@ -10,43 +10,81 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 @Entity
 @Table(name = "Article")
 public class Article implements Serializable {
 	
+	
+	
+	//ATTRIBUTS
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long idArticle;
 	
 	private String designation;
-	private String description;
+	
 	private double prix;
-	private String emplacement;
+	
 	private int quantite;
+	
+	private int quantiteAlerte;
+	
 	private String image;
+	
 	private boolean selectionne;
 	
 	@ManyToOne
-	@JoinColumn(name="idCategorie")
+	@JoinColumn(name="idCategorie", nullable = true)
+	@NotFound(action = NotFoundAction.IGNORE)
 	private Categorie categorie;
+	
+	@ManyToOne
+	@JoinColumn(name="codeTVA", nullable=true)  
+	@NotFound(action = NotFoundAction.IGNORE) 
+	private Tva tva;
 
 
+	
+	
+	//CONSTRUCTEURS
 	public Article() {
 		super();	
 	}
 
-	public Article(String designation, String description, double prix, String emplacement, int quantite, String image
-			, Categorie categorie) {
+
+	public Article(Long idArticle, String designation, double prix, int quantite, int quantiteAlerte, String image,
+			boolean selectionne, Categorie categorie, Tva tva) {
 		super();
+		this.idArticle = idArticle;
 		this.designation = designation;
-		this.description = description;
 		this.prix = prix;
-		this.emplacement = emplacement;
 		this.quantite = quantite;
+		this.quantiteAlerte = quantiteAlerte;
 		this.image = image;
+		this.selectionne = selectionne;
 		this.categorie = categorie;
-	
+		this.tva = tva;
 	}
 
+
+	public Article(String designation, double prix, int quantite, int quantiteAlerte, String image, boolean selectionne,
+			Categorie categorie, Tva tva) {
+		super();
+		this.designation = designation;
+		this.prix = prix;
+		this.quantite = quantite;
+		this.quantiteAlerte = quantiteAlerte;
+		this.image = image;
+		this.selectionne = selectionne;
+		this.categorie = categorie;
+		this.tva = tva;
+	}
+
+
+
+	//GETTER ET SETTER
 	public Long getIdArticle() {
 		return idArticle;
 	}
@@ -63,14 +101,7 @@ public class Article implements Serializable {
 		this.designation = designation;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
+	
 	public double getPrix() {
 		return prix;
 	}
@@ -79,13 +110,6 @@ public class Article implements Serializable {
 		this.prix = prix;
 	}
 
-	public String getEmplacement() {
-		return emplacement;
-	}
-
-	public void setEmplacement(String emplacement) {
-		this.emplacement = emplacement;
-	}
 
 	public int getQuantite() {
 		return quantite;
@@ -119,10 +143,13 @@ public class Article implements Serializable {
 		this.categorie = categorie;
 	}
 
+	
+	
+	//TOSTRING
 	@Override
 	public String toString() {
-		return "Article [idArticle=" + idArticle + ", designation=" + designation + ", description=" + description
-				+ ", prix=" + prix + ", emplacement=" + emplacement + ", quantite=" + quantite + ", image=" + image
+		return "Article [idArticle=" + idArticle + ", designation=" + designation + ", description="
+				+ ", prix=" + prix + ", emplacement=" + ", quantite=" + quantite + ", image=" + image
 				+ ", selectionne=" + selectionne + ", categorie=" + categorie + "]";
 	}
 	

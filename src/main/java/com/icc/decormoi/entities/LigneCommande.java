@@ -10,40 +10,60 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 @Entity
-public class LigneCommande implements Serializable {
+public class LigneCommande  implements Serializable
+{
+	@Id @GeneratedValue
+	private Long idLigneCom;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idLigne;
+	@ManyToOne
+	@JoinColumn(name="NUM_COMMANDE")
+	private Commande commande;
 	
 	@ManyToOne
 	@JoinColumn(name="idArticle")
+	@NotFound(action = NotFoundAction.IGNORE)
 	private Article article;
 	
-	private int quantite;
-	private double prix;
+	private int qte;
+	
+	private double total;
+	
+	private double ttc;
+	
+	
 	
 	public LigneCommande() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public LigneCommande(Article article, int quantite, double prix) {
+	public LigneCommande(Commande commande, Article article, int qte) {
 		super();
+		this.commande = commande;
 		this.article = article;
-		this.quantite = quantite;
-		this.prix = prix;
+		this.qte = qte;
 	}
 
-	public Long getIdLigne() {
-		return idLigne;
+	public Long getId() {
+		return idLigneCom;
 	}
 
-	public void setIdLigne(Long idLigne) {
-		this.idLigne = idLigne;
+	public void setId(Long idLigneCom) {
+		this.idLigneCom = idLigneCom;
 	}
 
-	public Article getArticle() {
+	public Commande getCommande() {
+		return commande;
+	}
+
+	public void setCommande(Commande commande) {
+		this.commande = commande;
+	}
+
+	public Article getProduit() {
 		return article;
 	}
 
@@ -51,27 +71,36 @@ public class LigneCommande implements Serializable {
 		this.article = article;
 	}
 
-	public int getQuantite() {
-		return quantite;
+	public int getQte() {
+		return qte;
 	}
 
-	public void setQuantite(int quantite) {
-		this.quantite = quantite;
+	public void setQte(int qte) {
+		this.qte = qte;
+	}
+	
+	
+	public double getTotal() {
+		return total;
 	}
 
-	public double getPrix() {
-		return prix;
+	public void setTotal(double total) {
+		this.total = total;
 	}
 
-	public void setPrix(double prix) {
-		this.prix = prix;
+	public double getTtc() {
+		return ttc;
+	}
+
+	public void setTtc(double ttc) {
+		this.ttc = ttc;
 	}
 
 	@Override
 	public String toString() {
-		return "LigneCommande [idLigne=" + idLigne + ", article=" + article + ", quantite=" + quantite + ", prix="
-				+ prix + "]";
+		// TODO Auto-generated method stub
+		return article+" : "+qte;
 	}
-	
-
 }
+
+

@@ -14,92 +14,79 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Utilisateur {
+
 	
+	//ATTRIBUTS
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	private String user_name;
-	private String user_password;
-	private boolean actif;
+	private String username;
 	
-	@OneToMany
-	@JoinColumn(name="id")
-	private Collection<Rôle> rôles;
+	private String password;
 	
-	@OneToMany
-	@JoinColumn(name="id")
-	private Collection<Permission> permission;
+	private boolean actif = false;
 	
+	@OneToMany(mappedBy="utilisateur", fetch = FetchType.LAZY)
+	private Collection<UtilisateursRoles> roles;
+	
+	
+	
+	
+	
+	//CONSTRUCTEUR
 	public Utilisateur() {
 		super();
 		
 	}
 
-	public Utilisateur(Long id, String user_name, String user_password, boolean actif, Collection<Rôle> rôles,
-			Collection<Permission> permission) {
+	public Utilisateur(String username, String password, boolean actif) {
 		super();
-		this.id = id;
-		this.user_name = user_name;
-		this.user_password = user_password;
+		this.username = username;
+		this.password = password;
 		this.actif = actif;
-		this.rôles = rôles;
-		this.permission = permission;
 	}
 
-	public Long getId() {
-		return id;
+
+	
+	
+	//GETTER ET SETTER
+	
+	public String getUsername() {
+		return username;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getUser_name() {
-		return user_name;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getUser_password() {
-		return user_password;
+	public Collection<UtilisateursRoles> getRoles() {
+		return roles;
 	}
 
-	public void setUser_password(String user_password) {
-		this.user_password = user_password;
+	public void setRoles(Collection<UtilisateursRoles> roles) {
+		this.roles = roles;
 	}
 
-	public boolean isActif() {
+	public boolean getActif() {
 		return actif;
 	}
 
 	public void setActif(boolean actif) {
 		this.actif = actif;
-	}
+	}  
 
-	public Collection<Rôle> getRôles() {
-		return rôles;
-	}
-
-	public void setRôles(Collection<Rôle> rôles) {
-		this.rôles = rôles;
-	}
-
-	public Collection<Permission> getPermission() {
-		return permission;
-	}
-
-	public void setPermission(Collection<Permission> permission) {
-		this.permission = permission;
-	}
-
+	
+	
+	//TOSTRING
 	@Override
-	public String toString() {
-		return "Utilisateur [id=" + id + ", user_name=" + user_name + ", user_password=" + user_password + ", actif="
-				+ actif + ", rôles=" + rôles + ", permission=" + permission + "]";
+	public String toString() { 
+		
+		return username; 
 	}
-	
-	
-
 }

@@ -1,12 +1,14 @@
 package com.icc.decormoi.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Rôle {
+public class Role implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,17 +17,19 @@ public class Rôle {
 	private String description;
 	
 	
-	public Rôle() {
+	public Role() {
 		super();
 	}
 
 
-	public Rôle(String role_nom, String description) {
-		super();
-		this.role_nom = role_nom;
-		this.description = description;
+	public Role(String r) {
+		role_nom=r;
 	}
-
+	
+	public Role(Long id,String r) {
+		role_nom=r;
+		this.role_id=id;
+	}
 
 	public String getRole_nom() {
 		return role_nom;
@@ -55,7 +59,7 @@ public class Rôle {
 
 	@Override
 	public String toString() {
-		return "Rôle [role_id=" + role_id + ", role_nom=" + role_nom + ", description=" + description + "]";
+		return "Role [role_id=" + role_id + ", role_nom=" + role_nom + ", description=" + description + "]";
 	}
 
 }
