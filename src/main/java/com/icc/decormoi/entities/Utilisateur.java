@@ -11,25 +11,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Utilisateur {
 
 	
 	//ATTRIBUTS
-	@Id
+	@Id @NotNull @Size(min=4,max=50)
 	private String username;
 	
+	@Size(min=4,max=50)
+	@JsonIgnore
 	private String password;
 	
 	private boolean actif = false;
 	
 	@OneToMany(mappedBy="utilisateur", fetch = FetchType.LAZY)
 	private Collection<UtilisateursRoles> roles;
-	
-	
-	
-	
 	
 	//CONSTRUCTEUR
 	public Utilisateur() {

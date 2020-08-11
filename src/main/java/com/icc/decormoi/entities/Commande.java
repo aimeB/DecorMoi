@@ -31,6 +31,7 @@ public class Commande implements Serializable{
 	private Long idCommande;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull
 	private Date dateCommande;
 	
 	@NotNull
@@ -53,7 +54,7 @@ public class Commande implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="numeroFiche")
 	@NotFound(action = NotFoundAction.IGNORE)
-	private Fiche fichier;
+	private Fiche fiche;
 	
 	
 	private double total;

@@ -23,7 +23,6 @@ import javax.persistence.Table;
 public class Agent extends Personne implements Serializable{
 	
 	
-	
 	//ATTRIBUTS
 	private Date entreService;
 	
@@ -32,9 +31,8 @@ public class Agent extends Personne implements Serializable{
 	@ManyToMany(cascade = { CascadeType.ALL })
 	private Collection<Evenement> events;
 	
-	
-	
 
+	
 	
 	//CONSTRUCTEUR
 	public Agent() {
@@ -82,9 +80,6 @@ public class Agent extends Personne implements Serializable{
 	}
 
 
-	
-	
-	
 	
 	//TOSTRING
 	@Override

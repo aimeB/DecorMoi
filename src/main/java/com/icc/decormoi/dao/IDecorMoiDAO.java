@@ -27,7 +27,7 @@ public interface IDecorMoiDAO {
 	
 	//Gestion des utilisateurs
 	public void ajouterUser(Utilisateur u);
-	public void supprimerUser(Long id);
+	public void supprimerUser(String username);
 	public void attribuerRole(Role r, Long id);
 	public void supprimerRoleUser(Utilisateur u, Long role_id);
 	public List<Utilisateur> UtilisateurParMotCle(String mc);
@@ -38,22 +38,22 @@ public interface IDecorMoiDAO {
 	public void modifierEvent (Evenement e);
 	public void supprimerEvent(Long idEvenement);
 	public List<Evenement> listEvents();
+	public List<Evenement> listEvents(Long id);
 	public Evenement getEvent(Long idEvenement);
 	public void affecterAgent(Long idEvenement, Long id);
 	public List<Evenement> EvenementAgent(Long idEvenement, Long id);
 
 	//Gestion des commandes
-	public Long ajouterCommande(Evenement e, Commande c);
-	public void modifierCommande (Commande c);
+	public Long ajouterCommande(Commande c);
 	public void supprimerCommande(Long idCommande);
 	public List<Commande> listCommande();
-	
+	public List<Commande> listCommande(Long id);
+	public void modifierCommande(Commande c);
 	
 	public List<Commande> findAllCommandesClients(Long numeroFiche);
 	public List<Commande> findAllCommandesClients(Long numeroFiche, Date date);
 	public List<Commande> findAllCommandesClients(Long numeroFiche, Boolean valide);
 	public List<Commande> findAllCommandesClients(Long numeroFiche, Date date, Boolean valide);
-	
 	
 	public List<Commande> findAllCommandesDuClient(Long numeroFiche, Long Id);
 	public List<Commande> findAllCommandesDuClient(Long numeroFiche, Date date, Long Id);
@@ -62,6 +62,7 @@ public interface IDecorMoiDAO {
 	
 	
 	public Commande enregistrerCommande(PanierC p, Client c);
+	
 	public boolean accepterCommande(Long idCommande);
 	
 	public Integer NbreCommande(Long numeroFiche);
@@ -71,9 +72,10 @@ public interface IDecorMoiDAO {
 	
 	//Gestion des Agents
 	public Long ajouterAgent(Agent a);
+	public List<Agent> listAgents();
 	public void modifierAgent (Agent a);
 	public void supprimerAgent(Long id);
-	public List<Agent> listAgents();
+	
 	
 	//Gestion des Clients
 	public Long ajouterClient(Client c);
@@ -95,18 +97,19 @@ public interface IDecorMoiDAO {
 	//Gestion des factures
 	
 	public Facture FactureClient(Long facture_id);
- 
 	
+	public Facture PayerFacture (Long facture_id);
+	
+	public List<Facture> RechercherFacturesDuClient(Long id);
+
 	public List<Facture> RechercherFacturesClients(Long numeroFiche);
- 
+	
 	public List<Facture> RechercherFacturesClients(Long numeroFiche, Date facture_date);
-	  
 	
 	public List<Facture> RechercherFacturesClients(Long numeroFiche, Long idClient);
  
 	public List<Facture> RechercherFacturesClients(Long numeroFiche, Date facture_date, Long idClient);
 
-	
 	public Integer NbrFacture(Long numeroFiche);
 	
 	public Integer NbrAchatsArticle(Long numeroFiche);
@@ -130,6 +133,8 @@ public interface IDecorMoiDAO {
 	public List<Object[]> CalculeArticleVendu(Long numeroFiche, 
 			Date facture_date, Date facture_date2);
 	
+	
+	
 	//Gestion des fiches
 	
 	public List<Fiche> rechercheFicheParNom(String nomFiche);
@@ -146,12 +151,18 @@ public interface IDecorMoiDAO {
 
 	//Gestion des lignes de commandes
 	
-	public LigneCommande rechercheLcParArticle( Long idCommande,String idArticle );
+	public LigneCommande rechercheLcParArticle(Long idCommande, String idArticle);
 	
 	//Gestion des lignes de factures
 
 	public LigneFacture rechercheLfParDate( Date facture_date, Date facture_date2 );
 
+	
+	//Gestion des Salle
+	public Long ajouterSalle(Salle s);
+	public List<Salle> listSalle();
+	public void modifierSalle (Salle s);
+	public void supprimerSalle(Long idSalle);
 	
 	//Gestion des roles
 	
@@ -166,6 +177,47 @@ public interface IDecorMoiDAO {
 	
 	public UtilisateursRoles rechercheRoleEtUser(String role_nom, String username);
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//Gestion des Mariages
+	public Long ajouterMariage(Mariage m);
+	public List<Mariage> listMariage();
+	public void modifierMariage (Mariage m);
+	public void supprimerMariage(Long idEvenement);
+	
+	//Gestion des Dotes
+	public Long ajouterDote(Dote d);
+	public List<Dote> listDote();
+	public void modifierDote (Dote d);
+	public void supprimerDote(Long idEvenement);
+	
+	//Gestion des Fiancaille
+	public Long ajouterFiancaille(Fiancaille f);
+	public List<Fiancaille> listFiancaille();
+	public void modifierFiancaille (Fiancaille f);
+	public void supprimerFiancaille(Long idEvenement);
+	
+	//Gestion des Garden Party
+	public Long ajouterGardenParty(GardenParty gp);
+	public List<GardenParty> listGardenParty();
+	public void modifierGardenParty (GardenParty gp);
+	public void supprimerGardenParty(Long idEvenement);
+	
+	//Gestion des Precious Times
+	public Long ajouterPreciousTimes(PreciousTimes pt);
+	public List<PreciousTimes> listPreciousTimes();
+	public void modifierPreciousTimes (PreciousTimes pt);
+	public void supprimerPreciousTimes(Long idEvenement);
+
+	
+
 	
 	
 }

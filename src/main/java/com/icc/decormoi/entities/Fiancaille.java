@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "Fiancaille")
+@DiscriminatorValue("FIAN")
 public class Fiancaille extends Mariage implements Serializable{
 
 	public Fiancaille() {

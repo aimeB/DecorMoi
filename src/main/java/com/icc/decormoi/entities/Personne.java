@@ -1,15 +1,17 @@
 package com.icc.decormoi.entities;
 
-import java.util.Date;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-
-import net.bytebuddy.implementation.auxiliary.AuxiliaryType.SignatureRelevant;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
@@ -18,14 +20,24 @@ public abstract class Personne {
 	
 	//ATTRIBUT
 	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@NotNull 
 	protected Long id;	
+	
+
 	protected String nom ;
+	
+
 	protected String prenom ;
+	
+
 	protected String adresse;
+	
+
 	protected int tel;
+	
+	@Email @NotBlank
 	protected String email;
 	private Date dinscription;
-	
 	
 	//CONSTRUCTEUR
 	public Personne() {

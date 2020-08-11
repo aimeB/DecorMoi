@@ -1,9 +1,11 @@
 package com.icc.decormoi.entities;
 
-	import java.util.Collection;
+	import java.io.Serializable;
+import java.util.Collection;
 	import java.util.Date;
 
-	import javax.persistence.Entity;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
 	import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,12 +19,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 	@Entity
-	@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
-	public abstract class Evenement {
+	@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+	@DiscriminatorColumn(name="TYPE_EVENT", length= 4)
+	public abstract class Evenement implements Serializable {
 		
 		
 		//ATTRIBUTS
-		@Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
+		@Id @GeneratedValue 
 		protected Long idEvenement;
 		
 		protected String NomEvent;
@@ -36,7 +39,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 		protected final int prix = 0;
 		
 		@ManyToOne
-		@JoinColumn(name="id")
+		@JoinColumn(name="idClient")
 		protected Client client;
 		
 		@ManyToOne

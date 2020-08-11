@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Mariage")
+@DiscriminatorValue("MARI")
 public class Mariage extends Evenement implements Serializable {
 	
 	
@@ -17,6 +18,8 @@ public class Mariage extends Evenement implements Serializable {
 	protected final int prixParPersonne= 15;
 	
 	protected final int coutFixeMariage = nbPersonnes * prixParPersonne ;
+	
+	
 	
 	
 

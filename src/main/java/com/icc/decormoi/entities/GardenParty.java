@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "GardenParty")
+@DiscriminatorValue("GAPA")
 public class GardenParty extends Evenement implements Serializable{
 	
 	private final int prixParPersonne =35;

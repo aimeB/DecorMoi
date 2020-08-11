@@ -11,7 +11,7 @@ public class Salle {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idSalle;
+	private Long idSalle;
 	private String désignation;
 	private boolean dispo;
 	
@@ -48,11 +48,11 @@ public class Salle {
 		this.dispo = dispo;
 	}
 
-	public int getIdSalle() {
+	public long getIdSalle() {
 		return idSalle;
 	}
 
-	public void setIdSalle(int idSalle) {
+	public void setIdSalle(long idSalle) {
 		this.idSalle = idSalle;
 	}
 

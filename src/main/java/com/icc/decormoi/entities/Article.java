@@ -7,8 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -21,17 +26,23 @@ public class Article implements Serializable {
 	
 	//ATTRIBUTS
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@NotNull
 	private Long idArticle;
 	
+	@Size(min=2, max=1000)
 	private String designation;
 	
+	@DecimalMin("0") 
 	private double prix;
 	
+	@Min(0)
 	private int quantite;
 	
+	@Min(0)
 	private int quantiteAlerte;
 	
-	private String image;
+	@Lob
+	private byte image;
 	
 	private boolean selectionne;
 	
@@ -54,7 +65,7 @@ public class Article implements Serializable {
 	}
 
 
-	public Article(Long idArticle, String designation, double prix, int quantite, int quantiteAlerte, String image,
+	public Article(Long idArticle, String designation, double prix, int quantite, int quantiteAlerte, byte image,
 			boolean selectionne, Categorie categorie, Tva tva) {
 		super();
 		this.idArticle = idArticle;
@@ -69,14 +80,13 @@ public class Article implements Serializable {
 	}
 
 
-	public Article(String designation, double prix, int quantite, int quantiteAlerte, String image, boolean selectionne,
+	public Article(String designation, double prix, int quantite, int quantiteAlerte,boolean selectionne,
 			Categorie categorie, Tva tva) {
 		super();
 		this.designation = designation;
 		this.prix = prix;
 		this.quantite = quantite;
 		this.quantiteAlerte = quantiteAlerte;
-		this.image = image;
 		this.selectionne = selectionne;
 		this.categorie = categorie;
 		this.tva = tva;
@@ -119,11 +129,11 @@ public class Article implements Serializable {
 		this.quantite = quantite;
 	}
 
-	public String getImage() {
+	public byte getImage() {
 		return image;
 	}
 
-	public void setImage(String image) {
+	public void setImage(byte image) {
 		this.image = image;
 	}
 

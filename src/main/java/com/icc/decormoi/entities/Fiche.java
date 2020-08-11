@@ -3,11 +3,13 @@ package com.icc.decormoi.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -22,6 +24,7 @@ public class Fiche  implements Serializable
 	@Id  @GeneratedValue
 	private Long numeroFiche;
 	
+	@Size(min=3, max=25)
 	private String nomFiche;
  
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -47,7 +50,7 @@ public class Fiche  implements Serializable
 	}
 	
 
-	//GETTRE ET SETTER
+	//GETTER ET SETTER
 	public Long getNumero() {
 		return numeroFiche;
 	}

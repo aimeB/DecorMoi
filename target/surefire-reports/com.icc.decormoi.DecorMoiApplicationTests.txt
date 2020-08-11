@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.icc.decormoi.DecorMoiApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.578 s - in com.icc.decormoi.DecorMoiApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.216 s - in com.icc.decormoi.DecorMoiApplicationTests
