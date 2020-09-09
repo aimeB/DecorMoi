@@ -3,8 +3,8 @@ package com.icc.decormoi.dao;
 import java.util.Date;
 import java.util.List;
 
-import com.icc.decormoi.entities.*;
-import com.icc.decormoi.entities.Devis.typeEvent;
+import com.icc.decormoi.domaine.*;
+
 
 public interface IDecorMoiDAO {
 	
@@ -26,22 +26,22 @@ public interface IDecorMoiDAO {
 	public void supprimerArticles(Long idArticle);
 	
 	//Gestion des utilisateurs
-	public void ajouterUser(Utilisateur u);
+	public void ajouterUser(User u);
 	public void supprimerUser(String username);
 	public void attribuerRole(Role r, Long id);
-	public void supprimerRoleUser(Utilisateur u, Long role_id);
-	public List<Utilisateur> UtilisateurParMotCle(String mc);
-	public List<Utilisateur> UtilisateurParUsername(String username);
+	public void supprimerRoleUser(User u, Long role_id);
+	public List<User> UtilisateurParMotCle(String mc);
+	public List<User> UtilisateurParUsername(String username);
 	
 	//Gestion des événements
-	public Long ajouterEvent(Evenement e);
-	public void modifierEvent (Evenement e);
+	public Long ajouterEvent(Event e);
+	public void modifierEvent (Event e);
 	public void supprimerEvent(Long idEvenement);
-	public List<Evenement> listEvents();
-	public List<Evenement> listEvents(Long id);
-	public Evenement getEvent(Long idEvenement);
+	public List<Event> listEvents();
+	public List<Event> listEvents(Long id);
+	public Event getEvent(Long idEvenement);
 	public void affecterAgent(Long idEvenement, Long id);
-	public List<Evenement> EvenementAgent(Long idEvenement, Long id);
+	public List<Event> EvenementAgent(Long idEvenement, Long id);
 
 	//Gestion des commandes
 	public Long ajouterCommande(Commande c);
@@ -91,7 +91,7 @@ public interface IDecorMoiDAO {
 	public void supprimerDevis(Long idEvenement);
 	public List<Devis> listDevis();
 	public Devis getDevis(Long idEvenement);
-	public typeEvent choisirTypeEvent (Devis d);
+	
 	
 	
 	//Gestion des factures
@@ -116,7 +116,7 @@ public interface IDecorMoiDAO {
 	
 	public Integer PrixAchatsArticle(Long numeroFiche);
 	
-	// Statititique Facture
+	// Statistique Facture
 	
 	public Integer CalculeVente(Long numeroFiche, 
 			Date facture_date, Date facture_date2);
@@ -175,7 +175,7 @@ public interface IDecorMoiDAO {
 	
 	//Gestion des UtilisateurRoles
 	
-	public UtilisateursRoles rechercheRoleEtUser(String role_nom, String username);
+
 	
 	
 	

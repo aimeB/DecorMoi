@@ -3,29 +3,27 @@ package com.icc.decormoi.metier;
 import java.util.Date;
 import java.util.List;
 
-import com.icc.decormoi.entities.Agent;
-import com.icc.decormoi.entities.Article;
-import com.icc.decormoi.entities.Categorie;
-import com.icc.decormoi.entities.Client;
-import com.icc.decormoi.entities.Commande;
-import com.icc.decormoi.entities.Devis;
-import com.icc.decormoi.entities.Dote;
-import com.icc.decormoi.entities.Evenement;
-import com.icc.decormoi.entities.Facture;
-import com.icc.decormoi.entities.Fiancaille;
-import com.icc.decormoi.entities.Fiche;
-import com.icc.decormoi.entities.GardenParty;
-import com.icc.decormoi.entities.LigneCommande;
-import com.icc.decormoi.entities.LigneFacture;
-import com.icc.decormoi.entities.Mariage;
-import com.icc.decormoi.entities.PanierC;
-import com.icc.decormoi.entities.PreciousTimes;
-import com.icc.decormoi.entities.Role;
-import com.icc.decormoi.entities.Salle;
-import com.icc.decormoi.entities.Utilisateur;
-import com.icc.decormoi.entities.UtilisateursRoles;
-import com.icc.decormoi.entities.Devis.typeEvent;
-
+import com.icc.decormoi.domaine.Agent;
+import com.icc.decormoi.domaine.Article;
+import com.icc.decormoi.domaine.Categorie;
+import com.icc.decormoi.domaine.Client;
+import com.icc.decormoi.domaine.Commande;
+import com.icc.decormoi.domaine.Devis;
+import com.icc.decormoi.domaine.Dote;
+import com.icc.decormoi.domaine.Event;
+import com.icc.decormoi.domaine.Facture;
+import com.icc.decormoi.domaine.Fiancaille;
+import com.icc.decormoi.domaine.Fiche;
+import com.icc.decormoi.domaine.GardenParty;
+import com.icc.decormoi.domaine.LigneCommande;
+import com.icc.decormoi.domaine.LigneFacture;
+import com.icc.decormoi.domaine.Mariage;
+import com.icc.decormoi.domaine.PanierC;
+import com.icc.decormoi.domaine.PreciousTimes;
+import com.icc.decormoi.domaine.Role;
+import com.icc.decormoi.domaine.Salle;
+import com.icc.decormoi.domaine.User;
+import com.icc.decormoi.domaine.User;
 public interface IAdminMetier extends IAgentMetier {
 	
 	//Gestion des Catégories
@@ -39,20 +37,20 @@ public interface IAdminMetier extends IAgentMetier {
 		public void supprimerArticles(Long idArticle);
 		
 		//Gestion des utilisateurs
-		public void ajouterUser(Utilisateur u);
+		public void ajouterUser(User u);
 		public void supprimerUser(String username);
 		public void attribuerRole(Role r, Long id);
-		public void supprimerRoleUser(Utilisateur u, Long role_id);
-		public List<Utilisateur> UtilisateurParMotCle(String mc);
-		public List<Utilisateur> UtilisateurParUsername(String username);
+		public void supprimerRoleUser(User u, Long role_id);
+		public List<User> UtilisateurParMotCle(String mc);
+		public List<User> UtilisateurParUsername(String username);
 		
 		//Gestion des événements
-		public Long ajouterEvent(Evenement e);
-		public void modifierEvent (Evenement e);
+		public Long ajouterEvent(Event e);
+		public void modifierEvent (Event e);
 		public void supprimerEvent(Long idEvenement);
-		public List<Evenement> listEvents();
-		public List<Evenement> listEvents(Long id);
-		public Evenement getEvent(Long idEvenement);
+		public List<Event> listEvents();
+		public List<Event> listEvents(Long id);
+		public Event getEvent(Long idEvenement);
 		public void affecterAgent(Long idEvenement, Long id);
 
 		//Gestion des commandes
@@ -99,7 +97,7 @@ public interface IAdminMetier extends IAgentMetier {
 		public void supprimerDevis(Long idEvenement);
 		public List<Devis> listDevis();
 		public Devis getDevis(Long idEvenement);
-		public typeEvent choisirTypeEvent (Devis d);
+	
 		
 		
 		//Gestion des factures
@@ -174,10 +172,6 @@ public interface IAdminMetier extends IAgentMetier {
 		
 		public Role rechercherRoleParIdEtNom(Long role_id, String role_nom);
 		
-		
-		//Gestion des UtilisateurRoles
-		
-		public UtilisateursRoles rechercheRoleEtUser(String role_nom, String username);
 		
 		//Gestion des Mariages
 		public Long ajouterMariage(Mariage m);

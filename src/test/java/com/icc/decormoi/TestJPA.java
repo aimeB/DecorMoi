@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.icc.decormoi.entities.Categorie;
+import com.icc.decormoi.domaine.Categorie;
 import com.icc.decormoi.metier.IAdminMetier;
 
 class TestJPA {
@@ -23,8 +23,8 @@ class TestJPA {
 			
 			List<Categorie> cat = metier.listCategories();
 			
-			metier.ajouterCategorie(new Categorie("Package", "offre groupé ", "image.jpg", null));
-			metier.ajouterCategorie(new Categorie("Produit", "article en détail", "image2.jpg", null));
+			metier.ajouterCategorie(new Categorie(null, "Package", "offre groupé ", "image.jpg", null, null));
+			metier.ajouterCategorie(new Categorie(null, "Produit", "article en détail", "image2.jpg", null, null));
 
 			List<Categorie> cat2 = metier.listCategories();
 

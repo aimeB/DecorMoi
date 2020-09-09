@@ -2,9 +2,9 @@ package com.icc.decormoi.metier;
 
 import java.util.List;
 
-import com.icc.decormoi.entities.Article;
-import com.icc.decormoi.entities.Categorie;
-import com.icc.decormoi.entities.Devis;
+import com.icc.decormoi.domaine.Article;
+import com.icc.decormoi.domaine.Categorie;
+import com.icc.decormoi.domaine.Devis;
 
 
 public interface IInternauteMetier {

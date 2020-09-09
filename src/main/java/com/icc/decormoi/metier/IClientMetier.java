@@ -2,11 +2,11 @@ package com.icc.decormoi.metier;
 
 import java.util.List;
 
-import com.icc.decormoi.entities.Client;
-import com.icc.decormoi.entities.Commande;
-import com.icc.decormoi.entities.Facture;
-import com.icc.decormoi.entities.LigneCommande;
-import com.icc.decormoi.entities.Salle;
+import com.icc.decormoi.domaine.Client;
+import com.icc.decormoi.domaine.Commande;
+import com.icc.decormoi.domaine.Facture;
+import com.icc.decormoi.domaine.LigneCommande;
+import com.icc.decormoi.domaine.Salle;
 
 
 public interface IClientMetier extends IInternauteMetier {

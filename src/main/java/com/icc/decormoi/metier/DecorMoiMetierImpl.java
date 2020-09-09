@@ -6,28 +6,28 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.icc.decormoi.dao.IDecorMoiDAO;
-import com.icc.decormoi.entities.Agent;
-import com.icc.decormoi.entities.Article;
-import com.icc.decormoi.entities.Categorie;
-import com.icc.decormoi.entities.Client;
-import com.icc.decormoi.entities.Commande;
-import com.icc.decormoi.entities.Devis;
-import com.icc.decormoi.entities.Devis.typeEvent;
-import com.icc.decormoi.entities.Dote;
-import com.icc.decormoi.entities.Evenement;
-import com.icc.decormoi.entities.Facture;
-import com.icc.decormoi.entities.Fiancaille;
-import com.icc.decormoi.entities.Fiche;
-import com.icc.decormoi.entities.GardenParty;
-import com.icc.decormoi.entities.LigneCommande;
-import com.icc.decormoi.entities.LigneFacture;
-import com.icc.decormoi.entities.Mariage;
-import com.icc.decormoi.entities.PanierC;
-import com.icc.decormoi.entities.PreciousTimes;
-import com.icc.decormoi.entities.Role;
-import com.icc.decormoi.entities.Salle;
-import com.icc.decormoi.entities.Utilisateur;
-import com.icc.decormoi.entities.UtilisateursRoles;
+import com.icc.decormoi.domaine.Agent;
+import com.icc.decormoi.domaine.Article;
+import com.icc.decormoi.domaine.Categorie;
+import com.icc.decormoi.domaine.Client;
+import com.icc.decormoi.domaine.Commande;
+import com.icc.decormoi.domaine.Devis;
+import com.icc.decormoi.domaine.Dote;
+import com.icc.decormoi.domaine.Event;
+import com.icc.decormoi.domaine.Facture;
+import com.icc.decormoi.domaine.Fiancaille;
+import com.icc.decormoi.domaine.Fiche;
+import com.icc.decormoi.domaine.GardenParty;
+import com.icc.decormoi.domaine.LigneCommande;
+import com.icc.decormoi.domaine.LigneFacture;
+import com.icc.decormoi.domaine.Mariage;
+import com.icc.decormoi.domaine.PanierC;
+import com.icc.decormoi.domaine.PreciousTimes;
+import com.icc.decormoi.domaine.Role;
+import com.icc.decormoi.domaine.Salle;
+import com.icc.decormoi.domaine.User;
+import com.icc.decormoi.domaine.User;
+
 
 
 @Transactional
@@ -53,7 +53,7 @@ public class DecorMoiMetierImpl implements IAdminMetier {
 	}
 
 	@Override
-	public List<Evenement> EvenementAgent(Long idEvenement, Long id) {
+	public List<Event> EvenementAgent(Long idEvenement, Long id) {
 	
 		return dao.EvenementAgent(idEvenement, id);
 	}
@@ -159,7 +159,7 @@ public class DecorMoiMetierImpl implements IAdminMetier {
 	}
 
 	@Override
-	public void ajouterUser(Utilisateur u) {
+	public void ajouterUser(User u) {
 		
 		dao.ajouterUser(u);
 	}
@@ -177,28 +177,28 @@ public class DecorMoiMetierImpl implements IAdminMetier {
 	}
 
 	@Override
-	public void supprimerRoleUser(Utilisateur u, Long role_id) {
+	public void supprimerRoleUser(User u, Long role_id) {
 
 		dao.supprimerRoleUser(u, role_id);
 	}
 
 	@Override
-	public List<Utilisateur> UtilisateurParMotCle(String mc) {
+	public List<User> UtilisateurParMotCle(String mc) {
 		return dao.UtilisateurParMotCle(mc);
 	}
 
 	@Override
-	public List<Utilisateur> UtilisateurParUsername(String username) {
+	public List<User> UtilisateurParUsername(String username) {
 		return dao.UtilisateurParUsername(username);
 	}
 
 	@Override
-	public Long ajouterEvent(Evenement e) {
+	public Long ajouterEvent(Event e) {
 		return dao.ajouterEvent(e);
 	}
 
 	@Override
-	public void modifierEvent(Evenement e) {
+	public void modifierEvent(Event e) {
 		dao.modifierEvent(e);
 	}
 
@@ -208,17 +208,17 @@ public class DecorMoiMetierImpl implements IAdminMetier {
 	}
 
 	@Override
-	public List<Evenement> listEvents() {
+	public List<Event> listEvents() {
 		return dao.listEvents();
 	}
 
 	@Override
-	public List<Evenement> listEvents(Long id) {
+	public List<Event> listEvents(Long id) {
 		return dao.listEvents(id);
 	}
 
 	@Override
-	public Evenement getEvent(Long idEvenement) {
+	public Event getEvent(Long idEvenement) {
 		return dao.getEvent(idEvenement);
 	}
 
@@ -353,11 +353,6 @@ public class DecorMoiMetierImpl implements IAdminMetier {
 	}
 
 	@Override
-	public typeEvent choisirTypeEvent(Devis d) {
-		return dao.choisirTypeEvent(d);
-	}
-
-	@Override
 	public Facture FactureClient(Long facture_id) {
 		return dao.FactureClient(facture_id);
 	}
@@ -484,11 +479,6 @@ public class DecorMoiMetierImpl implements IAdminMetier {
 
 	@Override
 	public Role rechercherRoleParIdEtNom(Long role_id, String role_nom) {
-		return null;
-	}
-
-	@Override
-	public UtilisateursRoles rechercheRoleEtUser(String role_nom, String username) {
 		return null;
 	}
 

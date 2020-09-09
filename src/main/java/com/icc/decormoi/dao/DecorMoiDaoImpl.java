@@ -7,28 +7,28 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.icc.decormoi.entities.Agent;
-import com.icc.decormoi.entities.Article;
-import com.icc.decormoi.entities.Categorie;
-import com.icc.decormoi.entities.Client;
-import com.icc.decormoi.entities.Commande;
-import com.icc.decormoi.entities.Devis;
-import com.icc.decormoi.entities.Devis.typeEvent;
-import com.icc.decormoi.entities.Dote;
-import com.icc.decormoi.entities.Evenement;
-import com.icc.decormoi.entities.Facture;
-import com.icc.decormoi.entities.Fiancaille;
-import com.icc.decormoi.entities.Fiche;
-import com.icc.decormoi.entities.GardenParty;
-import com.icc.decormoi.entities.LigneCommande;
-import com.icc.decormoi.entities.LigneFacture;
-import com.icc.decormoi.entities.Mariage;
-import com.icc.decormoi.entities.PanierC;
-import com.icc.decormoi.entities.PreciousTimes;
-import com.icc.decormoi.entities.Role;
-import com.icc.decormoi.entities.Salle;
-import com.icc.decormoi.entities.Utilisateur;
-import com.icc.decormoi.entities.UtilisateursRoles;
+import com.icc.decormoi.domaine.Agent;
+import com.icc.decormoi.domaine.Article;
+import com.icc.decormoi.domaine.Categorie;
+import com.icc.decormoi.domaine.Client;
+import com.icc.decormoi.domaine.Commande;
+import com.icc.decormoi.domaine.Devis;
+import com.icc.decormoi.domaine.Dote;
+import com.icc.decormoi.domaine.Event;
+import com.icc.decormoi.domaine.Facture;
+import com.icc.decormoi.domaine.Fiancaille;
+import com.icc.decormoi.domaine.Fiche;
+import com.icc.decormoi.domaine.GardenParty;
+import com.icc.decormoi.domaine.LigneCommande;
+import com.icc.decormoi.domaine.LigneFacture;
+import com.icc.decormoi.domaine.Mariage;
+import com.icc.decormoi.domaine.PanierC;
+import com.icc.decormoi.domaine.PreciousTimes;
+import com.icc.decormoi.domaine.Role;
+import com.icc.decormoi.domaine.Salle;
+import com.icc.decormoi.domaine.User;
+import com.icc.decormoi.domaine.User;
+
 
 public class DecorMoiDaoImpl implements IDecorMoiDAO {
 	
@@ -133,7 +133,7 @@ public class DecorMoiDaoImpl implements IDecorMoiDAO {
 
 	
 	@Override
-	public void ajouterUser(Utilisateur u) {
+	public void ajouterUser(User u) {
 		
 		em.persist(u);
 	}
@@ -165,46 +165,46 @@ public class DecorMoiDaoImpl implements IDecorMoiDAO {
 
 	@Override
 	public void supprimerUser(String username) {
-		Utilisateur c = em.find(Utilisateur.class, username);
+		User c = em.find(User.class, username);
 		em.remove(c);
 		
 	}
 
 	@Override
-	public void supprimerRoleUser(Utilisateur u, Long role_id) {
-		Utilisateur c = em.find(Utilisateur.class, role_id);
+	public void supprimerRoleUser(User u, Long role_id) {
+		User c = em.find(User.class, role_id);
 		em.remove(c);
 	}
 
 	@Override
-	public Long ajouterEvent(Evenement e) {
+	public Long ajouterEvent(Event e) {
 	em.persist(e);
 		return null;
 	}
 
 	@Override
-	public void modifierEvent(Evenement e) {
+	public void modifierEvent(Event e) {
 		em.merge(e);
 		
 	}
 
 	@Override
 	public void supprimerEvent(Long idEvenement) {
-		Evenement e = em.find(Evenement.class, idEvenement);
+		Event e = em.find(Event.class, idEvenement);
 		em.remove(e);
 		
 	}
 
 	@Override
-	public List<Evenement> listEvents() {
+	public List<Event> listEvents() {
 		Query req=em.createQuery("select e from Evenement e");
 		return req.getResultList();		
 	}
 
 	@Override
-	public Evenement getEvent(Long idEvenement) {
+	public Event getEvent(Long idEvenement) {
 		
-		return  em.find(Evenement.class, idEvenement);
+		return  em.find(Event.class, idEvenement);
 	}
 
 	//A FAIRE
@@ -217,7 +217,7 @@ public class DecorMoiDaoImpl implements IDecorMoiDAO {
 	
 	// A VERIFIER
 	@Override
-	public List<Evenement> EvenementAgent(Long idEvenement, Long id) {
+	public List<Event> EvenementAgent(Long idEvenement, Long id) {
 		Query req=em.createQuery("select e from Evenement e where e.agents.id= :x");
 		req.setParameter("x", id);
 		return req.getResultList();
@@ -340,15 +340,8 @@ public class DecorMoiDaoImpl implements IDecorMoiDAO {
 		return em.find(Devis.class, idEvenement);
 	}
 
-	//A FAIRE
 	@Override
-	public typeEvent choisirTypeEvent(Devis d) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Utilisateur> UtilisateurParMotCle(String mc) {
+	public List<User> UtilisateurParMotCle(String mc) {
 		Query req=em.createQuery("select u from Utilisateur u where u.username like :x");
 		req.setParameter("x", "%" +mc+ "%");
 		return req.getResultList();
@@ -356,7 +349,7 @@ public class DecorMoiDaoImpl implements IDecorMoiDAO {
 
 	
 	@Override
-	public List<Utilisateur> UtilisateurParUsername(String username) {
+	public List<User> UtilisateurParUsername(String username) {
 		Query req=em.createQuery("select u from Utilisateur u where u.username = :x");
 		req.setParameter("x", username);
 		return req.getResultList();
@@ -599,14 +592,10 @@ public class DecorMoiDaoImpl implements IDecorMoiDAO {
 		return null;
 	}
 
-	@Override
-	public UtilisateursRoles rechercheRoleEtUser(String role_nom, String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
-	public List<Evenement> listEvents(Long id) {
+	public List<Event> listEvents(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -779,5 +768,7 @@ public class DecorMoiDaoImpl implements IDecorMoiDAO {
 		return null;
 	}
 
+
+	
 
 }
