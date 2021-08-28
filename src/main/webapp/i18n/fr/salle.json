@@ -1,0 +1,24 @@
+{
+  "decormoiApp": {
+    "salle": {
+      "home": {
+        "title": "Salles",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer une nouvelle Salle",
+        "createOrEditLabel": "Détails de la Salle",
+        "notFound": "Aucune Salle trouvée"
+      },
+      "created": "Une nouvelle Salle a été créée",
+      "updated": "La Salle a été mise à jour",
+      "deleted": "La Salle a été supprimée",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Salle {{ id }} ?"
+      },
+      "detail": {
+        "title": "Salle"
+      },
+      "id": "ID",
+      "nom": "Nom"
+    }
+  }
+}

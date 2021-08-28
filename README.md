@@ -1,27 +1,57 @@
-# DecormoiAngular
+Instructions
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
+install npm packages
 
-## Development server
+```
+npm install
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run the following commands in two separate terminals to create a blissful development experience where your browser
+auto-refreshes when files change on your hard drive.
 
-## Code scaffolding
+```
+terminal 1
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+./mvnw -DskipTests #(DskipTests because some tests cases are broken. we will fix them)
 
-## Build
+terminal 2
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+npm start
+```
 
-## Running unit tests
+### Using Angular CLI
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+You can also use [Angular CLI][] to generate some custom client code.
 
-## Running end-to-end tests
+For example, the following command:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
+```
+ng generate component my-component
+```
 
-## Further help
+will generate few files:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+create src/main/webapp/app/my-component/my-component.component.html
+create src/main/webapp/app/my-component/my-component.component.ts
+update src/main/webapp/app/app.module.ts
+```
+
+## Building for production
+
+### Packaging as jar
+
+To build the final jar and optimize the decormoi application for production, run:
+
+```
+./mvnw -Pprod package -DskipTests #(DskipTests because some tests cases are broken. we will fix them)
+```
+
+This will concatenate and minify the client CSS and JavaScript files. It will also modify `index.html` so it references these new files.
+To ensure everything worked, run:
+
+```
+java -jar target/*.jar
+```
+
+Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
