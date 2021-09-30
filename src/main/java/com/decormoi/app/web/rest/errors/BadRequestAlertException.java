@@ -14,6 +14,8 @@ public class BadRequestAlertException extends AbstractThrowableProblem {
 
     private final String errorKey;
 
+
+
     public BadRequestAlertException(String defaultMessage, String entityName, String errorKey) {
         this(ErrorConstants.DEFAULT_TYPE, defaultMessage, entityName, errorKey);
     }

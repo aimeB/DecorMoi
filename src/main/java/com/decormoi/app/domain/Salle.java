@@ -21,6 +21,8 @@ public class Salle implements Serializable {
     @Column(name = "nom", nullable = false)
     private String nom;
 
+
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -35,6 +37,9 @@ public class Salle implements Serializable {
         return this;
     }
 
+
+
+
     public String getNom() {
         return this.nom;
     }
@@ -48,8 +53,9 @@ public class Salle implements Serializable {
         this.nom = nom;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
+
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
     @Override
     public boolean equals(Object o) {
         if (this == o) {

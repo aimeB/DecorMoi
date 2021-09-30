@@ -62,6 +62,9 @@ public class EventResource {
         this.userService = userService;
     }
 
+
+
+
     /**
      * {@code POST  /events} : Create a new event.
      *
@@ -87,6 +90,9 @@ public class EventResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+
+
 
     /**
      * {@code PUT  /events/:id} : Updates an existing event.
@@ -122,6 +128,10 @@ public class EventResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, event.getId().toString()))
             .body(result);
     }
+
+
+
+
 
     /**
      * {@code PATCH  /events/:id} : Partial updates given fields of an existing
@@ -164,6 +174,10 @@ public class EventResource {
         );
     }
 
+
+
+
+
     /**
      * {@code GET  /events} : get all the events.
      *
@@ -185,6 +199,10 @@ public class EventResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+
+
+
+
     /**
      * {@code GET  /events/count} : count all the events.
      *
@@ -197,6 +215,10 @@ public class EventResource {
         log.debug("REST request to count Events by criteria: {}", criteria);
         return ResponseEntity.ok().body(eventQueryService.countByCriteria(criteria));
     }
+
+
+
+
 
     /**
      * {@code GET  /events/:id} : get the "id" event.
@@ -216,6 +238,9 @@ public class EventResource {
         }
         return ResponseUtil.wrapOrNotFound(event);
     }
+
+
+
 
     /**
      * {@code DELETE  /events/:id} : delete the "id" event.

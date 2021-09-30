@@ -39,6 +39,8 @@ public class LoggingAspect {
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
     }
 
+
+
     /**
      * Pointcut that matches all Spring beans in the application's main packages.
      */
@@ -49,6 +51,8 @@ public class LoggingAspect {
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
     }
 
+
+
     /**
      * Retrieves the {@link Logger} associated to the given {@link JoinPoint}.
      *
@@ -58,6 +62,9 @@ public class LoggingAspect {
     private Logger logger(JoinPoint joinPoint) {
         return LoggerFactory.getLogger(joinPoint.getSignature().getDeclaringTypeName());
     }
+
+
+
 
     /**
      * Advice that logs methods throwing exceptions.
@@ -85,6 +92,10 @@ public class LoggingAspect {
                 );
         }
     }
+
+
+
+
 
     /**
      * Advice that logs when a method is entered and exited.

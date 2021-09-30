@@ -100,6 +100,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.id = id;
     }
 
+
+
+
     public String getLogin() {
         return login;
     }
@@ -109,6 +112,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.login = StringUtils.lowerCase(login, Locale.ENGLISH);
     }
 
+
+
+
     public String getPassword() {
         return password;
     }
@@ -116,6 +122,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
+
+
 
     public String getFirstName() {
         return firstName;
@@ -125,6 +135,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.firstName = firstName;
     }
 
+
+
+
     public String getLastName() {
         return lastName;
     }
@@ -132,6 +145,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+
+
 
     public String getEmail() {
         return email;
@@ -141,6 +157,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.email = email;
     }
 
+
+
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -148,6 +167,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+
+
 
     public boolean isActivated() {
         return activated;
@@ -157,6 +179,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.activated = activated;
     }
 
+
+
+
     public String getActivationKey() {
         return activationKey;
     }
@@ -164,6 +189,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setActivationKey(String activationKey) {
         this.activationKey = activationKey;
     }
+
+
+
+
 
     public String getResetKey() {
         return resetKey;
@@ -173,6 +202,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.resetKey = resetKey;
     }
 
+
+
+
     public Instant getResetDate() {
         return resetDate;
     }
@@ -180,6 +212,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setResetDate(Instant resetDate) {
         this.resetDate = resetDate;
     }
+
+
+
+
 
     public String getLangKey() {
         return langKey;
@@ -189,6 +225,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.langKey = langKey;
     }
 
+
+
+
     public Set<Authority> getAuthorities() {
         return authorities;
     }
@@ -197,6 +236,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
+
+
+
     public Set<PersistentToken> getPersistentTokens() {
         return persistentTokens;
     }
@@ -204,6 +246,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setPersistentTokens(Set<PersistentToken> persistentTokens) {
         this.persistentTokens = persistentTokens;
     }
+
+
+
 
     @Override
     public boolean equals(Object o) {

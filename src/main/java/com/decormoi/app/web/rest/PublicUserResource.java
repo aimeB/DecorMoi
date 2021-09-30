@@ -32,6 +32,9 @@ public class PublicUserResource {
         this.userService = userService;
     }
 
+
+
+
     /**
      * {@code GET /users} : get all users with only the public informations - calling this are allowed for anyone.
      *
@@ -53,6 +56,9 @@ public class PublicUserResource {
     private boolean onlyContainsAllowedProperties(Pageable pageable) {
         return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
     }
+
+
+
 
     /**
      * Gets a list of all roles.

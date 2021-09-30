@@ -33,6 +33,9 @@ public class CategorieProduitQueryService extends QueryService<CategorieProduit>
         this.categorieProduitRepository = categorieProduitRepository;
     }
 
+
+
+
     /**
      * Return a {@link List} of {@link CategorieProduit} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
@@ -44,6 +47,8 @@ public class CategorieProduitQueryService extends QueryService<CategorieProduit>
         final Specification<CategorieProduit> specification = createSpecification(criteria);
         return categorieProduitRepository.findAll(specification);
     }
+
+
 
     /**
      * Return a {@link Page} of {@link CategorieProduit} which matches the criteria from the database.
@@ -58,6 +63,9 @@ public class CategorieProduitQueryService extends QueryService<CategorieProduit>
         return categorieProduitRepository.findAll(specification, page);
     }
 
+
+
+
     /**
      * Return the number of matching entities in the database.
      * @param criteria The object which holds all the filters, which the entities should match.
@@ -69,6 +77,9 @@ public class CategorieProduitQueryService extends QueryService<CategorieProduit>
         final Specification<CategorieProduit> specification = createSpecification(criteria);
         return categorieProduitRepository.count(specification);
     }
+
+
+
 
     /**
      * Function to convert {@link CategorieProduitCriteria} to a {@link Specification}

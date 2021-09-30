@@ -35,6 +35,8 @@ public class Event implements Serializable {
     @ManyToOne
     private User appartenantA;
 
+
+
     @ManyToMany
     @JoinTable(
         name = "rel_event__agent_evenement",
@@ -43,9 +45,13 @@ public class Event implements Serializable {
     )
     private Set<User> agentEvenements = new HashSet<>();
 
+
+
     @ManyToOne(optional = false)
     @NotNull
     private TypeEvenement typeEvenement;
+
+
 
     @ManyToMany
     @JoinTable(
@@ -56,18 +62,24 @@ public class Event implements Serializable {
     @JsonIgnoreProperties(value = { "categorie" }, allowSetters = true)
     private Set<Produit> produits = new HashSet<>();
 
+
+
     @ManyToOne(optional = false)
     @NotNull
     private Salle salle;
+
+
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
 
+
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public Event id(Long id) {
         this.id = id;
@@ -87,6 +99,10 @@ public class Event implements Serializable {
         this.nom = nom;
     }
 
+
+
+
+
     public Instant getDateEvenement() {
         return this.dateEvenement;
     }
@@ -100,6 +116,9 @@ public class Event implements Serializable {
         this.dateEvenement = dateEvenement;
     }
 
+
+
+
     public Double getPrix() {
         return this.prix;
     }
@@ -112,6 +131,9 @@ public class Event implements Serializable {
     public void setPrix(Double prix) {
         this.prix = prix;
     }
+
+
+
 
     public User getAppartenantA() {
         return this.appartenantA;
@@ -129,6 +151,10 @@ public class Event implements Serializable {
     public Set<User> getAgentEvenements() {
         return this.agentEvenements;
     }
+
+
+
+
 
     public Event agentEvenements(Set<User> users) {
         this.setAgentEvenements(users);
@@ -149,6 +175,10 @@ public class Event implements Serializable {
         this.agentEvenements = users;
     }
 
+
+
+    
+
     public TypeEvenement getTypeEvenement() {
         return this.typeEvenement;
     }
@@ -161,6 +191,9 @@ public class Event implements Serializable {
     public void setTypeEvenement(TypeEvenement typeEvenement) {
         this.typeEvenement = typeEvenement;
     }
+
+
+
 
     public Set<Produit> getProduits() {
         return this.produits;
@@ -185,6 +218,9 @@ public class Event implements Serializable {
         this.produits = produits;
     }
 
+
+
+
     public Salle getSalle() {
         return this.salle;
     }
@@ -198,8 +234,11 @@ public class Event implements Serializable {
         this.salle = salle;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
+
+
+
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
     @Override
     public boolean equals(Object o) {
         if (this == o) {

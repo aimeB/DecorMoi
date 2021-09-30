@@ -30,10 +30,15 @@ public class TypeEvenement implements Serializable {
         this.id = id;
     }
 
+
+
     public TypeEvenement id(Long id) {
         this.id = id;
         return this;
     }
+
+
+
 
     public String getNom() {
         return this.nom;
@@ -47,6 +52,8 @@ public class TypeEvenement implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

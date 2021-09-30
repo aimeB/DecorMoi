@@ -53,6 +53,8 @@ public class ProduitResource {
         this.produitQueryService = produitQueryService;
     }
 
+
+
     /**
      * {@code POST  /produits} : Create a new produit.
      *
@@ -72,6 +74,9 @@ public class ProduitResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+
+
 
     /**
      * {@code PUT  /produits/:id} : Updates an existing produit.
@@ -106,6 +111,9 @@ public class ProduitResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, produit.getId().toString()))
             .body(result);
     }
+
+
+
 
     /**
      * {@code PATCH  /produits/:id} : Partial updates given fields of an existing produit, field will ignore if it is null
@@ -143,6 +151,9 @@ public class ProduitResource {
         );
     }
 
+
+
+
     /**
      * {@code GET  /produits} : get all the produits.
      *
@@ -158,6 +169,10 @@ public class ProduitResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+
+
+
+
     /**
      * {@code GET  /produits/count} : count all the produits.
      *
@@ -169,6 +184,9 @@ public class ProduitResource {
         log.debug("REST request to count Produits by criteria: {}", criteria);
         return ResponseEntity.ok().body(produitQueryService.countByCriteria(criteria));
     }
+
+
+
 
     /**
      * {@code GET  /produits/:id} : get the "id" produit.
@@ -182,6 +200,10 @@ public class ProduitResource {
         Optional<Produit> produit = produitService.findOne(id);
         return ResponseUtil.wrapOrNotFound(produit);
     }
+
+
+
+    
 
     /**
      * {@code DELETE  /produits/:id} : delete the "id" produit.

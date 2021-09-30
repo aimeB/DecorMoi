@@ -44,6 +44,8 @@ public class PersistentToken implements Serializable {
     @ManyToOne
     private User user;
 
+
+
     public String getSeries() {
         return series;
     }
@@ -51,6 +53,10 @@ public class PersistentToken implements Serializable {
     public void setSeries(String series) {
         this.series = series;
     }
+
+
+
+
 
     public String getTokenValue() {
         return tokenValue;
@@ -60,6 +66,9 @@ public class PersistentToken implements Serializable {
         this.tokenValue = tokenValue;
     }
 
+
+
+
     public LocalDate getTokenDate() {
         return tokenDate;
     }
@@ -68,6 +77,10 @@ public class PersistentToken implements Serializable {
         this.tokenDate = tokenDate;
     }
 
+
+
+
+
     public String getIpAddress() {
         return ipAddress;
     }
@@ -75,6 +88,10 @@ public class PersistentToken implements Serializable {
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }
+
+
+
+
 
     public String getUserAgent() {
         return userAgent;
@@ -87,6 +104,10 @@ public class PersistentToken implements Serializable {
             this.userAgent = userAgent;
         }
     }
+
+
+
+
 
     public User getUser() {
         return user;

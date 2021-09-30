@@ -53,6 +53,9 @@ public class SalleResource {
         this.salleQueryService = salleQueryService;
     }
 
+
+
+
     /**
      * {@code POST  /salles} : Create a new salle.
      *
@@ -72,6 +75,9 @@ public class SalleResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+
+    
 
     /**
      * {@code PUT  /salles/:id} : Updates an existing salle.
@@ -104,6 +110,9 @@ public class SalleResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, salle.getId().toString()))
             .body(result);
     }
+
+
+
 
     /**
      * {@code PATCH  /salles/:id} : Partial updates given fields of an existing salle, field will ignore if it is null
@@ -141,6 +150,9 @@ public class SalleResource {
         );
     }
 
+
+
+
     /**
      * {@code GET  /salles} : get all the salles.
      *
@@ -156,6 +168,9 @@ public class SalleResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+
+
+
     /**
      * {@code GET  /salles/count} : count all the salles.
      *
@@ -167,6 +182,9 @@ public class SalleResource {
         log.debug("REST request to count Salles by criteria: {}", criteria);
         return ResponseEntity.ok().body(salleQueryService.countByCriteria(criteria));
     }
+
+
+
 
     /**
      * {@code GET  /salles/:id} : get the "id" salle.
@@ -180,6 +198,9 @@ public class SalleResource {
         Optional<Salle> salle = salleService.findOne(id);
         return ResponseUtil.wrapOrNotFound(salle);
     }
+
+
+
 
     /**
      * {@code DELETE  /salles/:id} : delete the "id" salle.

@@ -42,6 +42,9 @@ public abstract class AbstractAuditingEntity implements Serializable {
     @JsonIgnore
     private Instant lastModifiedDate = Instant.now();
 
+
+
+
     public String getCreatedBy() {
         return createdBy;
     }

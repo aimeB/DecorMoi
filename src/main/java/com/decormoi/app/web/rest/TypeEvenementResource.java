@@ -57,6 +57,8 @@ public class TypeEvenementResource {
         this.typeEvenementQueryService = typeEvenementQueryService;
     }
 
+
+
     /**
      * {@code POST  /type-evenements} : Create a new typeEvenement.
      *
@@ -76,6 +78,9 @@ public class TypeEvenementResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+
+
 
     /**
      * {@code PUT  /type-evenements/:id} : Updates an existing typeEvenement.
@@ -110,6 +115,9 @@ public class TypeEvenementResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, typeEvenement.getId().toString()))
             .body(result);
     }
+
+
+
 
     /**
      * {@code PATCH  /type-evenements/:id} : Partial updates given fields of an existing typeEvenement, field will ignore if it is null
@@ -147,6 +155,9 @@ public class TypeEvenementResource {
         );
     }
 
+
+
+
     /**
      * {@code GET  /type-evenements} : get all the typeEvenements.
      *
@@ -162,6 +173,9 @@ public class TypeEvenementResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+
+
+
     /**
      * {@code GET  /type-evenements/count} : count all the typeEvenements.
      *
@@ -173,6 +187,9 @@ public class TypeEvenementResource {
         log.debug("REST request to count TypeEvenements by criteria: {}", criteria);
         return ResponseEntity.ok().body(typeEvenementQueryService.countByCriteria(criteria));
     }
+
+
+
 
     /**
      * {@code GET  /type-evenements/:id} : get the "id" typeEvenement.
@@ -186,6 +203,8 @@ public class TypeEvenementResource {
         Optional<TypeEvenement> typeEvenement = typeEvenementService.findOne(id);
         return ResponseUtil.wrapOrNotFound(typeEvenement);
     }
+
+
 
     /**
      * {@code DELETE  /type-evenements/:id} : delete the "id" typeEvenement.
