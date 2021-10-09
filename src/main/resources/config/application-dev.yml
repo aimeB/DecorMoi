@@ -32,8 +32,8 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:./target/h2db/db/decormoi;DB_CLOSE_DELAY=-1
-    username: decormoi
+    url: jdbc:mysql://localhost:3306/decormoi
+    username: root
     password:
     hikari:
       poolName: Hikari
@@ -43,7 +43,7 @@ spring:
       # disable spring boot built-in h2-console since we start it manually with correct configuration
       enabled: false
   jpa:
-    database-platform: tech.jhipster.domain.util.FixedH2Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
