@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
@@ -39,9 +39,13 @@ export class EventUpdateComponent implements OnInit {
     appartenantA: [],
     agentEvenements: [],
     typeEvenement: [null, Validators.required],
-    produits: [],
+    produits: this.fb.array([]),
     salle: [null, Validators.required],
   });
+
+  // get produits() : FormArray {
+  //   return this.editForm.get("produits") as FormArray
+  // }
 
   constructor(
     protected eventService: EventService,
@@ -71,13 +75,15 @@ export class EventUpdateComponent implements OnInit {
   }
 
   save(): void {
+    console.log("save");
+    console.log("produits: ", this.editForm.value);
     this.isSaving = true;
-    const event = this.createFromForm();
-    if (event.id !== undefined) {
-      this.subscribeToSaveResponse(this.eventService.update(event));
-    } else {
-      this.subscribeToSaveResponse(this.eventService.create(event));
-    }
+    // const event = this.createFromForm();
+    // if (event.id !== undefined) {
+    //   this.subscribeToSaveResponse(this.eventService.update(event));
+    // } else {
+    //   this.subscribeToSaveResponse(this.eventService.create(event));
+    // }
   }
 
   trackUserById(index: number, item: IUser): number {
@@ -138,6 +144,7 @@ export class EventUpdateComponent implements OnInit {
   }
 
   protected updateForm(event: IEvent): void {
+    console.log("updateForm");
     this.editForm.patchValue({
       id: event.id,
       nom: event.nom,
@@ -147,7 +154,7 @@ export class EventUpdateComponent implements OnInit {
       agentEvenements: event.agentEvenements,
       typeEvenement: event.typeEvenement,
       produits: event.produits,
-      salle: event.salle,
+      salle: event.salle
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(

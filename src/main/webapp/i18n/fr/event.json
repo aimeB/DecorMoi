@@ -25,6 +25,7 @@
       "agentEvenement": "Agents Affectés",
       "typeEvenement": "Type",
       "produit": "Produit",
+      "quantite": "Quantité",
       "salle": "Salle"
     }
   }

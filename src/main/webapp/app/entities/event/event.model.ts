@@ -13,6 +13,7 @@ export interface IEvent {
   agentEvenements?: IUser[] | null;
   typeEvenement?: ITypeEvenement;
   produits?: IProduit[] | null;
+  quantite?: number;
   salle?: ISalle;
 }
 
@@ -26,6 +27,7 @@ export class Event implements IEvent {
     public agentEvenements?: IUser[] | null,
     public typeEvenement?: ITypeEvenement,
     public produits?: IProduit[] | null,
+    public quantite?: number,
     public salle?: ISalle
   ) {}
 }
