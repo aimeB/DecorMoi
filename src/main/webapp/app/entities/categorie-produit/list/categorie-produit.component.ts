@@ -60,10 +60,12 @@ export class CategorieProduitComponent implements OnInit {
     return item.id!;
   }
 
-  delete(categorieProduit: ICategorieProduit): void {
-    this.categorieProduitService.delete(categorieProduit.id!).subscribe(() => {
-      this.loadPage();
-    });
+  delete(categorieProduit : ICategorieProduit): void {
+    if(window.confirm(`Voulez-vous supprimer la catégorie du produit ${categorieProduit.nom!}?`)){
+      this.categorieProduitService.delete(categorieProduit.id!).subscribe(() => {
+        this.loadPage();
+      });
+    }
   }
 
   protected sort(): string[] {
