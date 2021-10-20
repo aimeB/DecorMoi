@@ -55,12 +55,14 @@ import { DevisListComponent } from './new-comp/devis-list/devis-list.component';
 import { DevisFormComponent } from './new-comp/devis-list/devis-form/devis-form.component';
 import { DisponibiliteComponent } from './new-comp/disponibilite/disponibilite.component';
 import { AccueilService } from './new-comp/services/accueil.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     BrowserModule,
     SharedModule,
     HomeModule,
+    FormsModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     EntityRoutingModule,
     AppRoutingModule,

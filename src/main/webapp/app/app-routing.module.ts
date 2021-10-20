@@ -18,6 +18,7 @@ import { BlogListComponent } from './new-comp/blog-list/blog-list.component';
 import { BlogFormComponent } from './new-comp/blog-list/blog-form/blog-form.component';
 import { SingleDevisComponent } from './new-comp/devis-list/single-devis/single-devis.component';
 import { ContactComponent } from './new-comp/contact/contact.component';
+import { ListComponent } from './new-comp/user/list/list.component';
 import { MentionLegaleComponent } from './new-comp/mention-legale/mention-legale.component';
 import { ConditionsGeneraleComponent } from './new-comp/conditions-generale/conditions-generale.component';
 import { EventListComponent } from './new-comp/event-list/event-list.component';
@@ -56,7 +57,8 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         { path: 'article-form', component: ArticleFormComponent },
 
         { path: 'blog-list', component: BlogListComponent },
-        { path: 'single-blog', component: SingleBlogComponent },
+        { path: 'blog-list/:id', component: SingleBlogComponent },
+
         { path: 'blog-form', component: BlogFormComponent },
 
 
@@ -64,7 +66,7 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         { path: 'single-devis', component: SingleDevisComponent },
         { path: 'devis-form', component: DevisFormComponent },
 
-      
+        { path: 'list', component: ListComponent },
         { path: 'galerie', component: GalerieComponent },
         { path: 'apropos', component: AproposComponent },
         { path: 'contact', component: ContactComponent },
