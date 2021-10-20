@@ -1,5 +1,7 @@
 package com.decormoi.app.domain;
 
+import com.decormoi.app.domain.enums.ImpactType;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -41,6 +43,11 @@ public class Produit implements Serializable {
     @NotNull
     private CategorieProduit categorie;
 
+    @NotNull
+    @Column(name = "impact_price", nullable = false)
+    @Enumerated(EnumType.ORDINAL)
+    private ImpactType impactPrice;
+
 
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -75,8 +82,13 @@ public class Produit implements Serializable {
     }
 
 
+    public ImpactType getImpactPrice() {
+        return impactPrice;
+    }
 
-
+    public void setImpactPrice(ImpactType impactPrice) {
+        this.impactPrice = impactPrice;
+    }
 
     public String getDescription() {
         return this.description;
@@ -161,7 +173,7 @@ public class Produit implements Serializable {
 
 
 
-    
+
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

@@ -295,7 +295,7 @@ public class UserService {
         return userRepository.findAll(Specification.where(isAgent(agent)), pageable).map(UserDTO::new);
 
     }
-    
+
     @Transactional(readOnly = true)
     public Page<UserDTO> getAllPublicUsers(Pageable pageable) {
         return userRepository.findAllByIdNotNullAndActivatedIsTrue(pageable).map(UserDTO::new);

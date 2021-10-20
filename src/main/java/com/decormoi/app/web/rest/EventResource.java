@@ -1,6 +1,7 @@
 package com.decormoi.app.web.rest;
 
 import com.decormoi.app.domain.Event;
+import com.decormoi.app.domain.User;
 import com.decormoi.app.repository.EventRepository;
 import com.decormoi.app.service.EventQueryService;
 import com.decormoi.app.service.EventService;
@@ -12,6 +13,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
@@ -82,12 +84,40 @@ public class EventResource {
         }
         event.setAppartenantA(userService.getUserWithAuthorities().get());
         if (event.getProduits() != null) {
-            event.setPrix(event.getProduits().stream().map(p -> p.getPrix()).reduce(0.0, (a, b) -> a + b));
+            event.setPrix(eventService.calculateProducts(event));
         }
         Event result = eventService.save(event);
         return ResponseEntity
             .created(new URI("/api/events/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+
+
+    /**
+     * {@code PUT  /events/:id} : Updates an existing event.
+     *
+     * @param id the id of the event to save.
+     * @param agentEvenements Set of users
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with
+     * body the updated event, or with status {@code 400 (Bad Request)} if the
+     * event is not valid, or with status {@code 500 (Internal Server Error)} if
+     * the event couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PutMapping("/events-assign/{id}")
+    public ResponseEntity<Event> assignEvent(@PathVariable(value = "id", required = false) final Long id, @Valid @RequestBody Set<User> agentEvenements)
+        throws URISyntaxException {
+
+        if (!eventRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        Event result = eventService.assignAgentToEvent(id,agentEvenements);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -120,7 +150,7 @@ public class EventResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
         if (event.getProduits() != null) {
-            event.setPrix(event.getProduits().stream().map(p -> p.getPrix()).reduce(0.0, (a, b) -> a + b));
+            event.setPrix(eventService.calculateProducts(event));
         }
         Event result = eventService.save(event);
         return ResponseEntity
@@ -128,6 +158,36 @@ public class EventResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, event.getId().toString()))
             .body(result);
     }
+
+    /**
+     *
+     * @param event
+     * @return
+     * @throws URISyntaxException
+     */
+    @PutMapping("/events/checkout")
+    public ResponseEntity<Event> checkout(@Valid @RequestBody Event event)
+        throws URISyntaxException {
+
+        if(event == null){
+            throw new BadRequestAlertException("Invalid event", ENTITY_NAME, "Event is null");
+        }
+        if (event.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+
+        if (!eventRepository.existsById(event.getId())) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        event.setCheckout(true);
+        Event result = eventService.save(event);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, event.getId().toString()))
+            .body(result);
+    }
+
 
 
 
@@ -192,7 +252,16 @@ public class EventResource {
             LongFilter longFilter = new LongFilter();
             longFilter.setEquals(userService.getUserWithAuthorities().get().getId());
             criteria.setAppartenantAId(longFilter);
-        }
+        }/*else if (!userService.getUserWithAuthorities().get().getAuthorities().stream().anyMatch(a -> a.getName().equals("ROLE_AGENT"))) {
+            LongFilter longFilter = new LongFilter();
+            longFilter.setEquals(userService.getUserWithAuthorities().get().getId());
+            criteria.setAppartenantAId(longFilter);
+            //criteria.set
+        }*/
+
+
+
+
         log.debug("REST request to get Events by criteria: {}", criteria);
         Page<Event> page = eventQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
@@ -230,12 +299,12 @@ public class EventResource {
     @GetMapping("/events/{id}")
     public ResponseEntity<Event> getEvent(@PathVariable Long id) {
         log.debug("REST request to get Event : {}", id);
-        Optional<Event> event;
-        if (userService.getUserWithAuthorities().get().getAuthorities().stream().anyMatch(a -> a.getName().equals("ROLE_ADMIN"))) {
+        Optional<Event> event = eventService.findOne(id);
+        /*if (userService.getUserWithAuthorities().get().getAuthorities().stream().anyMatch(a -> a.getName().equals("ROLE_ADMIN"))) {
             event = eventService.findOne(id);
         } else {
             event = eventService.findOneByUserId(userService.getUserWithAuthorities().get().getId(), id);
-        }
+        }*/
         return ResponseUtil.wrapOrNotFound(event);
     }
 

@@ -32,9 +32,22 @@ public class Event implements Serializable {
     @Column(name = "prix")
     private Double prix;
 
+    @Column(name = "nb_person")
+    private Integer nbPerson;
+
+    @Column(name = "nb_table")
+    private Integer nbTable;
+
+
     @ManyToOne
     private User appartenantA;
 
+    @ManyToOne
+    private EventLocation eventLocation;
+
+    @NotNull
+    @Column(name = "checkout")
+    private Boolean checkout = false;
 
 
     @ManyToMany
@@ -81,6 +94,23 @@ public class Event implements Serializable {
     }
 
 
+    public Integer getNbPerson() {
+        return nbPerson;
+    }
+
+    public Integer getNbTable() {
+        return nbTable;
+    }
+
+
+    public void setNbPerson(Integer nbPerson) {
+        this.nbPerson = nbPerson;
+    }
+
+    public void setNbTable(Integer nbTable) {
+        this.nbTable = nbTable;
+    }
+
     public Event id(Long id) {
         this.id = id;
         return this;
@@ -100,8 +130,13 @@ public class Event implements Serializable {
     }
 
 
+    public EventLocation getEventLocation() {
+        return eventLocation;
+    }
 
-
+    public void setEventLocation(EventLocation eventLocation) {
+        this.eventLocation = eventLocation;
+    }
 
     public Instant getDateEvenement() {
         return this.dateEvenement;
@@ -117,7 +152,13 @@ public class Event implements Serializable {
     }
 
 
+    public Boolean getCheckout() {
+        return checkout;
+    }
 
+    public void setCheckout(Boolean checkout) {
+        this.checkout = checkout;
+    }
 
     public Double getPrix() {
         return this.prix;
@@ -177,7 +218,7 @@ public class Event implements Serializable {
 
 
 
-    
+
 
     public TypeEvenement getTypeEvenement() {
         return this.typeEvenement;
@@ -264,6 +305,8 @@ public class Event implements Serializable {
             ", nom='" + getNom() + "'" +
             ", dateEvenement='" + getDateEvenement() + "'" +
             ", prix=" + getPrix() +
+            ", nbPerson=" + getNbPerson() +
+            ", nbTable=" + getNbTable() +
             "}";
     }
 }
