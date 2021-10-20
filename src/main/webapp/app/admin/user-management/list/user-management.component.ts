@@ -47,14 +47,21 @@ export class UserManagementComponent implements OnInit {
   }
 
   deleteUser(user: User): void {
-    const modalRef = this.modalService.open(UserManagementDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    /*const modalRef = this.modalService.open(UserManagementDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.user = user;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
         this.loadAll();
       }
-    });
+    });*/
+
+    if(confirm(`Voulez-vous supprimer l'utilisateur ${user.login!}`)){
+      this.userService.delete(user.login!).subscribe(() => {
+        this.loadAll();
+      });
+    }
+
   }
 
   loadAll(): void {
