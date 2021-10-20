@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -284,6 +285,17 @@ public class UserService {
         return userRepository.findAll(pageable).map(AdminUserDTO::new);
     }
 
+    static Specification<User> isAgent(Authority role) {
+        return (obj, cq, cb) -> cb.isMember(role, obj.get("authorities"));
+    }
+
+    @Transactional(readOnly = true)
+    public Page<UserDTO> getAllManagedUsersWithRoleAgent(Pageable pageable) {
+        Authority agent = authorityRepository.findById(AuthoritiesConstants.AGENT).get();
+        return userRepository.findAll(Specification.where(isAgent(agent)), pageable).map(UserDTO::new);
+
+    }
+    
     @Transactional(readOnly = true)
     public Page<UserDTO> getAllPublicUsers(Pageable pageable) {
         return userRepository.findAllByIdNotNullAndActivatedIsTrue(pageable).map(UserDTO::new);
@@ -345,4 +357,6 @@ public class UserService {
     public List<String> getAuthorities() {
         return authorityRepository.findAll().stream().map(Authority::getName).collect(Collectors.toList());
     }
+
+
 }

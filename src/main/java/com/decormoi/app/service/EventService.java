@@ -1,8 +1,12 @@
 package com.decormoi.app.service;
 
 import com.decormoi.app.domain.Event;
+import com.decormoi.app.domain.User;
+import com.decormoi.app.domain.enums.ImpactType;
 import com.decormoi.app.repository.EventRepository;
 import java.util.Optional;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -33,6 +37,14 @@ public class EventService {
      */
     public Event save(Event event) {
         log.debug("Request to save Event : {}", event);
+        return eventRepository.save(event);
+    }
+
+
+
+    public Event assignAgentToEvent(Long id, Set<User> agentEvenements ){
+        Event event = eventRepository.findOneWithEagerRelationships(id).get();
+        event.setAgentEvenements(agentEvenements);
         return eventRepository.save(event);
     }
 
@@ -113,4 +125,17 @@ public class EventService {
         log.debug("Request to delete Event : {}", id);
         eventRepository.deleteById(id);
     }
+
+    public Double calculateProducts(Event event) {
+        return event.getProduits().stream().map(p -> {
+            if(p.getImpactPrice() == ImpactType.PP){
+                return p.getPrix() * event.getNbPerson();
+            }else if(p.getImpactPrice() == ImpactType.PT){
+                return p.getPrix() * event.getNbTable();
+            }
+            return p.getPrix();
+
+        }).reduce(0.0, (a, b) -> a + b);
+    }
+
 }
