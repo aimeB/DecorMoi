@@ -19,6 +19,11 @@ export class UserService {
     return this.http.get<IUser[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  queryAgentRole(req?: Pagination): Observable<HttpResponse<IUser[]>> {
+    const options = createRequestOption(req);
+    return this.http.get<IUser[]>(`${this.resourceUrl}-agent`, { params: options, observe: 'response' });
+  }
+
   addUserToCollectionIfMissing(userCollection: IUser[], ...usersToCheck: (IUser | null | undefined)[]): IUser[] {
     const users: IUser[] = usersToCheck.filter(isPresent);
     if (users.length > 0) {

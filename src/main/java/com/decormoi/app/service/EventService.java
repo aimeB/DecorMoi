@@ -4,15 +4,15 @@ import com.decormoi.app.domain.Event;
 import com.decormoi.app.domain.User;
 import com.decormoi.app.domain.enums.ImpactType;
 import com.decormoi.app.repository.EventRepository;
-import java.util.Optional;
-import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Implementation for managing {@link Event}.

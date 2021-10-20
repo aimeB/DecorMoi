@@ -2,9 +2,10 @@ package com.decormoi.app.domain;
 
 import com.decormoi.app.domain.enums.ImpactType;
 
-import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * A Produit.

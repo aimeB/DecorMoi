@@ -1,9 +1,9 @@
 package com.decormoi.app.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.decormoi.app.web.rest.TestUtil;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class SalleTest {
 

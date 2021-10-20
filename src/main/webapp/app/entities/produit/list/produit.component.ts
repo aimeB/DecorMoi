@@ -70,10 +70,13 @@ export class ProduitComponent implements OnInit {
     return this.dataUtils.openFile(base64String, contentType);
   }
 
-  delete(produit: IProduit): void {
-    this.produitService.delete(produit.id!).subscribe(() => {
-      this.loadPage();
-    });
+
+  delete(produit : IProduit): void {
+    if(window.confirm(`Voulez-vous supprimer le produit ${produit.nom!}?`)){
+      this.produitService.delete(produit.id!).subscribe(() => {
+        this.loadPage();
+      });
+    }
   }
 
   protected sort(): string[] {

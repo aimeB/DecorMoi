@@ -1,7 +1,6 @@
 package com.decormoi.app.service;
 
 import com.decormoi.app.domain.Comment;
-import com.decormoi.app.domain.Salle;
 import com.decormoi.app.repository.CommentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

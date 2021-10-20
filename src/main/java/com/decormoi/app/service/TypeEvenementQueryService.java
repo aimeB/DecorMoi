@@ -1,11 +1,9 @@
 package com.decormoi.app.service;
 
-import com.decormoi.app.domain.*; // for static metamodels
 import com.decormoi.app.domain.TypeEvenement;
+import com.decormoi.app.domain.TypeEvenement_;
 import com.decormoi.app.repository.TypeEvenementRepository;
 import com.decormoi.app.service.criteria.TypeEvenementCriteria;
-import java.util.List;
-import javax.persistence.criteria.JoinType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,6 +12,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.service.QueryService;
+
+import java.util.List;
 
 /**
  * Service for executing complex queries for {@link TypeEvenement} entities in the database.

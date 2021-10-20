@@ -2,8 +2,6 @@ package com.decormoi.app.security;
 
 import com.decormoi.app.domain.User;
 import com.decormoi.app.repository.UserRepository;
-import java.util.*;
-import java.util.stream.Collectors;
 import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +12,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * Authenticate a user from the database.
@@ -28,7 +30,7 @@ public class DomainUserDetailsService implements UserDetailsService {
     public DomainUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    
+
 
     @Override
     @Transactional

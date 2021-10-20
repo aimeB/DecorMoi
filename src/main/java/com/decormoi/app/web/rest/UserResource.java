@@ -10,12 +10,6 @@ import com.decormoi.app.service.dto.AdminUserDTO;
 import com.decormoi.app.web.rest.errors.BadRequestAlertException;
 import com.decormoi.app.web.rest.errors.EmailAlreadyUsedException;
 import com.decormoi.app.web.rest.errors.LoginAlreadyUsedException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.*;
-import java.util.Collections;
-import javax.validation.Valid;
-import javax.validation.constraints.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +25,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing users.
@@ -176,9 +179,6 @@ public class UserResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    private boolean onlyContainsAllowedProperties(Pageable pageable) {
-        return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
-    }
 
     /**
      * {@code GET /admin/users/:login} : get the "login" user.
@@ -205,5 +205,9 @@ public class UserResource {
         log.debug("REST request to delete User: {}", login);
         userService.deleteUser(login);
         return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName, "userManagement.deleted", login)).build();
+    }
+
+    private boolean onlyContainsAllowedProperties(Pageable pageable) {
+        return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
     }
 }

@@ -1,13 +1,5 @@
 package com.decormoi.app.web.rest;
 
-import static com.decormoi.app.web.rest.AccountResourceIT.TEST_USER_LOGIN;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import com.decormoi.app.IntegrationTest;
 import com.decormoi.app.config.Constants;
 import com.decormoi.app.domain.PersistentToken;
@@ -19,12 +11,8 @@ import com.decormoi.app.security.AuthoritiesConstants;
 import com.decormoi.app.service.UserService;
 import com.decormoi.app.service.dto.AdminUserDTO;
 import com.decormoi.app.service.dto.PasswordChangeDTO;
-import com.decormoi.app.service.dto.UserDTO;
 import com.decormoi.app.web.rest.vm.KeyAndPasswordVM;
 import com.decormoi.app.web.rest.vm.ManagedUserVM;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +22,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
+import static com.decormoi.app.web.rest.AccountResourceIT.TEST_USER_LOGIN;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link AccountResource} REST controller.

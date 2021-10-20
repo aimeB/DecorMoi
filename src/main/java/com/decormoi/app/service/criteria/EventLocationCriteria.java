@@ -1,7 +1,9 @@
 package com.decormoi.app.service.criteria;
 
 import tech.jhipster.service.Criteria;
-import tech.jhipster.service.filter.*;
+import tech.jhipster.service.filter.Filter;
+import tech.jhipster.service.filter.LongFilter;
+import tech.jhipster.service.filter.StringFilter;
 
 import java.io.Serializable;
 import java.util.Objects;

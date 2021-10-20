@@ -1,21 +1,15 @@
 package com.decormoi.app.web.rest;
 
+import com.decormoi.app.domain.Authority;
 import com.decormoi.app.domain.Event;
 import com.decormoi.app.domain.User;
 import com.decormoi.app.repository.EventRepository;
+import com.decormoi.app.security.AuthoritiesConstants;
 import com.decormoi.app.service.EventQueryService;
 import com.decormoi.app.service.EventService;
 import com.decormoi.app.service.UserService;
 import com.decormoi.app.service.criteria.EventCriteria;
 import com.decormoi.app.web.rest.errors.BadRequestAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,11 +19,19 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import tech.jhipster.service.filter.IntegerFilter;
 import tech.jhipster.service.filter.LongFilter;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing {@link com.decormoi.app.domain.Event}.
@@ -248,19 +250,16 @@ public class EventResource {
      */
     @GetMapping("/events")
     public ResponseEntity<List<Event>> getAllEvents(EventCriteria criteria, Pageable pageable) {
-        if (!userService.getUserWithAuthorities().get().getAuthorities().stream().anyMatch(a -> a.getName().equals("ROLE_ADMIN"))) {
+        Set<Authority> authorities = userService.getUserWithAuthorities().get().getAuthorities();
+        if (!authorities.stream().anyMatch(a -> a.getName().equals(AuthoritiesConstants.ADMIN))) {
             LongFilter longFilter = new LongFilter();
             longFilter.setEquals(userService.getUserWithAuthorities().get().getId());
             criteria.setAppartenantAId(longFilter);
-        }/*else if (!userService.getUserWithAuthorities().get().getAuthorities().stream().anyMatch(a -> a.getName().equals("ROLE_AGENT"))) {
-            LongFilter longFilter = new LongFilter();
-            longFilter.setEquals(userService.getUserWithAuthorities().get().getId());
-            criteria.setAppartenantAId(longFilter);
-            //criteria.set
-        }*/
 
-
-
+            if (authorities.stream().anyMatch(a -> a.getName().equals(AuthoritiesConstants.AGENT))){
+                criteria.setAgentEvenementId(longFilter);
+            }
+        }
 
         log.debug("REST request to get Events by criteria: {}", criteria);
         Page<Event> page = eventQueryService.findByCriteria(criteria, pageable);

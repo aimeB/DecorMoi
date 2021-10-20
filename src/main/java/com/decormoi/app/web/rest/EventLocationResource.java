@@ -1,13 +1,9 @@
 package com.decormoi.app.web.rest;
 
 import com.decormoi.app.domain.EventLocation;
-import com.decormoi.app.domain.Salle;
 import com.decormoi.app.repository.EventLocationRepository;
-import com.decormoi.app.repository.SalleRepository;
 import com.decormoi.app.service.EventLocationService;
 import com.decormoi.app.service.SalleQueryService;
-import com.decormoi.app.service.SalleService;
-import com.decormoi.app.service.criteria.SalleCriteria;
 import com.decormoi.app.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +19,9 @@ import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**

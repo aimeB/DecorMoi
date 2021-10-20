@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IEvent } from 'app/entities/event/event.model';
-import { EntityResponseType, EventService } from 'app/entities/event/service/event.service';
+import { EventService } from 'app/entities/event/service/event.service';
 import { Account } from '../auth/account.model';
 import { AccountService } from '../auth/account.service';
 
@@ -8,7 +8,7 @@ import { AccountService } from '../auth/account.service';
   providedIn: 'root',
 })
 export class StripeService {
- private paymentHandler:any;
+ paymentHandler:any;
  private event!: IEvent;
 
  private publicKey = 'pk_test_51HAztbJ6SRr8q2B7Ct6XZAlC11I0PrJekh2NCdL5JL1f5XvMPsrRYJKdK5URtxNLzfQxPnIG3KwuTI0hBjnD15aU00p4Xja8Zy';
@@ -32,7 +32,6 @@ export class StripeService {
 
 source(data : any, cb : any) {
    cb();
-  //this.eventService.checkoutEvent(this.event.id!);
 }
 
 
