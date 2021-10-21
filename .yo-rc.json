@@ -44,6 +44,9 @@
     "clientPackageManager": "npm",
     "languages": ["fr"],
     "lastLiquibaseTimestamp": 1629797296000,
-    "entities": ["Event", "CategorieProduit", "Produit", "TypeEvenement", "Salle"]
+    "entities": ["Event", "CategorieProduit", "Produit", "TypeEvenement", "Salle"],
+    "herokuAppName": "decormoi",
+    "herokuDeployType": "jar",
+    "herokuJavaVersion": "11"
   }
 }
