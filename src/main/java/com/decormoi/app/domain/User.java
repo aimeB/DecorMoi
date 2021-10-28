@@ -79,6 +79,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
+
+
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -92,6 +95,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
     private Set<PersistentToken> persistentTokens = new HashSet<>();
+
+
+
+
+
 
     public Long getId() {
         return id;

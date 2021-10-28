@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long>, JpaSpecificationExecutor<Comment> {
+
     //@Query("select comment from Comment comment where comment.blogId =:id")
     List<Comment> findCommentByBlogId(Long id);
 

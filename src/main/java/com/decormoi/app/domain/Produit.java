@@ -40,6 +40,9 @@ public class Produit implements Serializable {
     @Column(name = "image_content_type", nullable = false)
     private String imageContentType;
 
+
+
+
     @ManyToOne(optional = false)
     @NotNull
     private CategorieProduit categorie;
@@ -72,15 +75,15 @@ public class Produit implements Serializable {
     public String getNom() {
         return this.nom;
     }
-
     public Produit nom(String nom) {
         this.nom = nom;
         return this;
     }
-
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+
 
 
     public ImpactType getImpactPrice() {
@@ -91,15 +94,16 @@ public class Produit implements Serializable {
         this.impactPrice = impactPrice;
     }
 
+
+
+
     public String getDescription() {
         return this.description;
     }
-
     public Produit description(String description) {
         this.description = description;
         return this;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }

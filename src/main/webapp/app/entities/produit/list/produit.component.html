@@ -9,6 +9,7 @@
       </button>
 
       <button
+        *ngif="false"
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-produit"
@@ -77,6 +78,7 @@
               </button>
 
               <button
+                *ngif="false"
                 type="submit"
                 [routerLink]="['/produit', produit.id, 'edit']"
                 class="btn btn-primary btn-sm"

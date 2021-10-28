@@ -41,7 +41,13 @@ public class EventService {
     }
 
 
-
+    /**
+     * Assign an agent to an event.
+     *
+     * @param id
+     * @param agentEvenements
+     * @return
+     */
     public Event assignAgentToEvent(Long id, Set<User> agentEvenements ){
         Event event = eventRepository.findOneWithEagerRelationships(id).get();
         event.setAgentEvenements(agentEvenements);
@@ -89,12 +95,21 @@ public class EventService {
         return eventRepository.findAll(pageable);
     }
 
+
+    /**
+     *get one event by userId
+     *
+     * @param userId
+     * @param eventId
+     * @return
+     */
     @Transactional(readOnly = true)
     public Optional<Event> findOneByUserId(long userId, long eventId) {
         log.debug("Request to get event id" + eventId);
         return eventRepository.findByIdAndAppartenantAId(eventId, userId);
     }
 
+    
     /**
      * Get all the events with eager load of many-to-many relationships.
      *

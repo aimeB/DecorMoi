@@ -1163,6 +1163,7 @@
                             <driver></driver>
                             <url>${env.JDBC_DATABASE_URL}</url>
                             <defaultSchemaName></defaultSchemaName>
+
                             <username>${env.JDBC_DATABASE_USERNAME}</username>
                             <password>${env.JDBC_DATABASE_PASSWORD}</password>
                             <referenceUrl>hibernate:spring:com.decormoi.app.domain?dialect=org.hibernate.dialect.MySQL8Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
