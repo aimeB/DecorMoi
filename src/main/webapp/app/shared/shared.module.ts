@@ -12,9 +12,21 @@ import { FormatMediumDatePipe } from './date/format-medium-date.pipe';
 import { SortByDirective } from './sort/sort-by.directive';
 import { SortDirective } from './sort/sort.directive';
 import { ItemCountComponent } from './pagination/item-count.component';
+import { SharedRoutingModule } from './shared-routing.module';
+
+import { AcceuilComponent } from './components/acceuil/acceuil.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { BlogListComponent } from './components/blog-list/blog-list.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { MentionLegaleComponent } from './components/mention-legale/mention-legale.component';
+import { ConditionsGeneraleComponent } from './components/conditions-generale/conditions-generale.component';
+import { GalerieComponent } from './components/galerie/galerie.component';
+import { AproposComponent } from './components/apropos/apropos.component';
+import { SingleBlogComponent } from './components/blog-list/single-blog/single-blog.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [SharedLibsModule],
+  imports: [SharedLibsModule, SharedRoutingModule, FormsModule],
   declarations: [
     FindLanguageFromKeyPipe,
     TranslateDirective,
@@ -27,6 +39,15 @@ import { ItemCountComponent } from './pagination/item-count.component';
     SortByDirective,
     SortDirective,
     ItemCountComponent,
+    AcceuilComponent,
+    FaqComponent,
+    BlogListComponent,
+    ContactComponent,
+    MentionLegaleComponent,
+    ConditionsGeneraleComponent,
+    GalerieComponent,
+    AproposComponent,
+    SingleBlogComponent
   ],
   exports: [
     SharedLibsModule,
@@ -40,7 +61,7 @@ import { ItemCountComponent } from './pagination/item-count.component';
     FormatMediumDatePipe,
     SortByDirective,
     SortDirective,
-    ItemCountComponent,
+    ItemCountComponent
   ],
 })
 export class SharedModule {}

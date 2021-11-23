@@ -20,6 +20,8 @@
     <include file="config/liquibase/changelog/20210824091154_added_entity_Produit.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210824091613_added_entity_TypeEvenement.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210824092816_added_entity_Salle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210824092817_added_entity_EventLocation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210824092818_added_entity_Comment.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20210824090109_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210824091154_added_entity_constraints_Produit.xml" relativeToChangelogFile="false"/>

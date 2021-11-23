@@ -33,8 +33,6 @@ public class EventQueryService extends QueryService<Event> {
         this.eventRepository = eventRepository;
     }
 
-
-
     /**
      * Return a {@link List} of {@link Event} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
@@ -46,9 +44,6 @@ public class EventQueryService extends QueryService<Event> {
         final Specification<Event> specification = createSpecification(criteria);
         return eventRepository.findAll(specification);
     }
-
-
-
 
     /**
      * Return a {@link Page} of {@link Event} which matches the criteria from the database.
@@ -63,9 +58,6 @@ public class EventQueryService extends QueryService<Event> {
         return eventRepository.findAll(specification, page);
     }
 
-
-
-
     /**
      * Return the number of matching entities in the database.
      * @param criteria The object which holds all the filters, which the entities should match.
@@ -77,9 +69,6 @@ public class EventQueryService extends QueryService<Event> {
         final Specification<Event> specification = createSpecification(criteria);
         return eventRepository.count(specification);
     }
-
-
-
 
     /**
      * Function to convert {@link EventCriteria} to a {@link Specification}
@@ -112,7 +101,7 @@ public class EventQueryService extends QueryService<Event> {
             }
             if (criteria.getAgentEvenementId() != null) {
                 specification =
-                    specification.and(
+                    specification.or(
                         buildSpecification(
                             criteria.getAgentEvenementId(),
                             root -> root.join(Event_.agentEvenements, JoinType.LEFT).get(User_.id)

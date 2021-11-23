@@ -1,16 +1,10 @@
 package com.decormoi.app.service.criteria;
 
+import tech.jhipster.service.Criteria;
+import tech.jhipster.service.filter.*;
+
 import java.io.Serializable;
 import java.util.Objects;
-import tech.jhipster.service.Criteria;
-import tech.jhipster.service.filter.BooleanFilter;
-import tech.jhipster.service.filter.DoubleFilter;
-import tech.jhipster.service.filter.Filter;
-import tech.jhipster.service.filter.FloatFilter;
-import tech.jhipster.service.filter.InstantFilter;
-import tech.jhipster.service.filter.IntegerFilter;
-import tech.jhipster.service.filter.LongFilter;
-import tech.jhipster.service.filter.StringFilter;
 
 /**
  * Criteria class for the {@link com.decormoi.app.domain.Event} entity. This class is used
@@ -33,6 +27,10 @@ public class EventCriteria implements Serializable, Criteria {
 
     private DoubleFilter prix;
 
+    private IntegerFilter nb_person;
+
+    private IntegerFilter nb_table;
+
     private LongFilter appartenantAId;
 
     private LongFilter agentEvenementId;
@@ -42,6 +40,9 @@ public class EventCriteria implements Serializable, Criteria {
     private LongFilter produitId;
 
     private LongFilter salleId;
+
+    private BooleanFilter checkout;
+
 
     public EventCriteria() {}
 
@@ -86,6 +87,14 @@ public class EventCriteria implements Serializable, Criteria {
             nom = new StringFilter();
         }
         return nom;
+    }
+
+    public BooleanFilter getCheckout() {
+        return checkout;
+    }
+
+    public void setCheckout(BooleanFilter checkout) {
+        this.checkout = checkout;
     }
 
     public void setNom(StringFilter nom) {

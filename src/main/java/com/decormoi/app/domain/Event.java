@@ -1,5 +1,7 @@
 package com.decormoi.app.domain;
 
+import com.decormoi.app.domain.enums.ImpactType;
+import com.decormoi.app.domain.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
@@ -32,10 +34,21 @@ public class Event implements Serializable {
     @Column(name = "prix")
     private Double prix;
 
+    @Column(name = "nb_person")
+    private Integer nbPerson;
+
+    @Column(name = "nb_table")
+    private Integer nbTable;
+
     @ManyToOne
     private User appartenantA;
 
+    @ManyToOne
+    private EventLocation eventLocation;
 
+    @NotNull
+    @Column(name = "checkout")
+    private Boolean checkout = false;
 
     @ManyToMany
     @JoinTable(
@@ -45,13 +58,14 @@ public class Event implements Serializable {
     )
     private Set<User> agentEvenements = new HashSet<>();
 
-
+    @NotNull
+    @Column(name = "order_status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     @ManyToOne(optional = false)
     @NotNull
     private TypeEvenement typeEvenement;
-
-
 
     @ManyToMany
     @JoinTable(
@@ -62,24 +76,34 @@ public class Event implements Serializable {
     @JsonIgnoreProperties(value = { "categorie" }, allowSetters = true)
     private Set<Produit> produits = new HashSet<>();
 
-
-
     @ManyToOne(optional = false)
     @NotNull
     private Salle salle;
-
-
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
 
-
     public void setId(Long id) {
         this.id = id;
     }
 
+    public Integer getNbPerson() {
+        return nbPerson;
+    }
+
+    public Integer getNbTable() {
+        return nbTable;
+    }
+
+    public void setNbPerson(Integer nbPerson) {
+        this.nbPerson = nbPerson;
+    }
+
+    public void setNbTable(Integer nbTable) {
+        this.nbTable = nbTable;
+    }
 
     public Event id(Long id) {
         this.id = id;
@@ -99,9 +123,13 @@ public class Event implements Serializable {
         this.nom = nom;
     }
 
+    public EventLocation getEventLocation() {
+        return eventLocation;
+    }
 
-
-
+    public void setEventLocation(EventLocation eventLocation) {
+        this.eventLocation = eventLocation;
+    }
 
     public Instant getDateEvenement() {
         return this.dateEvenement;
@@ -116,8 +144,21 @@ public class Event implements Serializable {
         this.dateEvenement = dateEvenement;
     }
 
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
 
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 
+    public Boolean getCheckout() {
+        return checkout;
+    }
+
+    public void setCheckout(Boolean checkout) {
+        this.checkout = checkout;
+    }
 
     public Double getPrix() {
         return this.prix;
@@ -131,9 +172,6 @@ public class Event implements Serializable {
     public void setPrix(Double prix) {
         this.prix = prix;
     }
-
-
-
 
     public User getAppartenantA() {
         return this.appartenantA;
@@ -151,10 +189,6 @@ public class Event implements Serializable {
     public Set<User> getAgentEvenements() {
         return this.agentEvenements;
     }
-
-
-
-
 
     public Event agentEvenements(Set<User> users) {
         this.setAgentEvenements(users);
@@ -175,10 +209,6 @@ public class Event implements Serializable {
         this.agentEvenements = users;
     }
 
-
-
-    
-
     public TypeEvenement getTypeEvenement() {
         return this.typeEvenement;
     }
@@ -191,9 +221,6 @@ public class Event implements Serializable {
     public void setTypeEvenement(TypeEvenement typeEvenement) {
         this.typeEvenement = typeEvenement;
     }
-
-
-
 
     public Set<Produit> getProduits() {
         return this.produits;
@@ -218,9 +245,6 @@ public class Event implements Serializable {
         this.produits = produits;
     }
 
-
-
-
     public Salle getSalle() {
         return this.salle;
     }
@@ -233,10 +257,6 @@ public class Event implements Serializable {
     public void setSalle(Salle salle) {
         this.salle = salle;
     }
-
-
-
-
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
     @Override
@@ -264,6 +284,8 @@ public class Event implements Serializable {
             ", nom='" + getNom() + "'" +
             ", dateEvenement='" + getDateEvenement() + "'" +
             ", prix=" + getPrix() +
+            ", nbPerson=" + getNbPerson() +
+            ", nbTable=" + getNbTable() +
             "}";
     }
 }

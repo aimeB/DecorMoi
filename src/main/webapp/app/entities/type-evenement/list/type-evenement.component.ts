@@ -61,9 +61,11 @@ export class TypeEvenementComponent implements OnInit {
   }
 
   delete(typeEvenement: ITypeEvenement): void {
-    this.typeEvenementService.delete(typeEvenement.id!).subscribe(() => {
-      this.loadPage();
-    });
+    if (window.confirm(`Voulez-vous supprimer le type d'événement ${typeEvenement.nom!}?`)) {
+      this.typeEvenementService.delete(typeEvenement.id!).subscribe(() => {
+        this.loadPage();
+      });
+    }
   }
 
   protected sort(): string[] {

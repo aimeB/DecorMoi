@@ -60,10 +60,13 @@ export class SalleComponent implements OnInit {
     return item.id!;
   }
 
+
   delete(salle: ISalle): void {
-    this.salleService.delete(salle.id!).subscribe(() => {
-      this.loadPage();
-    });
+    if(window.confirm(`Voulez-vous supprimer la salle ${salle.nom!}?`)){
+      this.salleService.delete(salle.id!).subscribe(() => {
+        this.loadPage();
+      });
+    }
   }
 
   protected sort(): string[] {

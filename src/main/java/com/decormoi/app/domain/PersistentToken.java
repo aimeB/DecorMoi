@@ -1,12 +1,13 @@
 package com.decormoi.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Objects;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Persistent tokens are used by Spring Security to automatically log in users.

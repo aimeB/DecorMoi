@@ -18,6 +18,8 @@ import { IProduit } from 'app/entities/produit/produit.model';
 import { ProduitService } from 'app/entities/produit/service/produit.service';
 import { ISalle } from 'app/entities/salle/salle.model';
 import { SalleService } from 'app/entities/salle/service/salle.service';
+import { IEventLocation } from 'app/entities/event-location/event-location.model';
+import { EventLocationService } from 'app/entities/event-location/service/event-location.service';
 
 @Component({
   selector: 'jhi-event-update',
@@ -28,15 +30,19 @@ export class EventUpdateComponent implements OnInit {
 
   usersSharedCollection: IUser[] = [];
   typeEvenementsSharedCollection: ITypeEvenement[] = [];
+  eventLocationsSharedCollection: IEventLocation[] = [];
   produitsSharedCollection: IProduit[] = [];
   sallesSharedCollection: ISalle[] = [];
 
   editForm = this.fb.group({
     id: [],
     nom: [null, [Validators.required]],
+    nbTable: [],
+    nbPerson: [],
     dateEvenement: [null, [Validators.required]],
     prix: [],
     appartenantA: [],
+    eventLocation : [null],
     agentEvenements: [],
     typeEvenement: [null, Validators.required],
     produits: [],
@@ -47,6 +53,7 @@ export class EventUpdateComponent implements OnInit {
     protected eventService: EventService,
     protected userService: UserService,
     protected typeEvenementService: TypeEvenementService,
+    protected eventLocationService: EventLocationService,
     protected produitService: ProduitService,
     protected salleService: SalleService,
     protected activatedRoute: ActivatedRoute,
@@ -85,6 +92,10 @@ export class EventUpdateComponent implements OnInit {
   }
 
   trackTypeEvenementById(index: number, item: ITypeEvenement): number {
+    return item.id!;
+  }
+
+  trackEventLocationById(index: number, item: IEventLocation): number {
     return item.id!;
   }
 
@@ -146,8 +157,11 @@ export class EventUpdateComponent implements OnInit {
       appartenantA: event.appartenantA,
       agentEvenements: event.agentEvenements,
       typeEvenement: event.typeEvenement,
+      eventLocation: event.eventLocation,
       produits: event.produits,
       salle: event.salle,
+      nbTable: event.nbTable,
+      nbPerson: event.nbPerson
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
@@ -159,6 +173,12 @@ export class EventUpdateComponent implements OnInit {
       this.typeEvenementsSharedCollection,
       event.typeEvenement
     );
+
+    this.eventLocationsSharedCollection = this.typeEvenementService.addTypeEvenementToCollectionIfMissing(
+      this.eventLocationsSharedCollection,
+      event.eventLocation
+    );
+
     this.produitsSharedCollection = this.produitService.addProduitToCollectionIfMissing(
       this.produitsSharedCollection,
       ...(event.produits ?? [])
@@ -191,6 +211,17 @@ export class EventUpdateComponent implements OnInit {
       )
       .subscribe((typeEvenements: ITypeEvenement[]) => (this.typeEvenementsSharedCollection = typeEvenements));
 
+
+      this.eventLocationService
+      .query()
+      .pipe(map((res: HttpResponse<IEventLocation[]>) => res.body ?? []))
+      .pipe(
+        map((eventLocations: IEventLocation[]) =>
+          this.eventLocationService.addEventLocationToCollectionIfMissing(eventLocations, this.editForm.get('eventLocation')!.value)
+        )
+      )
+      .subscribe((eventLocations: IEventLocation[]) => (this.eventLocationsSharedCollection = eventLocations));
+
     this.produitService
       .query()
       .pipe(map((res: HttpResponse<IProduit[]>) => res.body ?? []))
@@ -220,8 +251,12 @@ export class EventUpdateComponent implements OnInit {
       appartenantA: this.editForm.get(['appartenantA'])!.value,
       agentEvenements: this.editForm.get(['agentEvenements'])!.value,
       typeEvenement: this.editForm.get(['typeEvenement'])!.value,
+      eventLocation: this.editForm.get(['eventLocation'])!.value,
       produits: this.editForm.get(['produits'])!.value,
       salle: this.editForm.get(['salle'])!.value,
+      nbPerson: this.editForm.get(['nbPerson'])!.value,
+      nbTable: this.editForm.get(['nbTable'])!.value,
+      
     };
   }
 }

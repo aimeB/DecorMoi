@@ -5,7 +5,7 @@
         "title": "Liste d'évenements",
         "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouvel évenement",
-        "createOrEditLabel": "Détails de l'évenement",
+        "createOrEditLabel": "Créer un évenement",
         "notFound": "Aucun Evenement trouvé"
       },
       "created": "Un nouvel évenement a été créé",
@@ -20,12 +20,15 @@
       "id": "ID",
       "nom": "Nom",
       "dateEvenement": "Date de l'évenement",
-      "prix": "Coût du devis",
+      "prix": "Coût du devis total",
       "appartenantA": "Appartenant A",
       "agentEvenement": "Agents Affectés",
       "typeEvenement": "Type",
+      "eventLocation":"Lieu de l'événement",
       "produit": "Produit",
-      "salle": "Salle"
+      "salle": "Salle",
+      "nbTable":"Nombre de tables",
+      "nbPerson":"Nombre de personnes"
     }
   }
 }

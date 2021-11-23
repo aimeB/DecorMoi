@@ -60,11 +60,15 @@ export class EventComponent implements OnInit {
     return item.id!;
   }
 
-  delete(id: number): void {
-    this.eventService.delete(id).subscribe(() => {
-      this.loadPage();
-    });
+  delete(event : IEvent): void {
+    if(window.confirm(`Voulez-vous supprimer l'événement ${event.nom!}?`)){
+      this.eventService.delete(event.id!).subscribe(() => {
+        this.loadPage();
+      });
+    }
   }
+
+ 
 
   protected sort(): string[] {
     const result = [this.predicate + ',' + (this.ascending ? ASC : DESC)];

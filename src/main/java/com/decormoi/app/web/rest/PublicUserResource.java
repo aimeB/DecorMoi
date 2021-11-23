@@ -1,6 +1,8 @@
 package com.decormoi.app.web.rest;
 
+import com.decormoi.app.security.AuthoritiesConstants;
 import com.decormoi.app.service.UserService;
+import com.decormoi.app.service.dto.AdminUserDTO;
 import com.decormoi.app.service.dto.UserDTO;
 import java.util.*;
 import java.util.Collections;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.PaginationUtil;
@@ -32,9 +35,6 @@ public class PublicUserResource {
         this.userService = userService;
     }
 
-
-
-
     /**
      * {@code GET /users} : get all users with only the public informations - calling this are allowed for anyone.
      *
@@ -53,12 +53,21 @@ public class PublicUserResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/users-agent")
+    public ResponseEntity<List<UserDTO>> getAllUsersWithAgentRole(Pageable pageable) {
+        log.debug("REST request to get all User with agent role for an admin");
+        if (!onlyContainsAllowedProperties(pageable)) {
+            return ResponseEntity.badRequest().build();
+        }
+        final Page<UserDTO> page = userService.getAllManagedUsersWithRoleAgent(pageable);
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
     private boolean onlyContainsAllowedProperties(Pageable pageable) {
         return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
     }
-
-
-
 
     /**
      * Gets a list of all roles.

@@ -1,11 +1,10 @@
 package com.decormoi.app.service;
 
-import com.decormoi.app.domain.*; // for static metamodels
+import com.decormoi.app.domain.CategorieProduit_;
 import com.decormoi.app.domain.Produit;
+import com.decormoi.app.domain.Produit_;
 import com.decormoi.app.repository.ProduitRepository;
 import com.decormoi.app.service.criteria.ProduitCriteria;
-import java.util.List;
-import javax.persistence.criteria.JoinType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,6 +13,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.service.QueryService;
+
+import javax.persistence.criteria.JoinType;
+import java.util.List;
 
 /**
  * Service for executing complex queries for {@link Produit} entities in the database.

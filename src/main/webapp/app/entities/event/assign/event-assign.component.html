@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-event-heading" data-cy="EventCreateUpdateHeading" >
+        Affecter des agents à l'événement : {{editForm.get('nom')!.value}}
+      </h2>
+        <div class="form-group">
+          <label  for="field_agents">Agents</label>
+          <select class="form-control" id="field_agents" data-cy="agents" multiple name="agentEvenements" formControlName="agentEvenements">
+            <option
+              [ngValue]="getSelectedUser(agentOption, editForm.get('agentEvenements')!.value)"
+              *ngFor="let agentOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ agentOption.login }}
+            </option>
+          </select>
+        </div>
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span >Terminer</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 package com.decormoi.app.web.rest.vm;
 
 import com.decormoi.app.service.dto.AdminUserDTO;
+
 import javax.validation.constraints.Size;
 
 /**

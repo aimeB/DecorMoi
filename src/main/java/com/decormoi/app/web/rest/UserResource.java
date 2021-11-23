@@ -7,6 +7,7 @@ import com.decormoi.app.security.AuthoritiesConstants;
 import com.decormoi.app.service.MailService;
 import com.decormoi.app.service.UserService;
 import com.decormoi.app.service.dto.AdminUserDTO;
+import com.decormoi.app.service.dto.UserDTO;
 import com.decormoi.app.web.rest.errors.BadRequestAlertException;
 import com.decormoi.app.web.rest.errors.EmailAlreadyUsedException;
 import com.decormoi.app.web.rest.errors.LoginAlreadyUsedException;
@@ -93,8 +94,6 @@ public class UserResource {
         this.mailService = mailService;
     }
 
-
-
     /**
      * {@code POST  /admin/users}  : Creates a new user.
      * <p>
@@ -176,10 +175,6 @@ public class UserResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    private boolean onlyContainsAllowedProperties(Pageable pageable) {
-        return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
-    }
-
     /**
      * {@code GET /admin/users/:login} : get the "login" user.
      *
@@ -205,5 +200,9 @@ public class UserResource {
         log.debug("REST request to delete User: {}", login);
         userService.deleteUser(login);
         return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName, "userManagement.deleted", login)).build();
+    }
+
+    private boolean onlyContainsAllowedProperties(Pageable pageable) {
+        return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
     }
 }

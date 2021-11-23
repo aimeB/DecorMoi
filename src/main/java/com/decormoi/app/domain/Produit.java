@@ -1,8 +1,10 @@
 package com.decormoi.app.domain;
 
+import com.decormoi.app.domain.enums.ImpactType;
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 
 /**
  * A Produit.
@@ -41,7 +43,15 @@ public class Produit implements Serializable {
     @NotNull
     private CategorieProduit categorie;
 
+    @NotNull
+    @Column(name = "impact_price", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ImpactType impactPrice;
 
+    @NotNull
+    @DecimalMin(value = "0")
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -57,9 +67,13 @@ public class Produit implements Serializable {
         return this;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
 
-
-
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 
     public String getNom() {
         return this.nom;
@@ -74,9 +88,13 @@ public class Produit implements Serializable {
         this.nom = nom;
     }
 
+    public ImpactType getImpactPrice() {
+        return impactPrice;
+    }
 
-
-
+    public void setImpactPrice(ImpactType impactPrice) {
+        this.impactPrice = impactPrice;
+    }
 
     public String getDescription() {
         return this.description;
@@ -91,10 +109,6 @@ public class Produit implements Serializable {
         this.description = description;
     }
 
-
-
-
-
     public Double getPrix() {
         return this.prix;
     }
@@ -107,9 +121,6 @@ public class Produit implements Serializable {
     public void setPrix(Double prix) {
         this.prix = prix;
     }
-
-
-
 
     public byte[] getImage() {
         return this.image;
@@ -124,10 +135,6 @@ public class Produit implements Serializable {
         this.image = image;
     }
 
-
-
-
-
     public String getImageContentType() {
         return this.imageContentType;
     }
@@ -141,11 +148,6 @@ public class Produit implements Serializable {
         this.imageContentType = imageContentType;
     }
 
-
-
-
-
-
     public CategorieProduit getCategorie() {
         return this.categorie;
     }
@@ -158,10 +160,6 @@ public class Produit implements Serializable {
     public void setCategorie(CategorieProduit categorieProduit) {
         this.categorie = categorieProduit;
     }
-
-
-
-    
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
