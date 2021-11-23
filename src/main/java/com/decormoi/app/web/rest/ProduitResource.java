@@ -184,7 +184,10 @@ public class ProduitResource {
         return ResponseUtil.wrapOrNotFound(produit);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
     /**
      * {@code DELETE  /produits/:id} : delete the "id" produit.
      *

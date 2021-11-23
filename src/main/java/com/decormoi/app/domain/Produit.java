@@ -1,12 +1,16 @@
 package com.decormoi.app.domain;
 
 import com.decormoi.app.domain.enums.ImpactType;
+<<<<<<< HEAD
 import org.jetbrains.annotations.NotNull;
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+<<<<<<< HEAD
 
 
 import javax.persistence.*;
@@ -14,6 +18,8 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
 
 /**
  * A Produit.
@@ -57,6 +63,7 @@ public class Produit implements Serializable {
 
     @NotNull
     @Column(name = "impact_price", nullable = false)
+<<<<<<< HEAD
 
     @Enumerated(EnumType.STRING)
     private ImpactType impactPrice;
@@ -65,6 +72,11 @@ public class Produit implements Serializable {
     private ImpactType impactPrice;
 
 
+=======
+    @Enumerated(EnumType.STRING)
+    private ImpactType impactPrice;
+
+>>>>>>> 5fd55b5 (modification backend)
     @NotNull
     @DecimalMin(value = "0")
     @Column(name = "quantity", nullable = false)
@@ -107,11 +119,17 @@ public class Produit implements Serializable {
         return impactPrice;
     }
 
+<<<<<<< HEAD
 
     public void setImpactPrice(ImpactType impactPrice) {
         this.impactPrice = impactPrice;
     }
 
+=======
+    public void setImpactPrice(ImpactType impactPrice) {
+        this.impactPrice = impactPrice;
+    }
+>>>>>>> 5fd55b5 (modification backend)
 
     public String getDescription() {
         return this.description;
@@ -176,7 +194,10 @@ public class Produit implements Serializable {
         this.categorie = categorieProduit;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

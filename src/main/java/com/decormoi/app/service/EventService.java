@@ -1,7 +1,10 @@
 package com.decormoi.app.service;
 
 import com.decormoi.app.domain.Event;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
 import com.decormoi.app.domain.Produit;
 import com.decormoi.app.domain.User;
 import com.decormoi.app.domain.enums.ImpactType;
@@ -12,11 +15,14 @@ import io.undertow.util.BadRequestException;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.Set;
+<<<<<<< HEAD
 
 import com.decormoi.app.domain.User;
 import com.decormoi.app.domain.enums.ImpactType;
 import com.decormoi.app.repository.EventRepository;
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -253,6 +259,7 @@ public class EventService {
         );
         return events;
     }
+<<<<<<< HEAD
 
     public Double calculateProducts(Event event) {
         return event.getProduits().stream().map(p -> {
@@ -266,4 +273,6 @@ public class EventService {
         }).reduce(0.0, (a, b) -> a + b);
     }
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
 }

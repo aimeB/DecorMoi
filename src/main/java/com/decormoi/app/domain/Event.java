@@ -41,12 +41,16 @@ public class Event implements Serializable {
     @Column(name = "nb_table")
     private Integer nbTable;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
     @ManyToOne
     private User appartenantA;
 
     @ManyToOne
     private EventLocation eventLocation;
+<<<<<<< HEAD
 
 
     @NotNull
@@ -60,7 +64,12 @@ public class Event implements Serializable {
     @NotNull
     @Column(name = "checkout")
     private Boolean checkout = false;
+=======
+>>>>>>> 5fd55b5 (modification backend)
 
+    @NotNull
+    @Column(name = "checkout")
+    private Boolean checkout = false;
 
     @ManyToMany
     @JoinTable(
@@ -92,16 +101,18 @@ public class Event implements Serializable {
     @NotNull
     private Salle salle;
 
+<<<<<<< HEAD
 
 
 
 
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
-
 
     public void setId(Long id) {
         this.id = id;
@@ -122,7 +133,10 @@ public class Event implements Serializable {
     public void setNbTable(Integer nbTable) {
         this.nbTable = nbTable;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
 
     public Event id(Long id) {
         this.id = id;
@@ -148,6 +162,7 @@ public class Event implements Serializable {
         return eventLocation;
     }
 
+<<<<<<< HEAD
 
     public void setEventLocation(EventLocation eventLocation) {
         this.eventLocation = eventLocation;
@@ -161,6 +176,11 @@ public class Event implements Serializable {
     }
 
 
+=======
+    public void setEventLocation(EventLocation eventLocation) {
+        this.eventLocation = eventLocation;
+    }
+>>>>>>> 5fd55b5 (modification backend)
 
     public Instant getDateEvenement() {
         return this.dateEvenement;
@@ -176,19 +196,32 @@ public class Event implements Serializable {
     public OrderStatus getOrderStatus() {
         return orderStatus;
     }
+<<<<<<< HEAD
 
 
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
+=======
+>>>>>>> 5fd55b5 (modification backend)
 
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 
+    public Boolean getCheckout() {
+        return checkout;
+    }
+
+<<<<<<< HEAD
     public Boolean getCheckout() {
         return checkout;
     }
 
 
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
     public void setCheckout(Boolean checkout) {
         this.checkout = checkout;
     }
@@ -247,10 +280,13 @@ public class Event implements Serializable {
         this.typeEvenement = typeEvenement;
     }
 
+<<<<<<< HEAD
 
 
     // PRODUIT
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
     public Set<Produit> getProduits() {
         return this.produits;
     }

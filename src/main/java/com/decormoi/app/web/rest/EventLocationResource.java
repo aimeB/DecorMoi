@@ -9,6 +9,7 @@ import com.decormoi.app.service.SalleQueryService;
 import com.decormoi.app.service.SalleService;
 import com.decormoi.app.service.criteria.SalleCriteria;
 import com.decormoi.app.web.rest.errors.BadRequestAlertException;
+<<<<<<< HEAD
 import com.sun.org.slf4j.internal.LoggerFactory;
 import lombok.Value;
 import org.slf4j.Logger;
@@ -37,6 +38,15 @@ import com.decormoi.app.service.SalleQueryService;
 import com.decormoi.app.service.SalleService;
 import com.decormoi.app.service.criteria.SalleCriteria;
 import com.decormoi.app.web.rest.errors.BadRequestAlertException;
+=======
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+>>>>>>> 5fd55b5 (modification backend)
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,6 +60,7 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+<<<<<<< HEAD
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.awt.print.Pageable;
@@ -59,6 +70,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
 /**
  * REST controller for managing {@link EventLocation}.
  */
@@ -79,6 +92,7 @@ public class EventLocationResource {
 
     private final SalleQueryService salleQueryService;
 
+<<<<<<< HEAD
     public EventLocationResource(EventLocationService eventLocationService, EventLocationRepository eventLocationRepository, SalleQueryService salleQueryService) {
         this.eventLocationService = eventLocationService;
         this.eventLocationRepository = eventLocationRepository;
@@ -171,14 +185,24 @@ public class EventLocationResource {
     private final SalleQueryService salleQueryService;
 
     public EventLocationResource(EventLocationService eventLocationService, EventLocationRepository eventLocationRepository, SalleQueryService salleQueryService) {
+=======
+    public EventLocationResource(
+        EventLocationService eventLocationService,
+        EventLocationRepository eventLocationRepository,
+        SalleQueryService salleQueryService
+    ) {
+>>>>>>> 5fd55b5 (modification backend)
         this.eventLocationService = eventLocationService;
         this.eventLocationRepository = eventLocationRepository;
         this.salleQueryService = salleQueryService;
     }
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
     /**
      * {@code POST  /event-locations} : Create a new event location.
      *
@@ -199,11 +223,14 @@ public class EventLocationResource {
             .body(result);
     }
 
+<<<<<<< HEAD
 
 
 
 
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
     /**
      * {@code GET  /event-locations} : get all the event locations.
      *
@@ -217,8 +244,11 @@ public class EventLocationResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
     /**
      * {@code GET  /salles/:id} : get the "id" salle.
      *
@@ -231,6 +261,9 @@ public class EventLocationResource {
         Optional<EventLocation> eventLocation = eventLocationService.findOne(id);
         return ResponseUtil.wrapOrNotFound(eventLocation);
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
 }

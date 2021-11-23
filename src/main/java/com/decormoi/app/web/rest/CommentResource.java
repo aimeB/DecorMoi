@@ -8,6 +8,15 @@ import com.decormoi.app.service.CommentService;
 import com.decormoi.app.service.EventLocationService;
 import com.decormoi.app.service.SalleQueryService;
 import com.decormoi.app.web.rest.errors.BadRequestAlertException;
+<<<<<<< HEAD
+=======
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import javax.validation.Valid;
+>>>>>>> 5fd55b5 (modification backend)
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +30,7 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+<<<<<<< HEAD
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -28,6 +38,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
 /**
  * REST controller for managing {@link Comment}.
  */
@@ -44,15 +56,21 @@ public class CommentResource {
 
     private final CommentService commentService;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
     public CommentResource(CommentService commentService) {
         this.commentService = commentService;
     }
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
     /**
      * {@code POST  /comments} : Create a new comment
      *
@@ -72,7 +90,10 @@ public class CommentResource {
             .body(result);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
     /**
      *
      * @param id
@@ -81,6 +102,7 @@ public class CommentResource {
     @GetMapping("/comments/{id}")
     public ResponseEntity<List<Comment>> getAllComment(@PathVariable Integer id, Pageable pageable) {
         Page<Comment> comments = commentService.findAll(pageable);
+<<<<<<< HEAD
         List<Comment> commentList = comments.stream().filter(comment -> comment.getBlogId()==id).collect(Collectors.toList());
         return ResponseEntity.ok().body(commentList);
     }
@@ -88,4 +110,9 @@ public class CommentResource {
 
 
 
+=======
+        List<Comment> commentList = comments.stream().filter(comment -> comment.getBlogId() == id).collect(Collectors.toList());
+        return ResponseEntity.ok().body(commentList);
+    }
+>>>>>>> 5fd55b5 (modification backend)
 }

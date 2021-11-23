@@ -1,11 +1,15 @@
 package com.decormoi.app.service.criteria;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
 import java.io.Serializable;
 import java.util.Objects;
 import tech.jhipster.service.Criteria;
 import tech.jhipster.service.filter.*;
 
+<<<<<<< HEAD
 import tech.jhipster.service.Criteria;
 import tech.jhipster.service.filter.Filter;
 import tech.jhipster.service.filter.LongFilter;
@@ -15,6 +19,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
 /**
  * Criteria class for the {@link com.decormoi.app.domain.EventLocation} entity. This class is used
  * in {@link com.decormoi.app.web.rest.EventResource} to receive all the possible filtering options from
@@ -32,7 +38,10 @@ public class EventLocationCriteria implements Serializable, Criteria {
 
     private StringFilter nom;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5fd55b5 (modification backend)
     public EventLocationCriteria() {}
 
     public EventLocationCriteria(EventLocationCriteria other) {
@@ -84,10 +93,14 @@ public class EventLocationCriteria implements Serializable, Criteria {
             return false;
         }
         final EventLocationCriteria that = (EventLocationCriteria) o;
+<<<<<<< HEAD
 
         return (Objects.equals(id, that.id) && Objects.equals(nom, that.nom));
 
 
+=======
+        return (Objects.equals(id, that.id) && Objects.equals(nom, that.nom));
+>>>>>>> 5fd55b5 (modification backend)
     }
 
     @Override
