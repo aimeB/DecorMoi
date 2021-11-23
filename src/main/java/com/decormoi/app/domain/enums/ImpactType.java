@@ -4,4 +4,5 @@ public enum ImpactType {
     PERSON,
     TABLE,
     ALONE,
+
 }

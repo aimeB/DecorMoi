@@ -1,10 +1,19 @@
 package com.decormoi.app.domain;
 
 import com.decormoi.app.domain.enums.ImpactType;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+
+
+import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+
 
 /**
  * A Produit.
@@ -39,14 +48,22 @@ public class Produit implements Serializable {
     @Column(name = "image_content_type", nullable = false)
     private String imageContentType;
 
+
+
+
     @ManyToOne(optional = false)
     @NotNull
     private CategorieProduit categorie;
 
     @NotNull
     @Column(name = "impact_price", nullable = false)
+
     @Enumerated(EnumType.STRING)
     private ImpactType impactPrice;
+
+    @Enumerated(EnumType.ORDINAL)
+    private ImpactType impactPrice;
+
 
     @NotNull
     @DecimalMin(value = "0")
@@ -78,12 +95,10 @@ public class Produit implements Serializable {
     public String getNom() {
         return this.nom;
     }
-
     public Produit nom(String nom) {
         this.nom = nom;
         return this;
     }
-
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -92,19 +107,19 @@ public class Produit implements Serializable {
         return impactPrice;
     }
 
+
     public void setImpactPrice(ImpactType impactPrice) {
         this.impactPrice = impactPrice;
     }
 
+
     public String getDescription() {
         return this.description;
     }
-
     public Produit description(String description) {
         this.description = description;
         return this;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -160,6 +175,7 @@ public class Produit implements Serializable {
     public void setCategorie(CategorieProduit categorieProduit) {
         this.categorie = categorieProduit;
     }
+
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

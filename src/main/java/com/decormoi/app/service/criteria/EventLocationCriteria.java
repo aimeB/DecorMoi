@@ -1,9 +1,19 @@
 package com.decormoi.app.service.criteria;
 
+
 import java.io.Serializable;
 import java.util.Objects;
 import tech.jhipster.service.Criteria;
 import tech.jhipster.service.filter.*;
+
+import tech.jhipster.service.Criteria;
+import tech.jhipster.service.filter.Filter;
+import tech.jhipster.service.filter.LongFilter;
+import tech.jhipster.service.filter.StringFilter;
+
+import java.io.Serializable;
+import java.util.Objects;
+
 
 /**
  * Criteria class for the {@link com.decormoi.app.domain.EventLocation} entity. This class is used
@@ -21,6 +31,7 @@ public class EventLocationCriteria implements Serializable, Criteria {
     private LongFilter id;
 
     private StringFilter nom;
+
 
     public EventLocationCriteria() {}
 
@@ -73,7 +84,10 @@ public class EventLocationCriteria implements Serializable, Criteria {
             return false;
         }
         final EventLocationCriteria that = (EventLocationCriteria) o;
+
         return (Objects.equals(id, that.id) && Objects.equals(nom, that.nom));
+
+
     }
 
     @Override

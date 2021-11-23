@@ -1,6 +1,6 @@
 package com.decormoi.app.config;
 
-import com.decormoi.app.security.*;
+import com.decormoi.app.security.AuthoritiesConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
@@ -18,7 +18,9 @@ import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWrite
 import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 import tech.jhipster.config.JHipsterProperties;
-import tech.jhipster.security.*;
+import tech.jhipster.security.AjaxAuthenticationFailureHandler;
+import tech.jhipster.security.AjaxAuthenticationSuccessHandler;
+import tech.jhipster.security.AjaxLogoutSuccessHandler;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
