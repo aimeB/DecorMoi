@@ -14,8 +14,8 @@ export class StripeService {
  private publicKey = 'pk_test_51HAztbJ6SRr8q2B7Ct6XZAlC11I0PrJekh2NCdL5JL1f5XvMPsrRYJKdK5URtxNLzfQxPnIG3KwuTI0hBjnD15aU00p4Xja8Zy';
  private account!: Account;
 
- 
-  
+
+
 
  constructor(private accountService: AccountService, private eventService: EventService){
     this.accountService.identity().subscribe(account => {
@@ -36,21 +36,29 @@ source(data : any, cb : any) {
 
 
  processPayment() {
- 
+
     const paymentHandler = (<any>window).StripeCheckout.configure({
       key: this.publicKey,
       locale: 'auto',
       source: (data: any) => this.source(data, ()=>{
         this.eventService.checkoutEvent(this.event);
-       
+
       })
     });
 
     paymentHandler.open({
       name: "Evenement : " +this.event.nom!,
-      amount: this.event.prix! * 100,
+      amount: this.applyTva(this.event.prix! * 100),
       email: this.account.email
     });
+  }
+
+  applyTva(amount:number){
+    return amount * 1.21;
+  }
+
+  removeTva(amount:number){
+    return amount / 1.21;
   }
 
 
@@ -65,13 +73,13 @@ source(data : any, cb : any) {
           key: this.publicKey,
           locale: 'auto',
           source: (data: any) => this.source(data, () => {
-            
+
           })
         });
-      }  
+      }
       window.document.body.appendChild(script);
     }
   }
-  
-  
+
+
 }

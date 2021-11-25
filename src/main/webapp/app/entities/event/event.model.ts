@@ -19,6 +19,14 @@ export interface IEvent {
   produits?: IProduit[] | null;
   salle?: ISalle;
   checkout?: boolean;
+  orderStatus?:OrderStatus;
+}
+
+export enum OrderStatus {
+  PENDING = "PENDING",
+  CANCELED = "CANCELED",
+  ACCEPTED = "ACCEPTED",
+  PAYED = "PAYED"
 }
 
 export class Event implements IEvent {
@@ -35,7 +43,8 @@ export class Event implements IEvent {
     public typeEvenement?: ITypeEvenement,
     public produits?: IProduit[] | null,
     public salle?: ISalle,
-    public checkout?:boolean
+    public checkout?:boolean,
+    public orderStatus?: OrderStatus
   ) {}
 }
 

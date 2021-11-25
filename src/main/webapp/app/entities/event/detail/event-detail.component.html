@@ -1,5 +1,5 @@
 
-<div class="row justify-content-center">
+<div class="row justify-content-center" #pdfElement>
   <div class="col-8">
     <div *ngIf="event">
       <h2 data-cy="eventDetailsHeading"><span jhiTranslate="decormoiApp.event.detail.title">Event</span></h2>
@@ -20,7 +20,7 @@
         </dd>
         <dt><span jhiTranslate="decormoiApp.event.prix">Prix</span></dt>
         <dd>
-          <span><b style="color: green;">{{ event.prix }}</b> €</span>
+          <span><b style="color: green;">{{ event.prix | number : '1.2-2' }}</b> €</span>
         </dd>
         <dt *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="decormoiApp.event.appartenantA">Appartenant A</span></dt>
         <dd *jhiHasAnyAuthority="'ROLE_ADMIN'">
@@ -37,7 +37,7 @@
             </button>
           </span>
         </dd>
-        
+
         <dt><span jhiTranslate="decormoiApp.event.typeEvenement">Type Evenement</span></dt>
         <dd>
           <div *ngIf="event.typeEvenement">{{ event.typeEvenement?.nom }}</div>
@@ -45,7 +45,7 @@
         <dt><span jhiTranslate="decormoiApp.event.produit">Produit</span></dt>
         <dd>
           <span *ngFor="let produit of event.produits; let last = last"
-            >{{ produit.nom }}
+          >{{ produit.nom }}
             {{ last ? '' : ', ' }}
           </span>
         </dd>
@@ -65,8 +65,16 @@
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
 
-      <button type="button" class="btn btn-success" (click)="makePayment()" *ngIf="hide">
+      <button type="button" class="btn btn-success" (click)="makePayment()" *ngIf="state==1">
         <fa-icon icon="shopping-cart"></fa-icon>&nbsp;<span>Payer maintenant</span>
+      </button>
+
+      <button type="button" class="btn btn-secondary" (click)="generatePDF('devis')" *ngIf="state==1">
+        <fa-icon icon="download"></fa-icon>&nbsp;<span>Générer un devis (PDF)</span>
+      </button>
+
+      <button type="button" class="btn btn-secondary" (click)="generatePDF('facture')" *ngIf="state==2">
+        <fa-icon icon="download"></fa-icon>&nbsp;<span>Télécharger la facture</span>
       </button>
     </div>
   </div>

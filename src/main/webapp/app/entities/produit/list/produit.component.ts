@@ -102,6 +102,7 @@ export class ProduitComponent implements OnInit {
     });
   }
 
+
   protected onSuccess(data: IProduit[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;

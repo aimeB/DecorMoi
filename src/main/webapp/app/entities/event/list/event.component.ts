@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IEvent } from '../event.model';
+import { IEvent, OrderStatus } from '../event.model';
 
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { EventService } from '../service/event.service';
-
+import { FormBuilder } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
+import { StripeService } from 'app/core/util/stripe.service';
 @Component({
   selector: 'jhi-event',
   templateUrl: './event.component.html',
 })
 export class EventComponent implements OnInit {
+  isSaving = false;
+
   events?: IEvent[];
   isLoading = false;
   totalItems = 0;
@@ -23,12 +27,38 @@ export class EventComponent implements OnInit {
   ascending!: boolean;
   ngbPaginationPage = 1;
 
+  colorsStatus: any = {
+    "PENDING": "orange",
+    "CANCELED": "red",
+    "ACCEPTED": "green",
+    "PAYED": "blue"
+  }
+
+  optionsOrderStatus = [
+    {value:"PENDING"},
+    {value:"CANCELED"},
+    {value:"ACCEPTED"},
+    {value:"PAYED"}
+  ]
+
+  editForm = this.fb.group({
+    orderStatus: []
+  });
+
   constructor(
     protected eventService: EventService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
-    protected modalService: NgbModal
-  ) {}
+    protected modalService: NgbModal,
+    protected fb: FormBuilder,
+    protected stripeService : StripeService
+  ) {
+  }
+
+
+
+
+
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
@@ -68,7 +98,35 @@ export class EventComponent implements OnInit {
     }
   }
 
- 
+  onChangeOrderStatus(ev: Event, event: IEvent ) {
+    const orderStatus = (<HTMLInputElement>ev.target).value;
+    event.orderStatus = orderStatus as OrderStatus;
+    this.isSaving = true;
+    console.log(event)
+    this.subscribeToSaveResponse(this.eventService.partialUpdate(event));
+  }
+
+
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IEvent>>): void {
+    result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
+      () => this.onSaveSuccess(),
+      () => this.onSaveError()
+    );
+  }
+
+  protected onSaveSuccess(): void {
+  }
+
+
+
+  protected onSaveError(): void {
+    // Api for inheritance.
+  }
+
+  protected onSaveFinalize(): void {
+    this.isSaving = false;
+  }
+
 
   protected sort(): string[] {
     const result = [this.predicate + ',' + (this.ascending ? ASC : DESC)];
@@ -105,7 +163,12 @@ export class EventComponent implements OnInit {
         },
       });
     }
-    this.events = data ?? [];
+    this.events = data?.map(event => {
+      if(event.prix){
+        event.prix = this.stripeService.applyTva(event.prix);
+      }
+      return event;
+    }) ?? [];
     this.ngbPaginationPage = this.page;
   }
 

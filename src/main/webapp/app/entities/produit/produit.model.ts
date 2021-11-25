@@ -8,6 +8,8 @@ export interface IProduit {
   imageContentType?: string;
   image?: string;
   categorie?: ICategorieProduit;
+  impactPrice?:ImpactType;
+  quantity?:number;
 }
 
 export class Produit implements IProduit {
@@ -18,10 +20,16 @@ export class Produit implements IProduit {
     public prix?: number,
     public imageContentType?: string,
     public image?: string,
-    public categorie?: ICategorieProduit
+    public categorie?: ICategorieProduit,
+    public impactPrice?:ImpactType,
+    public quantity?: number
   ) {}
 }
-
+export enum ImpactType {
+  PERSON = "PERSON",
+  TABLE = "TABLE",
+  ALONE = "ALONE"
+}
 export function getProduitIdentifier(produit: IProduit): number | undefined {
   return produit.id;
 }

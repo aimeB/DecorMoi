@@ -619,6 +619,7 @@
                             <artifactId>h2</artifactId>
                             <version>${h2.version}</version>
                         </dependency>
+
                     </dependencies>
                 </plugin>
                 <plugin>

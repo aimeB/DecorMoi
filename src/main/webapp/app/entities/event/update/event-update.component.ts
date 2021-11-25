@@ -8,7 +8,7 @@ import { finalize, map } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
-import { IEvent, Event } from '../event.model';
+import { IEvent, Event, OrderStatus } from '../event.model';
 import { EventService } from '../service/event.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
@@ -27,6 +27,8 @@ import { EventLocationService } from 'app/entities/event-location/service/event-
 })
 export class EventUpdateComponent implements OnInit {
   isSaving = false;
+  minDate!:string;
+
 
   usersSharedCollection: IUser[] = [];
   typeEvenementsSharedCollection: ITypeEvenement[] = [];
@@ -47,6 +49,7 @@ export class EventUpdateComponent implements OnInit {
     typeEvenement: [null, Validators.required],
     produits: [],
     salle: [null, Validators.required],
+    orderStatus: []
   });
 
   constructor(
@@ -65,6 +68,7 @@ export class EventUpdateComponent implements OnInit {
       if (event.id === undefined) {
         const today = dayjs().startOf('day');
         event.dateEvenement = today;
+        this.minDate = today.toISOString().substring(0, today.toISOString().length-1);
       }
 
       this.updateForm(event);
@@ -161,7 +165,8 @@ export class EventUpdateComponent implements OnInit {
       produits: event.produits,
       salle: event.salle,
       nbTable: event.nbTable,
-      nbPerson: event.nbPerson
+      nbPerson: event.nbPerson,
+      orderStatus: event.orderStatus
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
@@ -256,7 +261,7 @@ export class EventUpdateComponent implements OnInit {
       salle: this.editForm.get(['salle'])!.value,
       nbPerson: this.editForm.get(['nbPerson'])!.value,
       nbTable: this.editForm.get(['nbTable'])!.value,
-      
+      orderStatus: this.editForm.get(['orderStatus'])!.value || OrderStatus.PENDING,
     };
   }
 }

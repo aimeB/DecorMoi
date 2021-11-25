@@ -14,7 +14,7 @@ export type EntityArrayResponseType = HttpResponse<IEvent[]>;
 
 @Injectable({ providedIn: 'root' })
 export class EventService {
-  
+
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/events');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
@@ -33,13 +33,20 @@ export class EventService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  partialUpdate(event: IEvent): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(event);
+    return this.http
+      .patch<IEvent>(`${this.resourceUrl}/${getEventIdentifier(event) as number}`, copy, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
   checkoutEvent(event: IEvent): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(event);   
+    const copy = this.convertDateFromClient(event);
     return this.http
       .put<any>(`${this.resourceUrl}/checkout`, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)))
   }
- 
+
 
   assignEvent(event: IEvent): Observable<HttpResponse<{}>> {
     return this.http
@@ -47,12 +54,7 @@ export class EventService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  partialUpdate(event: IEvent): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(event);
-    return this.http
-      .patch<IEvent>(`${this.resourceUrl}/${getEventIdentifier(event) as number}`, copy, { observe: 'response' })
-      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
-  }
+
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
