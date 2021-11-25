@@ -1,0 +1,73 @@
+
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="event">
+      <h2 data-cy="eventDetailsHeading"><span jhiTranslate="decormoiApp.event.detail.title">Event</span></h2>
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="decormoiApp.event.nom">Nom</span></dt>
+        <dd>
+          <span>{{ event.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="decormoiApp.event.dateEvenement">Date Evenement</span></dt>
+        <dd>
+          <span>{{ event.dateEvenement | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="decormoiApp.event.prix">Prix</span></dt>
+        <dd>
+          <span><b style="color: green;">{{ event.prix }}</b> €</span>
+        </dd>
+        <dt *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="decormoiApp.event.appartenantA">Appartenant A</span></dt>
+        <dd *jhiHasAnyAuthority="'ROLE_ADMIN'">
+          <span>{{ event.appartenantA?.login }}</span>
+        </dd>
+        <dt><span jhiTranslate="decormoiApp.event.agentEvenement">Agent Evenement</span></dt>
+        <dd>
+          <span *ngFor="let agentEvenement of event.agentEvenements; let last = last">
+            {{ agentEvenement.login }}{{ last ? '' : ', ' }}
+          </span>
+          <span *jhiHasAnyAuthority="'ROLE_ADMIN'" >
+            <button type="button" [routerLink]="['/event', event.id, 'assign']" class="btn btn-primary">
+              <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="decormoiApp.event.agentEvenement">Affecter des agents</span>
+            </button>
+          </span>
+        </dd>
+        
+        <dt><span jhiTranslate="decormoiApp.event.typeEvenement">Type Evenement</span></dt>
+        <dd>
+          <div *ngIf="event.typeEvenement">{{ event.typeEvenement?.nom }}</div>
+        </dd>
+        <dt><span jhiTranslate="decormoiApp.event.produit">Produit</span></dt>
+        <dd>
+          <span *ngFor="let produit of event.produits; let last = last"
+            >{{ produit.nom }}
+            {{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="decormoiApp.event.salle">Salle</span></dt>
+        <dd>
+          <div *ngIf="event.salle">
+            {{ event.salle?.nom }}
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/event', event.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+
+      <button type="button" class="btn btn-success" (click)="makePayment()" *ngIf="hide">
+        <fa-icon icon="shopping-cart"></fa-icon>&nbsp;<span>Payer maintenant</span>
+      </button>
+    </div>
+  </div>
+</div>

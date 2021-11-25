@@ -1,0 +1,50 @@
+<!--------- blog --------->
+<!-------------------- row 1------------------>
+<div class="container"></div>
+<div class="container1 row1">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div>
+        <p class="title">Hello la communauté,</p>
+
+        <p>
+          Vous nous avez découvert, pour les plus anciens, via nos décorations de mariages et pour beaucoup nous ne faisions que cela.
+          Laissez-moi vous dire que c’est une grossière erreur et en même temps, mea culpa. Car nous n’avions pas pris le temps de vous
+          expliquer qui nous sommes et ce que nous faisons. Voici la raison de ce blog, nous vous raconterons nos expériences, les nouvelles
+          tendances, nos ambitions et challenges etc. bref notre life.
+        </p>
+      </div>
+
+      <p style="color: darkgoldenrod;">L'équipe de décor'moi</p>
+    </div>
+  </div>
+</div>
+
+<!-------------------- row 2------------------>
+
+<div class="container1">
+  <div class="row">
+    <!----------row 2 Colonne 1-------------->
+    <div class="col-md-4" *ngFor="let blog of blogs">
+      <!-- contenu -->
+
+      <div class="thumbnail">
+        <img [src]="blog.img" alt="Nature" />
+        <div class="caption">
+          <h3 class="titre">{{blog.title}}</h3>
+          <p>
+            {{blog.subtitle}}
+          </p>
+          <p>
+            <li routerLinkActive="active">
+              <a [routerLink]="blog.id" class="btn btn-xs btn-default" role="button" title="Voir le détail">Voir le détail</a>
+            </li>
+          </p>
+        </div>
+      </div>
+      <!-- ---------->
+    </div>
+  </div>
+</div>
+
+<!--------- fin blog --------->

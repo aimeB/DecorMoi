@@ -1,0 +1,28 @@
+{
+  "decormoiApp": {
+    "produit": {
+      "home": {
+        "title": "Produits",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Produit",
+        "createOrEditLabel": "Détail du Produit",
+        "notFound": "Aucun Produit trouvé"
+      },
+      "created": "Un nouveau Produit a été créé ",
+      "updated": "Le Produit a été mis à jour",
+      "deleted": "Le Produit a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Produit {{ id }} ?"
+      },
+      "detail": {
+        "title": "Produit"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "description": "Description",
+      "prix": "Prix",
+      "image": "Image",
+      "categorie": "Categorie"
+    }
+  }
+}
