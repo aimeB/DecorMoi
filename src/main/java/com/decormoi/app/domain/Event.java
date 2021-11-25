@@ -1,5 +1,7 @@
 package com.decormoi.app.domain;
 
+import com.decormoi.app.domain.enums.ImpactType;
+import com.decormoi.app.domain.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
@@ -58,6 +60,10 @@ public class Event implements Serializable {
     )
     private Set<User> agentEvenements = new HashSet<>();
 
+    @NotNull
+    @Column(name = "order_status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
 
     @ManyToOne(optional = false)
@@ -151,6 +157,14 @@ public class Event implements Serializable {
         this.dateEvenement = dateEvenement;
     }
 
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 
     public Boolean getCheckout() {
         return checkout;

@@ -21,6 +21,11 @@ public class Salle implements Serializable {
     @Column(name = "nom", nullable = false)
     private String nom;
 
+    @NotNull
+    @DecimalMin(value = "0")
+    @Column(name = "capacity", nullable = false)
+    private Integer capacity;
+
 
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -38,7 +43,13 @@ public class Salle implements Serializable {
     }
 
 
+    public Integer getCapacity() {
+        return capacity;
+    }
 
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
 
     public String getNom() {
         return this.nom;

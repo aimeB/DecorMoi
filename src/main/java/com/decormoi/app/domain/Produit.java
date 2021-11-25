@@ -1,6 +1,10 @@
 package com.decormoi.app.domain;
 
 import com.decormoi.app.domain.enums.ImpactType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.EnumDeserializer;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -45,8 +49,13 @@ public class Produit implements Serializable {
 
     @NotNull
     @Column(name = "impact_price", nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private ImpactType impactPrice;
+
+    @NotNull
+    @DecimalMin(value = "0")
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
 
 
 
@@ -64,9 +73,13 @@ public class Produit implements Serializable {
         return this;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
 
-
-
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 
     public String getNom() {
         return this.nom;

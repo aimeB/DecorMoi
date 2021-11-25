@@ -1,8 +1,10 @@
 package com.decormoi.app.web.rest;
 
+import com.decormoi.app.domain.Authority;
 import com.decormoi.app.domain.Event;
 import com.decormoi.app.domain.User;
 import com.decormoi.app.repository.EventRepository;
+import com.decormoi.app.security.AuthoritiesConstants;
 import com.decormoi.app.service.EventQueryService;
 import com.decormoi.app.service.EventService;
 import com.decormoi.app.service.UserService;
@@ -14,6 +16,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
@@ -27,9 +30,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.service.filter.IntegerFilter;
 import tech.jhipster.service.filter.LongFilter;
+import tech.jhipster.service.filter.StringFilter;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+import java.lang.Throwable;
+
 
 /**
  * REST controller for managing {@link com.decormoi.app.domain.Event}.
@@ -83,8 +89,24 @@ public class EventResource {
             throw new BadRequestAlertException("A new event cannot already have an ID", ENTITY_NAME, "idexists");
         }
         event.setAppartenantA(userService.getUserWithAuthorities().get());
+
         if (event.getProduits() != null) {
+            if(!eventService.validQuantityProducts(event)){
+                throw new BadRequestAlertException("Quantity not supported", ENTITY_NAME, "qty_not_supported");
+            }
+            if(!eventService.validCapacity(event)){
+                throw new BadRequestAlertException("Capacity of not supported", ENTITY_NAME, "capacity_not_supported");
+            }
+
+            if(!eventService.minDateAccepted(event)){
+                throw new BadRequestAlertException("Date not supported", ENTITY_NAME, "date_not_supported");
+            }
+
             event.setPrix(eventService.calculateProducts(event));
+
+            if(!eventService.minAccepted(event)){
+                throw new BadRequestAlertException("Minimum accepted price", ENTITY_NAME, "min_accepted");
+            }
         }
         Event result = eventService.save(event);
         return ResponseEntity
@@ -150,7 +172,22 @@ public class EventResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
         if (event.getProduits() != null) {
+            if(!eventService.validQuantityProducts(event)){
+                throw new BadRequestAlertException("Quantity not supported", ENTITY_NAME, "qty_not_supported");
+            }
+            if(!eventService.validCapacity(event)){
+                throw new BadRequestAlertException("Capacity of not supported", ENTITY_NAME, "capacity_not_supported");
+            }
+
+            if(!eventService.minDateAccepted(event)){
+                throw new BadRequestAlertException("Date not supported", ENTITY_NAME, "date_not_supported");
+            }
+
             event.setPrix(eventService.calculateProducts(event));
+
+            if(!eventService.minAccepted(event)){
+                throw new BadRequestAlertException("Minimum accepted price", ENTITY_NAME, "min_accepted");
+            }
         }
         Event result = eventService.save(event);
         return ResponseEntity
@@ -158,6 +195,67 @@ public class EventResource {
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, event.getId().toString()))
             .body(result);
     }
+
+
+    /**
+     * {@code PATCH  /events/:id} : Partial updates given fields of an existing
+     * event, field will ignore if it is null
+     *
+     * @param id the id of the event to save.
+     * @param event the event to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with
+     * body the updated event, or with status {@code 400 (Bad Request)} if the
+     * event is not valid, or with status {@code 404 (Not Found)} if the event
+     * is not found, or with status {@code 500 (Internal Server Error)} if the
+     * event couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PatchMapping("/events/{id}")
+    public ResponseEntity<Event> partialUpdateEvent(
+        @PathVariable(value = "id", required = false) final Long id,
+        @NotNull @RequestBody Event event
+    ) throws URISyntaxException {
+        log.debug("REST request to partial update Event partially : {}, {}", id, event);
+        System.out.println("*************************Je rentre dans la méthode partialUpdateEvent de la ressource");
+
+        if (event.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, event.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!eventRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        if (event.getProduits() != null) {
+            if(!eventService.validQuantityProducts(event)){
+                throw new BadRequestAlertException("Quantity not supported", ENTITY_NAME, "qty_not_supported");
+            }
+            if(!eventService.validCapacity(event)){
+                throw new BadRequestAlertException("Capacity not supported", ENTITY_NAME, "capacity_not_supported");
+            }
+
+            if(!eventService.minDateAccepted(event)){
+                throw new BadRequestAlertException("Date not supported", ENTITY_NAME, "date_not_supported");
+            }
+
+
+            event.setPrix(event.getProduits().stream().map(p -> p.getPrix()).reduce(0.0, (a, b) -> a + b));
+            if(!eventService.minAccepted(event)){
+                throw new BadRequestAlertException("Minimum accepted price", ENTITY_NAME, "min_accepted");
+            }
+        }
+        Optional<Event> result = eventService.partialUpdate(event);
+
+        return ResponseUtil.wrapOrNotFound(
+            result,
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, event.getId().toString())
+        );
+    }
+
+
 
     /**
      *
@@ -193,48 +291,6 @@ public class EventResource {
 
 
 
-    /**
-     * {@code PATCH  /events/:id} : Partial updates given fields of an existing
-     * event, field will ignore if it is null
-     *
-     * @param id the id of the event to save.
-     * @param event the event to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with
-     * body the updated event, or with status {@code 400 (Bad Request)} if the
-     * event is not valid, or with status {@code 404 (Not Found)} if the event
-     * is not found, or with status {@code 500 (Internal Server Error)} if the
-     * event couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PatchMapping(value = "/events/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<Event> partialUpdateEvent(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Event event
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update Event partially : {}, {}", id, event);
-        if (event.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, event.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!eventRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        if (event.getProduits() != null) {
-            event.setPrix(event.getProduits().stream().map(p -> p.getPrix()).reduce(0.0, (a, b) -> a + b));
-        }
-        Optional<Event> result = eventService.partialUpdate(event);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, event.getId().toString())
-        );
-    }
-
-
 
 
 
@@ -248,22 +304,20 @@ public class EventResource {
      */
     @GetMapping("/events")
     public ResponseEntity<List<Event>> getAllEvents(EventCriteria criteria, Pageable pageable) {
-        if (!userService.getUserWithAuthorities().get().getAuthorities().stream().anyMatch(a -> a.getName().equals("ROLE_ADMIN"))) {
+        Set<Authority> authorities = userService.getUserWithAuthorities().get().getAuthorities();
+        if (!authorities.stream().anyMatch(a -> a.getName().equals(AuthoritiesConstants.ADMIN))) {
             LongFilter longFilter = new LongFilter();
             longFilter.setEquals(userService.getUserWithAuthorities().get().getId());
             criteria.setAppartenantAId(longFilter);
-        }/*else if (!userService.getUserWithAuthorities().get().getAuthorities().stream().anyMatch(a -> a.getName().equals("ROLE_AGENT"))) {
-            LongFilter longFilter = new LongFilter();
-            longFilter.setEquals(userService.getUserWithAuthorities().get().getId());
-            criteria.setAppartenantAId(longFilter);
-            //criteria.set
-        }*/
 
-
-
+            if (authorities.stream().anyMatch(a -> a.getName().equals(AuthoritiesConstants.AGENT))){
+                criteria.setAgentEvenementId(longFilter);
+            }
+        }
 
         log.debug("REST request to get Events by criteria: {}", criteria);
-        Page<Event> page = eventQueryService.findByCriteria(criteria, pageable);
+        Page<Event> page = eventService.validDateOfEvents(eventQueryService.findByCriteria(criteria, pageable));
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -320,6 +374,7 @@ public class EventResource {
     @DeleteMapping("/events/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
         log.debug("REST request to delete Event : {}", id);
+        eventService.backQuantity(id);
         eventService.delete(id);
         return ResponseEntity
             .noContent()

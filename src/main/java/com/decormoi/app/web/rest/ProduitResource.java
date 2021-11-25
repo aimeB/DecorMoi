@@ -68,6 +68,7 @@ public class ProduitResource {
         if (produit.getId() != null) {
             throw new BadRequestAlertException("A new produit cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        System.out.println(produit);
         Produit result = produitService.save(produit);
         return ResponseEntity
             .created(new URI("/api/produits/" + result.getId()))
@@ -203,7 +204,7 @@ public class ProduitResource {
 
 
 
-    
+
 
     /**
      * {@code DELETE  /produits/:id} : delete the "id" produit.

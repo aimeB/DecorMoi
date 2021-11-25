@@ -64,6 +64,9 @@ public class ProduitService {
                     if (produit.getImageContentType() != null) {
                         existingProduit.setImageContentType(produit.getImageContentType());
                     }
+                    if (produit.getQuantity() != null) {
+                        existingProduit.setQuantity(produit.getQuantity());
+                    }
 
                     return existingProduit;
                 }
