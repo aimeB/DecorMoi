@@ -1,6 +1,8 @@
 id;nom
-1;Mariage
-2;Fiancaille
-3;Garden Party
-4;Dot
-5;Surprise
+1;Mariage (privé)
+2;Fiancaille (privé)
+3;Garden Party (privé)
+4;Dot (privé)
+5;Surprise (privé & professionnel)
+6;Meeting (professionnel)
+7;Réception (professionnel)

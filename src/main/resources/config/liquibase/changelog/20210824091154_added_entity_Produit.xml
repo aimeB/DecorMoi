@@ -32,7 +32,10 @@
             <column name="categorie_id" type="bigint">
                 <constraints nullable="false" />
             </column>
-            <column name="impact_price" type="bigint">
+            <column name="impact_price" type="ENUM('PERSON', 'TABLE', 'ALONE')" defaultValue="PERSON">
+                <constraints nullable="false" />
+            </column>
+            <column name="quantity" type="numeric">
                 <constraints nullable="false" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -51,9 +54,9 @@
     -->
     <changeSet id="20210824091154-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/produit.csv"
-                  separator=";"
-                  tableName="produit">
+            file="config/liquibase/fake-data/produit.csv"
+            separator=";"
+            tableName="produit">
             <column name="id" type="numeric"/>
             <column name="nom" type="string"/>
             <column name="description" type="string"/>
@@ -61,6 +64,7 @@
             <column name="image" type="blob"/>
             <column name="image_content_type" type="string"/>
             <column name="categorie_id" type="numeric"/>
+            <column name="quantity" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

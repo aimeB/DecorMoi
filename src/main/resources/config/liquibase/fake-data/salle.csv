@@ -1,6 +1,6 @@
-id;nom
-1;La renaissance
-2;Le prestige
-3;Château de Limont
-4;Le stalingrad
-5;Hotel bedford
+id;nom;capacity
+1;La renaissance;200
+2;Le prestige;750
+3;Chateau de Limont;500
+4;Le stalingrad;250
+5;Hotel bedford;120

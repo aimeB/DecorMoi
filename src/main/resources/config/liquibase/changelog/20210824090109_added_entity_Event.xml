@@ -49,6 +49,9 @@
             <column name="checkout" type="boolean" defaultValue="false">
                 <constraints nullable="false" />
             </column>
+            <column name="order_status" type="ENUM('PENDING', 'CANCELED', 'ACCEPTED', 'PAYED')" defaultValue="PENDING">
+                <constraints nullable="false" />
+            </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
@@ -92,9 +95,9 @@
     -->
     <changeSet id="20210824090109-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/event.csv"
-                  separator=";"
-                  tableName="event">
+            file="config/liquibase/fake-data/event.csv"
+            separator=";"
+            tableName="event">
             <column name="id" type="numeric"/>
             <column name="nom" type="string"/>
             <column name="date_evenement" type="${datetimeType}"/>

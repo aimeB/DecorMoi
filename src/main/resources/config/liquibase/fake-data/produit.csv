@@ -1,10 +1,10 @@
-id;nom;description;prix;image;image_content_type;categorie_id;impact_price
-1;Housse;Housse de chaise;2;../fake-data/blob/hipster.png;image/png;1;0
-2;Fleurs;Fleurs naturel;5;../fake-data/blob/hipster.png;image/png;2;1
-3;Plan de table;Grand plan de table ;150;../fake-data/blob/hipster.png;image/png;3;2
-4;Menu;Menu par personne;2;../fake-data/blob/hipster.png;image/png;3;0
-5;Noeuds de chaise;Noeuds coloré pour chaise;2;../fake-data/blob/hipster.png;image/png;1;0
-6;Drap�ee;Grand drappée au toit;200;../fake-data/blob/hipster.png;image/png;2;2
-7;Trone;Chaise des mariés;150;../fake-data/blob/hipster.png;image/png;3;2
-8;table mariés;décoration de la table des mariés;150;../fake-data/blob/hipster.png;image/png;1;2
-9;Nappe;Nappe pour les taples;15;../fake-data/blob/hipster.png;image/png;1;1
+id;nom;description;prix;image;image_content_type;categorie_id;impact_price;quantity
+1;Housse;Housse de chaise;2;../fake-data/blob/hipster.png;image/png;1;PERSON;20
+2;Fleurs;Fleurs naturel;5;../fake-data/blob/hipster.png;image/png;2;TABLE;40
+3;Plan de table;Grand plan de table ;150;../fake-data/blob/hipster.png;image/png;3;ALONE;35
+4;Menu;Menu par personne;2;../fake-data/blob/hipster.png;image/png;3;PERSON;200
+5;Noeuds de chaise;Noeuds coloré pour chaise;2;../fake-data/blob/hipster.png;image/png;1;PERSON;20
+6;Drap�ee;Grand drappée au toit;200;../fake-data/blob/hipster.png;image/png;2;ALONE;200
+7;Trone;Chaise des mariés;150;../fake-data/blob/hipster.png;image/png;3;ALONE;100
+8;table mariés;décoration de la table des mariés;150;../fake-data/blob/hipster.png;image/png;1;ALONE;100
+9;Nappe;Nappe pour les taples;15;../fake-data/blob/hipster.png;image/png;1;TABLE;50
