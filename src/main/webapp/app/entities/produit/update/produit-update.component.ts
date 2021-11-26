@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
-import { IProduit, Produit } from '../produit.model';
+import { ImpactType, IProduit, Produit } from '../produit.model';
 import { ProduitService } from '../service/produit.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
@@ -21,12 +21,15 @@ export class ProduitUpdateComponent implements OnInit {
   isSaving = false;
 
   categorieProduitsSharedCollection: ICategorieProduit[] = [];
+  impactPriceProduitsSharedCollection: any = [];
 
   editForm = this.fb.group({
     id: [],
     nom: [null, [Validators.required]],
     description: [null, [Validators.required]],
     prix: [null, [Validators.required, Validators.min(0)]],
+    quantity: [null, [Validators.required, Validators.min(0)]],
+    impactPrice : [null, Validators.required],
     image: [null, [Validators.required]],
     imageContentType: [],
     categorie: [null, Validators.required],
@@ -45,8 +48,13 @@ export class ProduitUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ produit }) => {
       this.updateForm(produit);
-
+      console.log((produit))
       this.loadRelationshipsOptions();
+      this.impactPriceProduitsSharedCollection = [
+        {id:ImpactType.PERSON, nom: "Par personne"},
+        {id:ImpactType.TABLE, nom: "Par table"},
+        {id:ImpactType.ALONE, nom: "Une seule fois"}
+      ]
     });
   }
 
@@ -89,6 +97,10 @@ export class ProduitUpdateComponent implements OnInit {
     }
   }
 
+  trackImpactPriceProduitById(index: number, item: ICategorieProduit): number {
+    return item.id!;
+  }
+
   trackCategorieProduitById(index: number, item: ICategorieProduit): number {
     return item.id!;
   }
@@ -118,9 +130,11 @@ export class ProduitUpdateComponent implements OnInit {
       nom: produit.nom,
       description: produit.description,
       prix: produit.prix,
+      quantity: produit.quantity,
       image: produit.image,
       imageContentType: produit.imageContentType,
       categorie: produit.categorie,
+      impactPrice: produit.impactPrice
     });
 
     this.categorieProduitsSharedCollection = this.categorieProduitService.addCategorieProduitToCollectionIfMissing(
@@ -142,15 +156,18 @@ export class ProduitUpdateComponent implements OnInit {
   }
 
   protected createFromForm(): IProduit {
+    console.log("------>", this.editForm.value)
     return {
       ...new Produit(),
       id: this.editForm.get(['id'])!.value,
       nom: this.editForm.get(['nom'])!.value,
       description: this.editForm.get(['description'])!.value,
       prix: this.editForm.get(['prix'])!.value,
+      quantity: this.editForm.get(['quantity'])!.value,
       imageContentType: this.editForm.get(['imageContentType'])!.value,
       image: this.editForm.get(['image'])!.value,
       categorie: this.editForm.get(['categorie'])!.value,
+      impactPrice: this.editForm.get(['impactPrice'])!.value,
     };
   }
 }

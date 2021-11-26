@@ -18,6 +18,7 @@ export class SalleUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     nom: [null, [Validators.required]],
+    capacity: [null, [Validators.required]],
   });
 
   constructor(protected salleService: SalleService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -65,6 +66,7 @@ export class SalleUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: salle.id,
       nom: salle.nom,
+      capacity: salle.capacity,
     });
   }
 
@@ -73,6 +75,7 @@ export class SalleUpdateComponent implements OnInit {
       ...new Salle(),
       id: this.editForm.get(['id'])!.value,
       nom: this.editForm.get(['nom'])!.value,
+      capacity: this.editForm.get(['capacity'])!.value,
     };
   }
 }

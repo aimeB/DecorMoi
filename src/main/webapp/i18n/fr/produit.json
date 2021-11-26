@@ -5,7 +5,7 @@
         "title": "Produits",
         "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Produit",
-        "createOrEditLabel": "Détail du Produit",
+        "createOrEditLabel": "Créer/Editer le produit",
         "notFound": "Aucun Produit trouvé"
       },
       "created": "Un nouveau Produit a été créé ",
@@ -22,7 +22,9 @@
       "description": "Description",
       "prix": "Prix",
       "image": "Image",
-      "categorie": "Categorie"
+      "categorie": "Categorie",
+      "quantity":"Quantité",
+      "impactPrice":"Impact du prix"
     }
   }
 }

@@ -18,6 +18,11 @@
         <dd>
           <span>{{ salle.nom }}</span>
         </dd>
+
+        <dt><span jhiTranslate="decormoiApp.salle.capacity">Capacité</span></dt>
+        <dd>
+          <span>{{ salle.capacity }}</span>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

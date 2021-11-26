@@ -28,7 +28,13 @@
       "produit": "Produit",
       "salle": "Salle",
       "nbTable":"Nombre de tables",
-      "nbPerson":"Nombre de personnes"
+      "nbPerson":"Nombre de personnes",
+      "orderStatus":"Etat de la commande",
+      "changeOrderStatus":"Changer l'état de la commande",
+      "PENDING": "En attente",
+      "CANCELED": "Annuler",
+      "ACCEPTED": "Accepté",
+      "PAYED": "Payé"
     }
   }
 }

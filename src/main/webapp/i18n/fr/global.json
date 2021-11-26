@@ -137,6 +137,10 @@
     "idnull": "Identifiant invalide",
     "idinvalid": "Invalid Id",
     "idnotfound": "ID cannot be found",
+    "date_not_supported":"La date doit être supérieur à la date d'aujourd'hui",
+    "qty_not_supported": "La quantité pour certains produits n'est pas supporté !",
+    "capacity_not_supported": "Le nombre de personnes choisi ne convient pas à cette salle !",
+    "min_accepted": "Désolé, le coût de l'événement ne doit pas être inférieur à 150 € !",
     "file": {
       "could.not.extract": "Impossible d'extraire le fichier",
       "not.image": "Le fichier doit être une image et non du type \"{{ fileType }}\""
