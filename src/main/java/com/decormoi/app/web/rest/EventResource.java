@@ -9,16 +9,8 @@ import com.decormoi.app.service.EventQueryService;
 import com.decormoi.app.service.EventService;
 import com.decormoi.app.service.UserService;
 import com.decormoi.app.service.criteria.EventCriteria;
+import com.decormoi.app.service.dto.Stock;
 import com.decormoi.app.web.rest.errors.BadRequestAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Stream;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,14 +20,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import tech.jhipster.service.filter.IntegerFilter;
 import tech.jhipster.service.filter.LongFilter;
-import tech.jhipster.service.filter.StringFilter;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
-import java.lang.Throwable;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.util.*;
 
 /**
  * REST controller for managing {@link com.decormoi.app.domain.Event}.
@@ -69,6 +64,7 @@ public class EventResource {
         this.eventQueryService = eventQueryService;
         this.userService = userService;
     }
+
 
 
 
@@ -117,6 +113,8 @@ public class EventResource {
 
 
 
+
+
     /**
      * {@code PUT  /events/:id} : Updates an existing event.
      *
@@ -140,6 +138,35 @@ public class EventResource {
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+
+
+    /**
+     *
+     * @param event
+     * @return
+     * @throws URISyntaxException
+     */
+    @PutMapping("/checkout/{id}")
+    public ResponseEntity<Event> checkoutData(@PathVariable(value = "id", required = false) final Long id, @Valid @RequestBody Event event) throws URISyntaxException {
+        if(event == null){
+            throw new BadRequestAlertException("Invalid event", ENTITY_NAME, "Event is null");
+        }
+        if (event.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+
+        if (!eventRepository.existsById(event.getId())) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        event.setCheckout(true);
+        Event result = eventService.save(event);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, event.getId().toString()))
             .body(result);
     }
 
@@ -216,7 +243,6 @@ public class EventResource {
         @NotNull @RequestBody Event event
     ) throws URISyntaxException {
         log.debug("REST request to partial update Event partially : {}, {}", id, event);
-        System.out.println("*************************Je rentre dans la méthode partialUpdateEvent de la ressource");
 
         if (event.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -254,40 +280,6 @@ public class EventResource {
             HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, event.getId().toString())
         );
     }
-
-
-
-    /**
-     *
-     * @param event
-     * @return
-     * @throws URISyntaxException
-     */
-    @PutMapping("/events/checkout")
-    public ResponseEntity<Event> checkout(@Valid @RequestBody Event event)
-        throws URISyntaxException {
-
-        if(event == null){
-            throw new BadRequestAlertException("Invalid event", ENTITY_NAME, "Event is null");
-        }
-        if (event.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-
-        if (!eventRepository.existsById(event.getId())) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        event.setCheckout(true);
-        Event result = eventService.save(event);
-        return ResponseEntity
-            .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, event.getId().toString()))
-            .body(result);
-    }
-
-
-
 
 
 
@@ -340,6 +332,18 @@ public class EventResource {
     }
 
 
+    /**
+     * {@code GET  /events/percentage} : Get all the events with percentage.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the
+     * count in body.
+     */
+    @GetMapping("/events/percentage")
+    public ResponseEntity<Map<LocalDate, Stock>> eventPercentage() {
+        return ResponseEntity.ok().body(eventService.checkStock());
+    }
+
+
 
 
 
@@ -374,7 +378,7 @@ public class EventResource {
     @DeleteMapping("/events/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
         log.debug("REST request to delete Event : {}", id);
-        eventService.backQuantity(id);
+        //eventService.backQuantity(id);
         eventService.delete(id);
         return ResponseEntity
             .noContent()

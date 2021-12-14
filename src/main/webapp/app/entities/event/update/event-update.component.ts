@@ -1,25 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {finalize, map} from 'rxjs/operators';
 
 import * as dayjs from 'dayjs';
-import { DATE_TIME_FORMAT } from 'app/config/input.constants';
+import {DATE_TIME_FORMAT} from 'app/config/input.constants';
 
-import { IEvent, Event, OrderStatus } from '../event.model';
-import { EventService } from '../service/event.service';
-import { IUser } from 'app/entities/user/user.model';
-import { UserService } from 'app/entities/user/user.service';
-import { ITypeEvenement } from 'app/entities/type-evenement/type-evenement.model';
-import { TypeEvenementService } from 'app/entities/type-evenement/service/type-evenement.service';
-import { IProduit } from 'app/entities/produit/produit.model';
-import { ProduitService } from 'app/entities/produit/service/produit.service';
-import { ISalle } from 'app/entities/salle/salle.model';
-import { SalleService } from 'app/entities/salle/service/salle.service';
-import { IEventLocation } from 'app/entities/event-location/event-location.model';
-import { EventLocationService } from 'app/entities/event-location/service/event-location.service';
+import {Event, IEvent, OrderStatus} from '../event.model';
+import {EventService} from '../service/event.service';
+import {IUser} from 'app/entities/user/user.model';
+import {UserService} from 'app/entities/user/user.service';
+import {ITypeEvenement} from 'app/entities/type-evenement/type-evenement.model';
+import {TypeEvenementService} from 'app/entities/type-evenement/service/type-evenement.service';
+import {IProduit} from 'app/entities/produit/produit.model';
+import {ProduitService} from 'app/entities/produit/service/produit.service';
+import {ISalle} from 'app/entities/salle/salle.model';
+import {SalleService} from 'app/entities/salle/service/salle.service';
+import {IEventLocation} from 'app/entities/event-location/event-location.model';
+import {EventLocationService} from 'app/entities/event-location/service/event-location.service';
 
 @Component({
   selector: 'jhi-event-update',

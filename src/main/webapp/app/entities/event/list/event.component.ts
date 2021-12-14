@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, Observable } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit} from '@angular/core';
+import {HttpHeaders, HttpResponse} from '@angular/common/http';
+import {ActivatedRoute, Router} from '@angular/router';
+import {combineLatest, Observable} from 'rxjs';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { IEvent, OrderStatus } from '../event.model';
+import {IEvent, OrderStatus} from '../event.model';
 
-import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
-import { EventService } from '../service/event.service';
-import { FormBuilder } from '@angular/forms';
-import { finalize } from 'rxjs/operators';
-import { StripeService } from 'app/core/util/stripe.service';
+import {ASC, DESC, ITEMS_PER_PAGE, SORT} from 'app/config/pagination.constants';
+import {EventService} from '../service/event.service';
+import {FormBuilder} from '@angular/forms';
+import {finalize} from 'rxjs/operators';
+import {StripeService} from 'app/core/util/stripe.service';
+
 @Component({
   selector: 'jhi-event',
   templateUrl: './event.component.html',
@@ -163,12 +164,7 @@ export class EventComponent implements OnInit {
         },
       });
     }
-    this.events = data?.map(event => {
-      if(event.prix){
-        event.prix = this.stripeService.applyTva(event.prix);
-      }
-      return event;
-    }) ?? [];
+    this.events = data ?? [];
     this.ngbPaginationPage = this.page;
   }
 

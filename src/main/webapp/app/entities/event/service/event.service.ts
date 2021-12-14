@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 
-import { isPresent } from 'app/core/util/operators';
-import { ApplicationConfigService } from 'app/core/config/application-config.service';
-import { createRequestOption } from 'app/core/request/request-util';
-import { IEvent, getEventIdentifier } from '../event.model';
+import {isPresent} from 'app/core/util/operators';
+import {ApplicationConfigService} from 'app/core/config/application-config.service';
+import {createRequestOption} from 'app/core/request/request-util';
+import {getEventIdentifier, IEvent} from '../event.model';
 
 export type EntityResponseType = HttpResponse<IEvent>;
 export type EntityArrayResponseType = HttpResponse<IEvent[]>;
@@ -26,6 +26,14 @@ export class EventService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  checkoutEvent(event: IEvent): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(event);
+    return this.http
+      .put<IEvent>(`${this.resourceUrl}/checkout/${getEventIdentifier(event) as number}`, copy, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)))
+  }
+
+
   update(event: IEvent): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(event);
     return this.http
@@ -40,12 +48,6 @@ export class EventService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  checkoutEvent(event: IEvent): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(event);
-    return this.http
-      .put<any>(`${this.resourceUrl}/checkout`, copy, { observe: 'response' })
-      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)))
-  }
 
 
   assignEvent(event: IEvent): Observable<HttpResponse<{}>> {
@@ -59,6 +61,12 @@ export class EventService {
   find(id: number): Observable<EntityResponseType> {
     return this.http
       .get<IEvent>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  findWithPercentage(): Observable<EntityResponseType> {
+    return this.http
+      .get<IEvent>(`${this.resourceUrl}/percentage`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 

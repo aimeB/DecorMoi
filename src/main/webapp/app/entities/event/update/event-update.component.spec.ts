@@ -1,25 +1,25 @@
 jest.mock('@angular/router');
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpResponse } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { of, Subject } from 'rxjs';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpResponse} from '@angular/common/http';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {of, Subject} from 'rxjs';
 
-import { EventService } from '../service/event.service';
-import { IEvent, Event } from '../event.model';
+import {EventService} from '../service/event.service';
+import {Event, IEvent} from '../event.model';
 
-import { IUser } from 'app/entities/user/user.model';
-import { UserService } from 'app/entities/user/user.service';
-import { ITypeEvenement } from 'app/entities/type-evenement/type-evenement.model';
-import { TypeEvenementService } from 'app/entities/type-evenement/service/type-evenement.service';
-import { IProduit } from 'app/entities/produit/produit.model';
-import { ProduitService } from 'app/entities/produit/service/produit.service';
-import { ISalle } from 'app/entities/salle/salle.model';
-import { SalleService } from 'app/entities/salle/service/salle.service';
+import {IUser} from 'app/entities/user/user.model';
+import {UserService} from 'app/entities/user/user.service';
+import {ITypeEvenement} from 'app/entities/type-evenement/type-evenement.model';
+import {TypeEvenementService} from 'app/entities/type-evenement/service/type-evenement.service';
+import {IProduit} from 'app/entities/produit/produit.model';
+import {ProduitService} from 'app/entities/produit/service/produit.service';
+import {ISalle} from 'app/entities/salle/salle.model';
+import {SalleService} from 'app/entities/salle/service/salle.service';
 
-import { EventUpdateComponent } from './event-update.component';
+import {EventUpdateComponent} from './event-update.component';
 
 describe('Component Tests', () => {
   describe('Event Management Update Component', () => {

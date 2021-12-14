@@ -189,3 +189,9 @@
 </header>
 
 <!--------------------------------------------------------------------------------------------------------------->
+<div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+<div style="text-align: center;" *ngIf="messages"  class="container alert alert-danger alert-dismissable" role="alert">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+  <div [innerHtml]="messages"></div>
+</div>
+</div>

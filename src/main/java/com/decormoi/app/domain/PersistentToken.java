@@ -49,54 +49,38 @@ public class PersistentToken implements Serializable {
     public String getSeries() {
         return series;
     }
-
     public void setSeries(String series) {
         this.series = series;
     }
 
 
-
-
-
     public String getTokenValue() {
         return tokenValue;
     }
-
     public void setTokenValue(String tokenValue) {
         this.tokenValue = tokenValue;
     }
 
 
-
-
     public LocalDate getTokenDate() {
         return tokenDate;
     }
-
     public void setTokenDate(LocalDate tokenDate) {
         this.tokenDate = tokenDate;
     }
 
 
-
-
-
     public String getIpAddress() {
         return ipAddress;
     }
-
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }
 
 
-
-
-
     public String getUserAgent() {
         return userAgent;
     }
-
     public void setUserAgent(String userAgent) {
         if (userAgent.length() >= MAX_USER_AGENT_LEN) {
             this.userAgent = userAgent.substring(0, MAX_USER_AGENT_LEN - 1);
@@ -106,16 +90,15 @@ public class PersistentToken implements Serializable {
     }
 
 
-
-
-
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
+
+
+
 
     @Override
     public boolean equals(Object o) {

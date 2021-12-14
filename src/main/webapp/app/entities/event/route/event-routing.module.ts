@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { EventComponent } from '../list/event.component';
-import { EventDetailComponent } from '../detail/event-detail.component';
-import { EventUpdateComponent } from '../update/event-update.component';
-import { EventRoutingResolveService } from './event-routing-resolve.service';
-import { EventAssignComponent } from '../assign/event-assign.component';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access.service';
+import {EventComponent} from '../list/event.component';
+import {EventDetailComponent} from '../detail/event-detail.component';
+import {EventUpdateComponent} from '../update/event-update.component';
+import {EventRoutingResolveService} from './event-routing-resolve.service';
+import {EventAssignComponent} from '../assign/event-assign.component';
 
 const eventRoute: Routes = [
   {

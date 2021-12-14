@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, Router} from '@angular/router';
+import {EMPTY, Observable, of} from 'rxjs';
+import {mergeMap} from 'rxjs/operators';
 
-import { IEvent, Event } from '../event.model';
-import { EventService } from '../service/event.service';
+import {Event, IEvent} from '../event.model';
+import {EventService} from '../service/event.service';
 
 @Injectable({ providedIn: 'root' })
 export class EventRoutingResolveService implements Resolve<IEvent> {

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { IEvent } from '../event.model';
-import { EventService } from '../service/event.service';
+import {IEvent} from '../event.model';
+import {EventService} from '../service/event.service';
 
 @Component({
   templateUrl: './event-delete-dialog.component.html',

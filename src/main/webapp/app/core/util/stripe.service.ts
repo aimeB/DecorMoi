@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { IEvent } from 'app/entities/event/event.model';
-import { EventService } from 'app/entities/event/service/event.service';
-import { Account } from '../auth/account.model';
-import { AccountService } from '../auth/account.service';
+import {Injectable} from '@angular/core';
+import {IEvent} from 'app/entities/event/event.model';
+import {EventService} from 'app/entities/event/service/event.service';
+import {Account} from '../auth/account.model';
+import {AccountService} from '../auth/account.service';
 
 @Injectable({
   providedIn: 'root',
@@ -39,16 +39,18 @@ source(data : any, cb : any) {
 
     const paymentHandler = (<any>window).StripeCheckout.configure({
       key: this.publicKey,
-      locale: 'auto',
+      locale: 'fr',
+      currency:'EUR',
       source: (data: any) => this.source(data, ()=>{
-        this.eventService.checkoutEvent(this.event);
-
+        this.eventService.checkoutEvent(this.event).subscribe(res => {
+          console.log(res)
+        })
       })
     });
 
     paymentHandler.open({
       name: "Evenement : " +this.event.nom!,
-      amount: this.applyTva(this.event.prix! * 100),
+      amount: (this.event.prix! * 100),
       email: this.account.email
     });
   }
@@ -73,7 +75,7 @@ source(data : any, cb : any) {
           key: this.publicKey,
           locale: 'auto',
           source: (data: any) => this.source(data, () => {
-
+           
           })
         });
       }

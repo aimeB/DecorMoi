@@ -51,44 +51,44 @@
           </div>
         </div>
 
-        <!--
+<!--
 
-                <div class="form-group">
-                  <label class="form-control-label" jhiTranslate="decormoiApp.event.eventLocation" for="eventLocation">Lieu de l'évènement</label>
-                  <select
-                    class="form-control"
-                    id="eventLocation"
-                    data-cy="eventLocation"
-                    name="eventLocation"
-                    formControlName="eventLocation"
-                  >
-                    <option *ngIf="!editForm.get('eventLocation')!.value" [ngValue]="null" selected></option>
-                    <option
-                      [ngValue]="
-                      eventLocationOption.id === editForm.get('eventLocation')!.value?.id
-                          ? editForm.get('eventLocation')!.value
-                          : eventLocationOption
-                      "
-                      *ngFor="let eventLocationOption of eventLocationsSharedCollection; trackBy: trackEventLocationById"
-                    >
-                      {{ eventLocationOption.nom }}
-                    </option>
-                  </select>
-                </div>
-                <div
-                  *ngIf="
-                    editForm.get(['eventLocation'])!.invalid && (editForm.get(['eventLocation'])!.dirty || editForm.get(['eventLocation'])!.touched)
-                  "
-                >
-                  <small
-                    class="form-text text-danger"
-                    *ngIf="editForm.get(['eventLocation'])?.errors?.required"
-                    jhiTranslate="entity.validation.required"
-                  >
-                    This field is required.
-                  </small>
-                </div>
-        -->
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="decormoiApp.event.eventLocation" for="eventLocation">Lieu de l'évènement</label>
+          <select
+            class="form-control"
+            id="eventLocation"
+            data-cy="eventLocation"
+            name="eventLocation"
+            formControlName="eventLocation"
+          >
+            <option *ngIf="!editForm.get('eventLocation')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+              eventLocationOption.id === editForm.get('eventLocation')!.value?.id
+                  ? editForm.get('eventLocation')!.value
+                  : eventLocationOption
+              "
+              *ngFor="let eventLocationOption of eventLocationsSharedCollection; trackBy: trackEventLocationById"
+            >
+              {{ eventLocationOption.nom }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="
+            editForm.get(['eventLocation'])!.invalid && (editForm.get(['eventLocation'])!.dirty || editForm.get(['eventLocation'])!.touched)
+          "
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['eventLocation'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+-->
 
 
 
@@ -160,6 +160,11 @@
             </small>
           </div>
         </div>
+
+
+
+
+
 
 
         <div class="form-group">

@@ -1,15 +1,15 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { StripeService } from 'app/core/util/stripe.service';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {StripeService} from 'app/core/util/stripe.service';
 
-import { IEvent, OrderStatus } from '../event.model';
-import  jsPDF  from "jspdf";
-import { Account } from 'app/core/auth/account.model';
-import { AccountService } from 'app/core/auth/account.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {IEvent, OrderStatus} from '../event.model';
+import jsPDF from 'jspdf';
+import {Account} from 'app/core/auth/account.model';
+import {AccountService} from 'app/core/auth/account.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 import * as dayjs from 'dayjs';
-import { ImpactType } from 'app/entities/produit/produit.model';
+import {ImpactType} from 'app/entities/produit/produit.model';
 
 @Component({
   selector: 'jhi-event-detail',
@@ -44,14 +44,15 @@ export class EventDetailComponent implements OnInit {
       this.event = event;
 
       if (this.event) {
-        if (this.event.orderStatus === OrderStatus.CANCELED) {
-          this.state = 0;
+        if (this.event.orderStatus === OrderStatus.ACCEPTED) {
+          this.state = 1;
         } else if (this.event.orderStatus === OrderStatus.PAYED) {
           this.state = 2;
         } else {
-          this.state = 1;
+          //If it's pending or canceled, the client can't pay
+          this.state = 0;
         }
-        this.event.prix = this.stripeService.applyTva(event?.prix);
+        this.event.prix = (event?.prix);
       }
       //this.hide = !this.event?.checkout;
     });

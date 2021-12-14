@@ -37,7 +37,7 @@
             </button>
           </span>
         </dd>
-
+        
         <dt><span jhiTranslate="decormoiApp.event.typeEvenement">Type Evenement</span></dt>
         <dd>
           <div *ngIf="event.typeEvenement">{{ event.typeEvenement?.nom }}</div>
@@ -45,7 +45,7 @@
         <dt><span jhiTranslate="decormoiApp.event.produit">Produit</span></dt>
         <dd>
           <span *ngFor="let produit of event.produits; let last = last"
-          >{{ produit.nom }}
+            >{{ produit.nom }}
             {{ last ? '' : ', ' }}
           </span>
         </dd>

@@ -6,19 +6,21 @@ import com.decormoi.app.domain.User;
 import com.decormoi.app.domain.enums.ImpactType;
 import com.decormoi.app.domain.enums.OrderStatus;
 import com.decormoi.app.repository.EventRepository;
-
-import java.time.Instant;
-import java.util.Optional;
-import java.util.Set;
-
-import com.decormoi.app.web.rest.errors.BadRequestAlertException;
-import io.undertow.util.BadRequestException;
+import com.decormoi.app.service.dto.Stock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.awt.print.Book;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Event}.
@@ -55,7 +57,6 @@ public class EventService {
      * @return the persisted entity.
      */
     public Optional<Event> partialUpdate(Event event) {
-        System.out.println("*************************Je rentre dans la méthode partialUpdate du service");
         log.debug("Request to partially update Event : {}", event);
 
         return eventRepository
@@ -92,6 +93,9 @@ public class EventService {
 
 
 
+
+
+
     /**
      * Get all the events.
      *
@@ -102,6 +106,32 @@ public class EventService {
     public Page<Event> findAll(Pageable pageable) {
         log.debug("Request to get all Events");
         return eventRepository.findAll(pageable);
+    }
+
+
+
+    @Transactional(readOnly = true)
+    public Map<LocalDate, Stock> checkStock(){
+        List<Event> events = eventRepository.findAll();
+        Map<LocalDate, Stock> soldOut = new HashMap<>();
+        for (Produit produit : produitService.findAll()) {
+            for (Event event : events) {
+                if(event.getProduits().contains(produit)){
+                    LocalDate localDate = convertToLocalDate(event.getDateEvenement()).plusDays(1);
+                    if(soldOut.containsKey(localDate)){
+                        Stock stock = soldOut.get(localDate);
+                        int quantity = stock.getQuantity(produit) != null ? stock.getQuantity(produit) : produit.getQuantity();
+                        stock.setQuantity(produit,setQuantity(produit, quantity, event));
+                    }else{
+                        Stock stock = new Stock();
+                        stock.setQuantity(produit, setQuantity(produit, produit.getQuantity(), event));
+                        soldOut.put(localDate, stock);
+                    }
+                }
+            }
+        }
+
+        return soldOut;
     }
 
     @Transactional(readOnly = true)
@@ -157,43 +187,73 @@ public class EventService {
         });
     }
 
+
+    private double applyTva(double amount){
+        return amount * 1.21;
+    }
+
+
     public Double calculateProducts(Event event) {
 
-        return event.getProduits().stream().map(p -> {
+        return applyTva(event.getProduits().stream().map(p -> {
             double total = 0;
             int qty = 0;
             if(p.getImpactPrice() == ImpactType.PERSON){
-                p.setQuantity(p.getQuantity() - event.getNbPerson());
+                //p.setQuantity(p.getQuantity() - event.getNbPerson());
                 total = p.getPrix() * event.getNbPerson();
             }else if(p.getImpactPrice() == ImpactType.TABLE){
-                p.setQuantity(p.getQuantity() - event.getNbTable());
+                //p.setQuantity(p.getQuantity() - event.getNbTable());
                 total = p.getPrix() * event.getNbTable();
             }else{
                 total =  p.getPrix();
-                p.setQuantity(p.getQuantity() - 1);
+                //p.setQuantity(p.getQuantity() - 1);
             }
-            produitService.partialUpdate(p);
+            //produitService.partialUpdate(p);
             return total;
 
-        }).reduce(0.0, (a, b) -> a + b);
+        }).reduce(0.0, (a, b) -> a + b));
     }
 
+
+
     public boolean validQuantityProducts(Event event){
-        for (Produit p :event.getProduits()) {
-            if(p.getImpactPrice() == ImpactType.PERSON){
-                if((p.getQuantity() - event.getNbPerson()) < 0){
-                    return false;
-                }
-            }else if(p.getImpactPrice() == ImpactType.TABLE){
-                if((p.getQuantity() - event.getNbTable()) < 0){
-                    return false;
+        LocalDate localDate = convertToLocalDate(event.getDateEvenement());
+        List<Event> events = eventRepository
+            .findAllOtherEventOfOneSpecificDate().stream()
+            .filter(ev-> convertToLocalDate(ev.getDateEvenement()).equals(localDate))
+            .collect(Collectors.toList());
+        for (Produit produit :event.getProduits()) {
+            //Quantité total du produit
+            int quantityProduit = produit.getQuantity();
+            for (Event otherEvent: events) {
+                Optional<Produit> otherProduit = otherEvent.getProduits().stream().filter(p -> p.getId() == produit.getId()).findFirst();
+                if(otherProduit.isPresent()){
+                    //Modifier la quantité de chaque produit de la liste d'événement sans prendre compte de l'évenenment principal
+                    quantityProduit = setQuantity(otherProduit.get(), quantityProduit, otherEvent);
                 }
             }
-            if(p.getQuantity() < 0){
+            //Modifier finalement la quantité de l'événement principal
+            quantityProduit = setQuantity(produit, quantityProduit, event);
+            if(quantityProduit < 0){
                 return false;
             }
         }
         return true;
+    }
+
+    private int setQuantity(Produit produit, int quantity, Event event) {
+        if (produit.getImpactPrice() == ImpactType.PERSON) {
+            quantity -= event.getNbPerson();
+        } else if (produit.getImpactPrice() == ImpactType.TABLE) {
+            quantity -= event.getNbTable();
+        } else {
+            quantity -= 1;
+        }
+        return quantity;
+    }
+
+    private LocalDate convertToLocalDate(Instant date) {
+        return LocalDateTime.ofInstant(date, ZoneOffset.UTC).toLocalDate();
     }
 
     public boolean minAccepted(Event event){

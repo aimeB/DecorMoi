@@ -1,9 +1,9 @@
 import * as dayjs from 'dayjs';
-import { IUser } from 'app/entities/user/user.model';
-import { ITypeEvenement } from 'app/entities/type-evenement/type-evenement.model';
-import { IProduit } from 'app/entities/produit/produit.model';
-import { ISalle } from 'app/entities/salle/salle.model';
-import { IEventLocation } from '../event-location/event-location.model';
+import {IUser} from 'app/entities/user/user.model';
+import {ITypeEvenement} from 'app/entities/type-evenement/type-evenement.model';
+import {IProduit} from 'app/entities/produit/produit.model';
+import {ISalle} from 'app/entities/salle/salle.model';
+import {IEventLocation} from '../event-location/event-location.model';
 
 export interface IEvent {
   id?: number;

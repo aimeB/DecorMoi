@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ActivatedRoute} from '@angular/router';
+import {of} from 'rxjs';
 
-import { EventDetailComponent } from './event-detail.component';
+import {EventDetailComponent} from './event-detail.component';
 
 describe('Component Tests', () => {
   describe('Event Management Detail Component', () => {
