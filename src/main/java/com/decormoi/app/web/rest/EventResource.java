@@ -87,9 +87,9 @@ public class EventResource {
         event.setAppartenantA(userService.getUserWithAuthorities().get());
 
         if (event.getProduits() != null) {
-            if(!eventService.validQuantityProducts(event)){
+           /* if(!eventService.validQuantityProducts(event)){
                 throw new BadRequestAlertException("Quantity not supported", ENTITY_NAME, "qty_not_supported");
-            }
+            }*/
             if(!eventService.validCapacity(event)){
                 throw new BadRequestAlertException("Capacity of not supported", ENTITY_NAME, "capacity_not_supported");
             }
@@ -199,9 +199,9 @@ public class EventResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
         if (event.getProduits() != null) {
-            if(!eventService.validQuantityProducts(event)){
+           /* if(!eventService.validQuantityProducts(event)){
                 throw new BadRequestAlertException("Quantity not supported", ENTITY_NAME, "qty_not_supported");
-            }
+            }*/
             if(!eventService.validCapacity(event)){
                 throw new BadRequestAlertException("Capacity of not supported", ENTITY_NAME, "capacity_not_supported");
             }
@@ -256,9 +256,9 @@ public class EventResource {
         }
 
         if (event.getProduits() != null) {
-            if(!eventService.validQuantityProducts(event)){
+           /* if(!eventService.validQuantityProducts(event)){
                 throw new BadRequestAlertException("Quantity not supported", ENTITY_NAME, "qty_not_supported");
-            }
+            }*/
             if(!eventService.validCapacity(event)){
                 throw new BadRequestAlertException("Capacity not supported", ENTITY_NAME, "capacity_not_supported");
             }

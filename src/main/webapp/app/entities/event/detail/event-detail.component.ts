@@ -111,7 +111,7 @@ export class EventDetailComponent implements OnInit {
     }
 
     const nomApp = "Decor'MOI";
-    const address = 'Mettre une adresse';
+    const address = 'rue haute 398';
     const city = '1200 Bruxelles';
     pdf.text(`${nomApp}\n${address}\n${city}`, 150, 40);
     const today = dayjs().format('DD/MM/YYYY');
