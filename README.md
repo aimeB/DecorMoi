@@ -1,57 +1,51 @@
-Instructions
+# DecorMoi
 
-install npm packages
+Application e-commerce spécialisée dans la décoration d’intérieur.  
+Développée en **Java Spring Boot** pour le backend et **Angular** pour le frontend, cette application permet la gestion des produits, des commandes et de l’expérience client.
 
-```
+---
+
+## Fonctionnalités principales
+
+- Gestion des produits de décoration (CRUD complet)
+- Panier et commande client
+- Interface responsive et moderne (Angular)
+- API REST sécurisée avec Spring Boot
+- Optimisée pour la production (packaging JAR)
+
+---
+
+## Architecture technique
+
+- **Backend** : Java Spring Boot, JPA, MySQL
+- **Frontend** : Angular
+- **Outils** : Maven, npm
+- **Langages** : Java, TypeScript, HTML, CSS
+
+---
+
+## Installation
+
+### Prérequis
+- Java 17+
+- Node.js + Angular CLI
+- MySQL
+
+### Étapes
+1. Cloner le repository :
+```bash
+git clone https://github.com/aimeB/DecorMoi.git
+
+Lancer le backend :
+
+./mvnw -DskipTests
+
+Lancer le frontend :
+
 npm install
-```
-
-Run the following commands in two separate terminals to create a blissful development experience where your browser
-auto-refreshes when files change on your hard drive.
-
-```
-terminal 1
-
-./mvnw -DskipTests #(DskipTests because some tests cases are broken. we will fix them)
-
-terminal 2
-
 npm start
-```
+Accéder à l’application : http://localhost:8080
 
-### Using Angular CLI
+Objectif du projet
+Ce projet a été réalisé comme démonstration d’une application e-commerce complète avec une architecture full stack. Il combine gestion des données côté serveur et expérience utilisateur fluide côté client.
 
-You can also use [Angular CLI][] to generate some custom client code.
-
-For example, the following command:
-
-```
-ng generate component my-component
-```
-
-will generate few files:
-
-```
-create src/main/webapp/app/my-component/my-component.component.html
-create src/main/webapp/app/my-component/my-component.component.ts
-update src/main/webapp/app/app.module.ts
-```
-
-## Building for production
-
-### Packaging as jar
-
-To build the final jar and optimize the decormoi application for production, run:
-
-```
-./mvnw -Pprod package -DskipTests #(DskipTests because some tests cases are broken. we will fix them)
-```
-
-This will concatenate and minify the client CSS and JavaScript files. It will also modify `index.html` so it references these new files.
-To ensure everything worked, run:
-
-```
-java -jar target/*.jar
-```
-
-Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
